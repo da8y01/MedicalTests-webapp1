@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'patient', component: PatientComponent },
   { path: 'medic', component: MedicComponent },
   { path: 'login', component: LoginComponent },
-  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
 
