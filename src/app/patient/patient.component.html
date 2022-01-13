@@ -25,53 +25,11 @@
       <div>NOMBRE DEL EXAMEN</div>
       <div>DESCARGAR</div>
     </div>
-    <div class="contenedor-examenes-resultados">
-      <div>Marzo 26 de 2022</div>
-      <div>Examen general óptico cornea ojo izquierdo</div>
+    <div class="contenedor-examenes-resultados" *ngFor="let result of results">
+      <div>{{result.createdAt | date: 'longDate'}}</div>
+      <div>{{result.name}}</div>
       <div>
-        <a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-      </div>
-    </div>
-    <div class="contenedor-examenes-resultados">
-      <div>Marzo 26 de 2022</div>
-      <div>Examen general óptico</div>
-      <div>
-        <a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-      </div>
-    </div>
-    <div class="contenedor-examenes-resultados">
-      <div>Marzo 26 de 2022</div>
-      <div>Examen general óptico cornea ojo derecho</div>
-      <div>
-        <a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-      </div>
-    </div>
-    <div class="contenedor-examenes-resultados">
-      <div>Marzo 26 de 2022</div>
-      <div>Examen general óptico cornea ojo derecho</div>
-      <div>
-        <a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-      </div>
-    </div>
-    <div class="contenedor-examenes-resultados">
-      <div>Marzo 26 de 2022</div>
-      <div>Examen general óptico</div>
-      <div>
-        <a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-      </div>
-    </div>
-    <div class="contenedor-examenes-resultados">
-      <div>Marzo 26 de 2022</div>
-      <div>Examen general óptico</div>
-      <div>
-        <a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-      </div>
-    </div>
-    <div class="contenedor-examenes-resultados">
-      <div>Marzo 26 de 2022</div>
-      <div>Examen general óptico</div>
-      <div>
-        <a href="#"><i class="iconoDescarga fas fa-download"></i></a>
+        <a href="{{result.link}}"><i class="iconoDescarga fas fa-download"></i></a>
       </div>
     </div>
   </div>
