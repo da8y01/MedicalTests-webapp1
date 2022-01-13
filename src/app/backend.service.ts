@@ -10,7 +10,8 @@ import { Result } from './result.model';
 })
 export class BackendService {
   // private resultsUrl = 'api/results'
-  private resultsUrl = 'http://localhost:3000/api/results'
+  // private resultsUrl = 'http://localhost:3000/api/results'
+  private resultsUrl = 'https://medical-tests.herokuapp.com/api/results'
 
   constructor(private http: HttpClient) { }
 
