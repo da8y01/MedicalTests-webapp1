@@ -6,7 +6,7 @@
   </div>
   <div class="nav-banner">
     <div class="nav-grid-banner_logo">
-      <img src="../../assets/logo-SD.png" alt="Logo" />
+      <img src="../../images/logo-SD.png" alt="Logo" />
       <div class="nav-titulos">
         <h1>Resultados</h1>
         <div class="info-usuario">
@@ -24,12 +24,20 @@
       <div>FECHA</div>
       <div>NOMBRE DEL EXAMEN</div>
       <div>DESCARGAR</div>
+      <div>LECTURA</div>
     </div>
     <div class="contenedor-examenes-resultados" *ngFor="let result of results">
-      <div>{{result.createdAt | date: 'longDate'}}</div>
-      <div>{{result.name}}</div>
+      <div>{{ result.createdAt | date: "longDate" }}</div>
+      <div>{{ result.name }}</div>
       <div>
-        <a href="{{result.link}}"><i class="iconoDescarga fas fa-download"></i></a>
+        <a href="{{ result.link }}"
+          ><i class="iconoDescarga fas fa-download"></i
+        ></a>
+      </div>
+      <div>
+        <a href="{{ result.reading }}"
+          ><i class="iconoDescarga-lectura fas fa-download"></i
+        ></a>
       </div>
     </div>
   </div>

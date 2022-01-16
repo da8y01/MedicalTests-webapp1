@@ -1,0 +1,130 @@
+@media(max-width: 1440px){
+
+	.nav-principal_contenedor{
+		width: 90%;
+	}
+
+	header .nav-banner{
+		width: 90%;
+		margin: auto;
+	}
+
+
+	.main-contenedor-examenes{
+		width: 90%;
+		
+	}
+
+	.main-contenedor-info{
+		width: 90%;
+	}
+
+	.buscador-alert{
+		width: 80%;
+	}
+
+	.lista-pacientes-titulo{
+		padding: 10px 19px 10px 19px;
+	}
+
+	.lista-pacientes-contenido{
+		padding: 10px 19px 10px 19px;
+
+	}
+}
+
+@media(max-width: 1050px){
+
+	footer{
+		height: auto;
+	}
+
+	footer .info-contacto{
+		width: 90% ;
+	}
+
+	.lista-pacientes-titulo{
+		font-size: 12px;
+	}
+
+	.lista-pacientes-contenido{
+		font-size: 12px;
+
+	}
+}	
+
+@media(max-width: 900px){
+
+	body{
+		font-size: 12px;
+	}
+	.nav-titulos h1 {
+		font-size: 18px;
+	}
+
+	.nav-grid-banner_logo img{
+		margin: auto;
+	}
+
+	.grid-main-contenendor-examenes .contenedor-examenes-resultados{
+		padding: 5px 25px 5px 25px;
+		grid-template-columns: 15% 55% 15% 15%;
+
+	}
+
+	.grid-main-contenendor-examenes .contenedor-examenes-titulo{
+		font-size: 11px;
+		grid-template-columns: 15% 55% 15% 15%;
+		grid-column-gap: 5px;
+		padding: 15px 25px 15px 25px;
+		font-weight: bold;
+	
+	}
+
+	.nav-titulos .info-usuario .nombre-usuario{
+		font-size: 14px;
+	}
+
+	.nav-titulos .info-usuario .doumento-usuario{
+		font-size: 12px;
+	}
+
+	footer .info-contacto p{
+		font-size: 12px;
+		padding-left: 35px;
+		padding-right: 60px;
+	}
+
+	.grid-contenedor-info{
+	grid-template-columns:  1fr;
+	grid-template-rows: 30px 30px auto auto;
+	}
+
+	.buscador-alert{
+		width: 94%;
+		margin-top: 10px;
+	}
+
+}
+
+
+@media(max-width: 550px){
+
+	.grid-main-contenendor-examenes .contenedor-examenes-titulo{
+	font-size: 9px;
+	
+	}
+
+	.contenedor-info-paciente{
+		display: block;
+		padding: 12px 45px 12px 25px;
+		margin-top: 10px;
+	}
+
+	.contenedor-info-paciente span{
+		font-weight: bold;
+	}
+
+
+}
+
