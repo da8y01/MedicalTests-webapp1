@@ -4,19 +4,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Result } from './result.model';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
-  // private resultsUrl = 'api/results'
-  // private resultsUrl = 'http://localhost:3000/api/results'
-  private resultsUrl = 'https://medical-tests.herokuapp.com/api/results'
-
   constructor(private http: HttpClient) { }
 
   getResults(): Observable<Result[]> {
-    return this.http.get<Result[]>(this.resultsUrl)
+    return this.http.get<Result[]>(`${environment.apiUrl}/results`)
       .pipe(
         tap(_ => console.info('fetched results', _)),
         catchError(this.handleError<Result[]>('getResults', []))
@@ -24,7 +21,7 @@ export class BackendService {
   }
 
   getResult(id: number): Observable<Result> {
-    const url = `${this.resultsUrl}/${id}`;
+    const url = `${environment.apiUrl}/results/${id}`;
     return this.http.get<Result>(url).pipe(
       tap(_ => console.info(`fetched result id=${id}`)),
       catchError(this.handleError<Result>(`getResult id=${id}`))
