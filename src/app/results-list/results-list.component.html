@@ -1,0 +1,22 @@
+<div class="grid-main-contenendor-examenes">
+  <div class="contenedor-examenes-titulo">
+    <div>FECHA</div>
+    <div>NOMBRE DEL EXAMEN</div>
+    <div>DESCARGAR</div>
+    <div>LECTURA</div>
+  </div>
+  <div class="contenedor-examenes-resultados" *ngFor="let result of results">
+    <div>{{ result.createdAt | date: "MMMM d, y":"-0500":"es" }}</div>
+    <div>{{ result.name }}</div>
+    <div>
+      <a [href]="result.link" target="_blank" download="download"
+        ><i class="iconoDescarga fas fa-download"></i
+      ></a>
+    </div>
+    <div>
+      <a *ngIf="result.reading" [href]="result.reading"
+        ><i class="iconoDescarga-lectura fas fa-download"></i
+      ></a>
+    </div>
+  </div>
+</div>
