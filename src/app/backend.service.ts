@@ -35,6 +35,24 @@ export class BackendService {
     );
   }
 
+  /* GET patients whose document contains search term */
+  searchPatients(term: string): Observable<Patient[]> {
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http
+      .get<Patient[]>(`${environment.apiUrl}/patients/?document=${term}`)
+      .pipe(
+        tap((x) =>
+          x.length
+            ? console.info(`found patients matching "${term}"`)
+            : console.info(`no patients matching "${term}"`)
+        ),
+        catchError(this.handleError<Patient[]>('searchPatients', []))
+      );
+  }
+
   getPatient(id: number): Observable<Patient> {
     const url = `${environment.apiUrl}/patients/${id}`;
     return this.http.get<Patient>(url).pipe(

@@ -1,0 +1,26 @@
+<div class="buscador">
+  <input
+    class="input-campo_busqueda"
+    type="text"
+    name="user"
+    #searchBox
+    id="search-box"
+    (input)="search(searchBox.value)"
+  />
+  <div class="buscador-button">
+    <a href="#"><i class="iconoBuscar fas fa-search"></i></a>
+  </div>
+</div>
+<div class="lista-pacientes-busqueda">
+  <div class="lista-pacientes-titulo">
+    <div>DOCUMENTO</div>
+    <div>NOMBRES Y APELLIDOS PACIENTE</div>
+  </div>
+  <div
+    class="lista-pacientes-contenido"
+    *ngFor="let patient of patients$ | async"
+  >
+    <div>CC. {{ patient.document }}</div>
+    <div>{{ patient.firstName + " " + patient.lastName }}</div>
+  </div>
+</div>
