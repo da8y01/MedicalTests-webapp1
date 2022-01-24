@@ -10,7 +10,8 @@ import { LoginComponent } from './login/login.component';
 
 import localeEs from '@angular/common/locales/es'
 import {registerLocaleData} from '@angular/common';
-import { ResultsListComponent } from './results-list/results-list.component'
+import { ResultsListComponent } from './results-list/results-list.component';
+import { PatientSearchComponent } from './patient-search/patient-search.component'
 registerLocaleData(localeEs, 'es')
 
 @NgModule({
@@ -20,7 +21,8 @@ registerLocaleData(localeEs, 'es')
     MedicComponent,
     PageNotFoundComponent,
     LoginComponent,
-    ResultsListComponent
+    ResultsListComponent,
+    PatientSearchComponent
   ],
   imports: [
     BrowserModule,

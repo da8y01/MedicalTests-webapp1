@@ -3,6 +3,9 @@ export interface Patient {
   document: string;
   firstName: string;
   lastName: string;
+  address?: string;
+  phone?: string;
+  email?: string;
   createdAt: string;
   updatedAt: string;
 }

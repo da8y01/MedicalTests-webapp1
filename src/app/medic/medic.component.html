@@ -20,12 +20,22 @@
 <main class="main-contenedor-info">
   <section class="grid-contenedor-info">
     <div class="buscador">
-      <input class="input-campo_busqueda" type="text" name="user" />
+      <input
+        class="input-campo_busqueda"
+        type="text"
+        name="user"
+        #searchBox
+        id="search-box"
+        (input)="search(searchBox.value)"
+      />
       <div class="buscador-button">
         <a href="#"><i class="iconoBuscar fas fa-search"></i></a>
       </div>
     </div>
-    <div [style.visibility]="1 === 1 ? 'hidden': 'visible'" class="buscador-alert">
+    <div
+      [style.visibility]="true ? 'hidden' : 'visible'"
+      class="buscador-alert"
+    >
       <div>
         <a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
       </div>
@@ -36,28 +46,36 @@
         <div>DOCUMENTO</div>
         <div>NOMBRES Y APELLIDOS PACIENTE</div>
       </div>
-      <div class="lista-pacientes-contenido" *ngFor="let patient of patients">
+      <div
+        class="lista-pacientes-contenido"
+        *ngFor="let patient of patients$ | async"
+        (click)="onSelect(patient)"
+      >
         <div>CC. {{ patient.document }}</div>
         <div>{{ patient.firstName + " " + patient.lastName }}</div>
       </div>
     </div>
-
-    <div class="cntenedor-info-paciente-resultado">
+    <div class="cntenedor-info-paciente-resultado" *ngIf="selectedPatient">
       <div class="contenedor-info-paciente">
         <div class="contenedor-info-pacientes-izquierdo">
-          <div><span>Luis Eduardo Charry</span></div>
-          <div><span>cc. 12236235 </span></div>
+          <div>
+            <span>{{
+              selectedPatient?.firstName + " " + selectedPatient?.lastName
+            }}</span>
+          </div>
+          <div>
+            <span>cc. {{ selectedPatient?.document }} </span>
+          </div>
           <div>16/12/1985</div>
         </div>
         <div class="contenedor-info-pacientes-derecho">
-          <div>Calle 73 # 48 - 20 Poblado - Ed. El Doral apto 305</div>
-          <div>3168911402</div>
-          <div>luis.e.charry@gmail.com</div>
+          <div>{{ selectedPatient?.address }}</div>
+          <div>{{ selectedPatient?.phone }}</div>
+          <div>{{ selectedPatient?.email }}</div>
         </div>
       </div>
       <app-results-list></app-results-list>
     </div>
-
   </section>
 </main>
 
