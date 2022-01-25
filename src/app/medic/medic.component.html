@@ -48,7 +48,7 @@
       </div>
       <div
         class="lista-pacientes-contenido"
-        *ngFor="let patient of patients$ | async"
+        *ngFor="let patient of patients"
         (click)="onSelect(patient)"
       >
         <div>CC. {{ patient.document }}</div>

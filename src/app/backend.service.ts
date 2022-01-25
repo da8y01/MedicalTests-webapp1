@@ -37,12 +37,8 @@ export class BackendService {
 
   /* GET patients whose document contains search term */
   searchPatients(term: string): Observable<Patient[]> {
-    if (!term.trim()) {
-      // if not search term, return empty hero array.
-      return of([]);
-    }
     return this.http
-      .get<Patient[]>(`${environment.apiUrl}/patients/?document=${term}`)
+      .get<Patient[]>(`${environment.apiUrl}/patients/?document=${term.trim()}`)
       .pipe(
         tap((x) =>
           x.length

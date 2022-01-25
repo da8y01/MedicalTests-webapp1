@@ -13,6 +13,7 @@ import { Patient } from '../patient.model';
 })
 export class MedicComponent implements OnInit {
   patients$!: Observable<Patient[]>;
+  patients: Patient[] = [];
   private searchTerms = new Subject<string>();
 
   constructor(private backendService: BackendService) {}
@@ -33,6 +34,8 @@ export class MedicComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.backendService.searchPatients(term))
     );
+    this.patients$.subscribe(result => this.patients = result);
+    this.search('');
   }
 
   selectedPatient?: Patient;
