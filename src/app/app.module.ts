@@ -8,11 +8,13 @@ import { MedicComponent } from './medic/medic.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 
-import localeEs from '@angular/common/locales/es'
-import {registerLocaleData} from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
 import { ResultsListComponent } from './results-list/results-list.component';
-import { PatientSearchComponent } from './patient-search/patient-search.component'
-registerLocaleData(localeEs, 'es')
+import { PatientSearchComponent } from './patient-search/patient-search.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [
@@ -22,15 +24,17 @@ registerLocaleData(localeEs, 'es')
     PageNotFoundComponent,
     LoginComponent,
     ResultsListComponent,
-    PatientSearchComponent
+    PatientSearchComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   // providers: [{provide: LOCALE_ID, useValue: 'es'}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

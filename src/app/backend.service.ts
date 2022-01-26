@@ -13,10 +13,11 @@ import { Patient } from './patient.model';
 export class BackendService {
   constructor(private http: HttpClient) {}
 
-  getResults(): Observable<Result[]> {
-    return this.http.get<Result[]>(`${environment.apiUrl}/results`).pipe(
+  getResults(queryParams: {offset: number, limit: number}): Observable<{count: number, rows: Result[]}> {
+    const requestUrl = `${environment.apiUrl}/results?limit=${queryParams.limit || 10}&offset=${queryParams.offset || 0}`
+    return this.http.get<{count: number, rows: Result[]}>(requestUrl).pipe(
       tap((_) => console.info('fetched results', _)),
-      catchError(this.handleError<Result[]>('getResults', []))
+      catchError(this.handleError<{count: number, rows: Result[]}>('getResults', {count: 0, rows: []}))
     );
   }
 
