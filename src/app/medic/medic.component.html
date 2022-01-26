@@ -26,10 +26,9 @@
         name="user"
         #searchBox
         id="search-box"
-        (input)="search(searchBox.value)"
       />
-      <div class="buscador-button">
-        <a href="#"><i class="iconoBuscar fas fa-search"></i></a>
+      <div class="buscador-button" (click)="search(searchBox.value)">
+        <a><i class="iconoBuscar fas fa-search"></i></a>
       </div>
     </div>
     <div
@@ -41,19 +40,28 @@
       </div>
       <p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
     </div>
-    <div class="lista-pacientes-busqueda">
-      <div class="lista-pacientes-titulo">
-        <div>DOCUMENTO</div>
-        <div>NOMBRES Y APELLIDOS PACIENTE</div>
+    <div>
+      <div class="lista-pacientes-busqueda">
+        <div class="lista-pacientes-titulo">
+          <div>DOCUMENTO</div>
+          <div>NOMBRES Y APELLIDOS PACIENTE</div>
+        </div>
+        <div
+          class="lista-pacientes-contenido"
+          *ngFor="let patient of patients"
+          (click)="onSelect(patient)"
+        >
+          <div>CC. {{ patient.document }}</div>
+          <div>{{ patient.firstName + " " + patient.lastName }}</div>
+        </div>
       </div>
-      <div
-        class="lista-pacientes-contenido"
-        *ngFor="let patient of patients$ | async"
-        (click)="onSelect(patient)"
+      <mat-paginator
+        [length]="paginatorData.length"
+        [pageSize]="paginatorData.pageSize"
+        (page)="pageEvent($event)"
+        aria-label="Select page"
       >
-        <div>CC. {{ patient.document }}</div>
-        <div>{{ patient.firstName + " " + patient.lastName }}</div>
-      </div>
+      </mat-paginator>
     </div>
     <div class="cntenedor-info-paciente-resultado" *ngIf="selectedPatient">
       <div class="contenedor-info-paciente">

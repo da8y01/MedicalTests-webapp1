@@ -6,6 +6,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Result } from './result.model';
 import { environment } from '../environments/environment';
 import { Patient } from './patient.model';
+import { ResultResponse } from './result-response.model';
+import { QueryParams } from './query-params.model';
+import { PatientResponse } from './patient-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +16,11 @@ import { Patient } from './patient.model';
 export class BackendService {
   constructor(private http: HttpClient) {}
 
-  getResults(): Observable<Result[]> {
-    return this.http.get<Result[]>(`${environment.apiUrl}/results`).pipe(
+  getResults(queryParams: QueryParams): Observable<ResultResponse> {
+    const requestUrl = `${environment.apiUrl}/results?limit=${queryParams.limit || 10}&offset=${queryParams.offset || 0}`
+    return this.http.get<ResultResponse>(requestUrl).pipe(
       tap((_) => console.info('fetched results', _)),
-      catchError(this.handleError<Result[]>('getResults', []))
+      catchError(this.handleError<ResultResponse>('getResults', {count: 0, rows: []}))
     );
   }
 
@@ -28,28 +32,25 @@ export class BackendService {
     );
   }
 
-  getPatients(): Observable<Patient[]> {
-    return this.http.get<Patient[]>(`${environment.apiUrl}/patients`).pipe(
+  getPatients(): Observable<PatientResponse> {
+    return this.http.get<PatientResponse>(`${environment.apiUrl}/patients`).pipe(
       tap((_) => console.info('fetched patients', _)),
-      catchError(this.handleError<Patient[]>('getPatients', []))
+      catchError(this.handleError<PatientResponse>('getPatients', {count: 0, rows: []}))
     );
   }
 
   /* GET patients whose document contains search term */
-  searchPatients(term: string): Observable<Patient[]> {
-    if (!term.trim()) {
-      // if not search term, return empty hero array.
-      return of([]);
-    }
+  searchPatients(term: string, queryParams: QueryParams): Observable<PatientResponse> {
+    const requestUrl = `${environment.apiUrl}/patients?limit=${queryParams.limit || 10}&offset=${queryParams.offset || 0}&document=${term.trim()}`
     return this.http
-      .get<Patient[]>(`${environment.apiUrl}/patients/?document=${term}`)
+      .get<PatientResponse>(requestUrl)
       .pipe(
         tap((x) =>
-          x.length
+          x.count
             ? console.info(`found patients matching "${term}"`)
             : console.info(`no patients matching "${term}"`)
         ),
-        catchError(this.handleError<Patient[]>('searchPatients', []))
+        catchError(this.handleError<PatientResponse>('searchPatients', {count: 0, rows: []}))
       );
   }
 
