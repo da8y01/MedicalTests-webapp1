@@ -5,10 +5,11 @@ import { PatientComponent } from './patient/patient.component';
 import { MedicComponent } from './medic/medic.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: 'patient', component: PatientComponent },
-  { path: 'medic', component: MedicComponent },
+  { path: 'patient', component: PatientComponent, canActivate: [AuthGuard] },
+  { path: 'medic', component: MedicComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
@@ -16,6 +17,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

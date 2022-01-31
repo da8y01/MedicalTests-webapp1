@@ -1,0 +1,19 @@
+<header>
+  <div class="nav-principal">
+    <div class="nav-principal_contenedor">
+      <a (click)="logout()" *ngIf="backendService.isLoggedIn">Cerrar sesión</a>
+    </div>
+  </div>
+  <div class="nav-banner">
+    <div class="nav-grid-banner_logo">
+      <img src="../../images/logo-SD.png" alt="Logo" />
+      <div class="nav-titulos">
+        <h1>{{backendService.loggedUser.roles[0] === 'ROLE_PATIENT' ? 'Resultados' : 'Pacientes remitidos'}}</h1>
+        <div class="info-usuario">
+          <p class="nombre-usuario">{{backendService.loggedUser.username}}</p>
+          <p class="doumento-usuario">{{backendService.loggedUser.roles}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
