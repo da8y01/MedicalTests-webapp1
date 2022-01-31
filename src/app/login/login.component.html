@@ -1,8 +1,8 @@
 <main class="main-contenedor_loguin">
-  <section  class="contenedor-loguin">
+  <section class="contenedor-loguin">
     <div class="grid-contenedor_loguin">
       <div class="contenedor-logo">
-        <img src="images/logo-SD.png" alt="Logo">
+        <img src="images/logo-SD.png" alt="Logo" />
       </div>
       <div>
         <h1>¡Bienvenidos!</h1>
@@ -10,15 +10,28 @@
       </div>
       <div>
         <h2>Usuario</h2>
-        <input class="input-campo_texto" type="text" name="user">
+        <input
+          class="input-campo_texto"
+          type="text"
+          name="user"
+          #user
+          id="user"
+        />
       </div>
       <div>
         <h2>Contraseña</h2>
-        <input class="input-campo_texto" type="text" name="password">
+        <input
+          class="input-campo_texto"
+          type="text"
+          name="password"
+          #password
+          id="password"
+        />
         <a href="#">¿Olvidaste tu contraseña?</a>
       </div>
-      <button class="boton-sumit" type="text" name="password">INICIAR SESIÓN</button>
+      <button class="boton-sumit" (click)="submit(user.value, password.value)">
+        INICIAR SESIÓN
+      </button>
     </div>
-    
   </section>
 </main>
