@@ -37,6 +37,8 @@ export class BackendService {
       roles: [],
       accessToken: '',
     };
+    // localStorage.setItem('isLoggedIn','false');    
+    localStorage.removeItem('user');
   }
 
   constructor(private http: HttpClient) {
@@ -117,13 +119,18 @@ export class BackendService {
   /** POST: sign up a new user to the database */
   signIn(username: string, password: string): Observable<LoginResponse | {}> {
     return this.http
-      .post<LoginResponse>(
-        `${environment.apiUrl}/auth/signin`,
-        { username, password }
-      )
+      .post<LoginResponse>(`${environment.apiUrl}/auth/signin`, {
+        username,
+        password,
+      })
       .pipe(
         tap(() => (this.isLoggedIn = true)),
-        map((res) => (this.loggedUser = res)),
+        map((res) => {
+          this.loggedUser = res;
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('user', JSON.stringify(res));
+          return res;
+        }),
         catchError(this.handleError('signIn', {}))
       );
   }

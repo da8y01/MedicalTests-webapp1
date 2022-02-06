@@ -21,17 +21,23 @@ export class AuthGuard implements CanActivate {
     console.log(`AuthGuard#canActivate called`);
     const url: string = state.url;
 
-    return this.checkLogin(url);
+    return this.checkLogin(url.toLowerCase());
   }
 
   checkLogin(url: string): true | UrlTree {
-    const loggedUserRole = this.backendService.loggedUser.roles && this.backendService.loggedUser.roles[0]
-      ? this.backendService.loggedUser.roles[0].toLowerCase()
+    const loggedUserRole =
+      this.backendService.loggedUser.roles &&
+      this.backendService.loggedUser.roles[0]
+        ? this.backendService.loggedUser.roles[0].toLowerCase()
+        : '';
+    const storageUser = localStorage.getItem('user');
+    const storageUserRole = storageUser
+      ? JSON.parse(storageUser).roles[0].toLowerCase()
       : '';
+
     if (
-      (loggedUserRole.includes('patient') &&
-        url.toLowerCase().includes('patient')) ||
-      (loggedUserRole.includes('medic') && url.toLowerCase().includes('medic'))
+      (storageUserRole.includes('patient') && url.includes('patient')) ||
+      (storageUserRole.includes('medic') && url.includes('medic'))
     ) {
       return true;
     }
