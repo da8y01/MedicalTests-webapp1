@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { BackendService } from '../backend.service';
 import { Result } from '../result.model';
 
@@ -37,5 +38,18 @@ export class ResultsListComponent implements OnInit {
     this.queryParams.limit = this.paginatorData.pageSize;
     this.queryParams.offset = this.paginatorData.pageSize * event.pageIndex;
     this.getResults(this.queryParams);
+  }
+
+  downloadFile(url: string, event: MouseEvent) {
+    event.preventDefault();
+    fetch(url).then(function (t) {
+      return t.blob().then((blob) => {
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        var fileName = url.substring(url.indexOf('.com/') + 5);
+        a.setAttribute('download', fileName);
+        a.click();
+      });
+    });
   }
 }
