@@ -15,6 +15,7 @@ import { PatientSearchComponent } from './patient-search/patient-search.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HeaderComponent } from './header/header.component';
+import { LogoutComponent } from './logout/logout.component';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -27,6 +28,7 @@ registerLocaleData(localeEs, 'es');
     ResultsListComponent,
     PatientSearchComponent,
     HeaderComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

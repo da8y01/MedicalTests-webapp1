@@ -15,7 +15,7 @@ import { LoginResponse } from './login-response.model';
   providedIn: 'root',
 })
 export class BackendService {
-  isLoggedIn = false;
+  isLoggedIn: boolean = false;
   loggedUser: LoginResponse;
 
   // store the URL so we can redirect after logging in
@@ -127,6 +127,7 @@ export class BackendService {
         tap(() => (this.isLoggedIn = true)),
         map((res) => {
           this.loggedUser = res;
+          this.isLoggedIn = true;
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('user', JSON.stringify(res));
           return res;

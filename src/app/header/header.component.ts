@@ -10,11 +10,10 @@ import { BackendService } from '../backend.service';
 export class HeaderComponent implements OnInit {
   constructor(public backendService: BackendService, public router: Router) {}
 
-  ngOnInit(): void {
-    console.log(this.backendService.loggedUser)
-  }
+  ngOnInit(): void {}
 
-  logout() {
+  logout(event: MouseEvent) {
+    event.preventDefault();
     this.backendService.logout();
     this.router.navigate(['/login']);
   }
