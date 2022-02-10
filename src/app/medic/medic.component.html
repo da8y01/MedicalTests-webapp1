@@ -15,7 +15,7 @@
       </div>
     </div>
     <div
-      [style.visibility]="true ? 'hidden' : 'visible'"
+      [style.visibility]="patients.length == 0 ? 'visible' : 'hidden'"
       class="buscador-alert"
     >
       <div>
