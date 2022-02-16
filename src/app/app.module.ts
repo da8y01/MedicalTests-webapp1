@@ -1,6 +1,6 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PatientComponent } from './patient/patient.component';
@@ -16,6 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './logout/logout.component';
+import { PaginatorIntl, PaginatorIntlModule } from './paginator-intl';
+import { AdminComponent } from './admin/admin.component';
+import { AuthInterceptor } from './auth-interceptor';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -29,6 +32,8 @@ registerLocaleData(localeEs, 'es');
     PatientSearchComponent,
     HeaderComponent,
     LogoutComponent,
+    PaginatorIntl,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,8 +41,11 @@ registerLocaleData(localeEs, 'es');
     AppRoutingModule,
     MatPaginatorModule,
     BrowserAnimationsModule,
+    PaginatorIntlModule
   ],
-  providers: [],
+  // providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  // providers: [{provide: MatPaginatorIntl, useClass: CustomPaginatorIntl}],
   // providers: [{provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent],
 })

@@ -37,6 +37,7 @@ export class AuthGuard implements CanActivate {
 
     if (
       (storageUserRole.includes('patient') && url.includes('patient')) ||
+      (storageUserRole.includes('admin') && url.includes('admin')) ||
       (storageUserRole.includes('medic') && url.includes('medic'))
     ) {
       return true;

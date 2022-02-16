@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
+import { LoginResponse } from '../login-response.model';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     this.backendService
       .signIn(user, password)
       // .login()
-      .subscribe((res) => {
+      .subscribe((res: any) => {
         console.log(res);
         // this.message = this.getMessage();
         if (this.backendService.isLoggedIn) {
@@ -24,7 +25,18 @@ export class LoginComponent implements OnInit {
           // However to keep the example simple, we will always redirect to `/admin`.
           // const redirectUrl = '/medic';
           // const redirectUrl = '/patient';
-          const redirectUrl = this.backendService.loggedUser.roles[0].toLowerCase().includes('medic') ? '/medic' : '/patient';
+          let redirectUrl;
+          const loggedUserRole =
+            this.backendService.loggedUser.roles[0].toLowerCase();
+          if (loggedUserRole.includes('patient')) {
+            redirectUrl = '/patient';
+          }
+          if (loggedUserRole.includes('medic')) {
+            redirectUrl = '/medic';
+          }
+          if (loggedUserRole.includes('admin')) {
+            redirectUrl = '/admin';
+          }
 
           // Redirect the user
           this.router.navigate([redirectUrl]);
