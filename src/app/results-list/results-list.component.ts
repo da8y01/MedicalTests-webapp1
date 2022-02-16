@@ -33,7 +33,7 @@ export class ResultsListComponent implements OnInit {
     });
   }
 
-  pageEvent(event: PageEvent): void {
+  pageEvent(event: any): void {
     console.log(event);
     this.queryParams.limit = this.paginatorData.pageSize;
     this.queryParams.offset = this.paginatorData.pageSize * event.pageIndex;
