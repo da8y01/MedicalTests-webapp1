@@ -47,6 +47,10 @@ export class MedicComponent implements OnInit {
     this.patientsResponse$.subscribe(({ count, rows }) => {
       this.paginatorData.length = count;
       this.patients = rows;
+      if (this.patients.length <= 0) {
+        // display notification
+        
+      }
     });
     this.search('');
   }

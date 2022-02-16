@@ -15,7 +15,7 @@ import { LoginResponse } from './login-response.model';
   providedIn: 'root',
 })
 export class BackendService {
-  isLoggedIn = false;
+  isLoggedIn: boolean = false;
   loggedUser: LoginResponse;
 
   // store the URL so we can redirect after logging in
@@ -92,7 +92,7 @@ export class BackendService {
   ): Observable<PatientResponse> {
     const requestUrl = `${environment.apiUrl}/patients?limit=${
       queryParams.limit || 10
-    }&offset=${queryParams.offset || 0}&document=${term.trim()}`;
+    }&offset=${queryParams.offset || 0}&document=${term.trim()}&medic=${this.loggedUser.id}`;
     return this.http.get<PatientResponse>(requestUrl).pipe(
       tap((x) =>
         x.count
@@ -125,8 +125,9 @@ export class BackendService {
       })
       .pipe(
         tap(() => (this.isLoggedIn = true)),
-        map((res) => {
+        map((res: LoginResponse) => {
           this.loggedUser = res;
+          this.isLoggedIn = true;
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('user', JSON.stringify(res));
           return res;
