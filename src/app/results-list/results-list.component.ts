@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { BackendService } from '../backend.service';
 import { Result } from '../result.model';
