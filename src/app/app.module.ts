@@ -19,6 +19,7 @@ import { LogoutComponent } from './logout/logout.component';
 // import { PaginatorIntl, PaginatorIntlModule } from './paginator-intl';
 import { AdminComponent } from './admin/admin.component';
 import { AuthInterceptor } from './auth-interceptor';
+import { FooterComponent } from './footer/footer.component';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -33,6 +34,7 @@ registerLocaleData(localeEs, 'es');
     HeaderComponent,
     LogoutComponent,
     AdminComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
