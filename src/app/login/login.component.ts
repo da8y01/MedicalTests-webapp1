@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
+import { GenericResponse } from '../generic-response.model';
 import { LoginResponse } from '../login-response.model';
 
 @Component({
@@ -9,6 +10,7 @@ import { LoginResponse } from '../login-response.model';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  serverResponse: any;
   constructor(private backendService: BackendService, public router: Router) {}
 
   ngOnInit(): void {}
@@ -17,12 +19,14 @@ export class LoginComponent implements OnInit {
     this.backendService
       .signIn(user, password)
       // .login()
-      .subscribe((res: any) => {
-        if (res.id !== 0) {
+      .subscribe((res: GenericResponse | any) => {
+        if (res.data?.id) {
           // Usually you would use the redirect URL from the auth service.
           // However to keep the example simple, we will always redirect to `/admin`.
           let redirectUrl;
-          const loggedUserRole = res.roles[0].toLowerCase();
+          const loggedUserRole = this.backendService
+            .getLocalStorageUser()
+            .roles[0].toLowerCase();
           if (loggedUserRole.includes('patient')) {
             redirectUrl = '/patient';
           }
@@ -35,6 +39,8 @@ export class LoginComponent implements OnInit {
 
           // Redirect the user
           this.router.navigate([redirectUrl]);
+        } else {
+          this.serverResponse = res;
         }
       });
   }

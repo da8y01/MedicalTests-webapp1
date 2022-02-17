@@ -10,6 +10,7 @@ import { ResultResponse } from './result-response.model';
 import { QueryParams } from './query-params.model';
 import { PatientResponse } from './patient-response.model';
 import { LoginResponse } from './login-response.model';
+import { GenericResponse } from './generic-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +38,6 @@ export class BackendService {
       roles: [],
       accessToken: '',
     };
-    // localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('user');
   }
 
@@ -92,7 +92,9 @@ export class BackendService {
   ): Observable<PatientResponse> {
     const requestUrl = `${environment.apiUrl}/patients?limit=${
       queryParams.limit || 10
-    }&offset=${queryParams.offset || 0}&document=${term.trim()}&medic=${this.getLocalStorageUser().id}`;
+    }&offset=${queryParams.offset || 0}&document=${term.trim()}&medic=${
+      this.getLocalStorageUser().id
+    }`;
     return this.http.get<PatientResponse>(requestUrl).pipe(
       tap((x) =>
         x.count
@@ -117,34 +119,36 @@ export class BackendService {
   }
 
   /** POST: sign up a new user to the database */
-  signIn(username: string, password: string): Observable<LoginResponse | {}> {
+  signIn(username: string, password: string): Observable<GenericResponse> {
     return this.http
-      .post<LoginResponse>(`${environment.apiUrl}/auth/signin`, {
+      .post<GenericResponse>(`${environment.apiUrl}/auth/signin`, {
         username,
         password,
       })
       .pipe(
         tap(() => (this.isLoggedIn = true)),
-        map((res: LoginResponse) => {
-          this.loggedUser = res;
-          this.isLoggedIn = true;
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('user', JSON.stringify(res));
+        map((res: GenericResponse) => {
+          if (res.data.id) {
+            this.isLoggedIn = !!res.data.id;
+            this.loggedUser = res.data;
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('user', JSON.stringify(this.loggedUser));
+          }
           return res;
         }),
-        catchError(this.handleError('signIn', {}))
+        catchError(this.handleError('signIn', { code: 0, data: {} }))
       );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      return of(result as T);
+      return of(error.error as T);
     };
   }
 
   getLocalStorageUser(): any {
-    const localStorageUser = localStorage.getItem('user') || '{}'
-    return JSON.parse(localStorageUser)
+    const localStorageUser = localStorage.getItem('user') || '{}';
+    return JSON.parse(localStorageUser);
   }
 }
