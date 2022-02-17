@@ -18,16 +18,11 @@ export class LoginComponent implements OnInit {
       .signIn(user, password)
       // .login()
       .subscribe((res: any) => {
-        console.log(res);
-        // this.message = this.getMessage();
-        if (this.backendService.isLoggedIn) {
+        if (res.id !== 0) {
           // Usually you would use the redirect URL from the auth service.
           // However to keep the example simple, we will always redirect to `/admin`.
-          // const redirectUrl = '/medic';
-          // const redirectUrl = '/patient';
           let redirectUrl;
-          const loggedUserRole =
-            this.backendService.loggedUser.roles[0].toLowerCase();
+          const loggedUserRole = res.roles[0].toLowerCase();
           if (loggedUserRole.includes('patient')) {
             redirectUrl = '/patient';
           }

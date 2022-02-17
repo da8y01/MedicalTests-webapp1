@@ -92,7 +92,7 @@ export class BackendService {
   ): Observable<PatientResponse> {
     const requestUrl = `${environment.apiUrl}/patients?limit=${
       queryParams.limit || 10
-    }&offset=${queryParams.offset || 0}&document=${term.trim()}&medic=${this.loggedUser.id}`;
+    }&offset=${queryParams.offset || 0}&document=${term.trim()}&medic=${this.getLocalStorageUser().id}`;
     return this.http.get<PatientResponse>(requestUrl).pipe(
       tap((x) =>
         x.count
@@ -141,5 +141,10 @@ export class BackendService {
       console.error(error);
       return of(result as T);
     };
+  }
+
+  getLocalStorageUser(): any {
+    const localStorageUser = localStorage.getItem('user') || '{}'
+    return JSON.parse(localStorageUser)
   }
 }

@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): true | UrlTree {
-    console.log(`AuthGuard#canActivate called`);
     const url: string = state.url;
 
     return this.checkLogin(url.toLowerCase());
