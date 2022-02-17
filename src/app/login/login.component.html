@@ -32,6 +32,7 @@
       <button class="boton-sumit" (click)="submit(user.value, password.value)">
         INICIAR SESIÓN
       </button>
+      <div>{{serverResponse | json}}</div>
     </div>
   </section>
 </main>
