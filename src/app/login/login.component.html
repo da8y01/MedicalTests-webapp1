@@ -33,7 +33,7 @@
         INICIAR SESIÓN
       </button>
       <div
-        [style.visibility]="serverResponse !== '' ? 'visible' : 'hidden'"
+        [style.visibility]="serverResponse ? 'visible' : 'hidden'"
         class="buscador-alert"
       >
         <div>
