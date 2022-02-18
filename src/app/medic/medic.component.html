@@ -34,7 +34,7 @@
           *ngFor="let patient of patients"
           (click)="onSelect(patient)"
         >
-          <div>CC. {{ patient.document }}</div>
+          <div>CC. {{ patient.username }}</div>
           <div>{{ patient.firstName + " " + patient.lastName }}</div>
         </div>
       </div>
@@ -55,7 +55,7 @@
             }}</span>
           </div>
           <div>
-            <span>cc. {{ selectedPatient?.document }} </span>
+            <span>cc. {{ selectedPatient?.username }} </span>
           </div>
           <div>16/12/1985</div>
         </div>

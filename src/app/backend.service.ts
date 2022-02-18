@@ -101,6 +101,7 @@ export class BackendService {
           ? console.info(`found patients matching "${term}"`)
           : console.info(`no patients matching "${term}"`)
       ),
+      map((res) => (res)),
       catchError(
         this.handleError<PatientResponse>('searchPatients', {
           count: 0,
