@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
 import { QueryParams } from '../query-params.model';
 import { Result } from '../result.model';
@@ -23,10 +24,12 @@ export class ResultsListComponent implements OnInit, OnChanges {
     limit: 10,
     patient: 0,
   };
+  currentUrl = '';
 
-  constructor(private backendService: BackendService) {}
+  constructor(private backendService: BackendService, private router: Router) {}
 
   ngOnInit(): void {
+    this.currentUrl = this.router.url;
     this.queryParams.patient = this.inputPatient;
     this.getResults(this.queryParams);
   }
