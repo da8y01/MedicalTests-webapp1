@@ -35,7 +35,6 @@ export class ResultsListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.info(this.inputPatient);
     this.queryParams.patient = this.inputPatient;
     this.getResults(this.queryParams);
   }

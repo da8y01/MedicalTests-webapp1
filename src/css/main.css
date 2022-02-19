@@ -184,6 +184,7 @@ header .nav-principal a {
   font-weight: bold;
   line-height: 15px;
   letter-spacing: 0.3px;
+  text-decoration: underline;
 }
 
 header .nav-banner {
