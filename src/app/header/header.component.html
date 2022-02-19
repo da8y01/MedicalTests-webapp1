@@ -8,10 +8,16 @@
     <div class="nav-grid-banner_logo">
       <img src="../../images/logo-SD.png" alt="Logo" />
       <div class="nav-titulos">
-        <h1>{{backendService.loggedUser.roles[0] === 'ROLE_PATIENT' ? 'Resultados' : 'Pacientes remitidos'}}</h1>
+        <h1>
+          {{
+            backendService.loggedUser.roles[0] === "ROLE_PATIENT"
+              ? "Resultados"
+              : "Pacientes remitidos"
+          }}
+        </h1>
         <div class="info-usuario">
-          <p class="nombre-usuario">{{backendService.loggedUser.username}}</p>
-          <p class="doumento-usuario">{{backendService.loggedUser.roles}}</p>
+          <p class="nombre-usuario">{{ backendService.loggedUser.username }}</p>
+          <p class="documento-usuario">{{ backendService.loggedUser.roles }}</p>
         </div>
       </div>
     </div>
