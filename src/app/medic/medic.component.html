@@ -65,7 +65,7 @@
           <div>{{ selectedPatient?.email }}</div>
         </div>
       </div>
-      <app-results-list></app-results-list>
+      <app-results-list [patient]="selectedPatient?.id || 0"></app-results-list>
     </div>
   </section>
 </main>

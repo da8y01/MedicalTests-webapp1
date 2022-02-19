@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { BackendService } from '../backend.service';
+import { QueryParams } from '../query-params.model';
 import { Result } from '../result.model';
 
 @Component({
@@ -10,7 +11,8 @@ import { Result } from '../result.model';
   templateUrl: './results-list.component.html',
   styleUrls: ['./results-list.component.css'],
 })
-export class ResultsListComponent implements OnInit {
+export class ResultsListComponent implements OnInit, OnChanges {
+  @Input('patient') inputPatient: number = 0;
   results: Result[] = [];
   paginatorData = {
     length: 0,
@@ -19,15 +21,23 @@ export class ResultsListComponent implements OnInit {
   queryParams = {
     offset: 0,
     limit: 10,
+    patient: 0,
   };
 
   constructor(private backendService: BackendService) {}
 
   ngOnInit(): void {
+    this.queryParams.patient = this.inputPatient;
     this.getResults(this.queryParams);
   }
 
-  getResults(queryParams: { offset: number; limit: number }): void {
+  ngOnChanges() {
+    console.info(this.inputPatient);
+    this.queryParams.patient = this.inputPatient;
+    this.getResults(this.queryParams);
+  }
+
+  getResults(queryParams: QueryParams): void {
     this.backendService.getResults(queryParams).subscribe((results) => {
       this.paginatorData.length = results.count;
       this.results = results.rows;

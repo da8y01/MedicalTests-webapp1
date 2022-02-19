@@ -54,7 +54,7 @@ export class BackendService {
   getResults(queryParams: QueryParams): Observable<ResultResponse> {
     const requestUrl = `${environment.apiUrl}/results?limit=${
       queryParams.limit || 10
-    }&offset=${queryParams.offset || 0}`;
+    }&offset=${queryParams.offset || 0}&patient=${queryParams.patient || 0}`;
     return this.http.get<ResultResponse>(requestUrl).pipe(
       tap((_) => console.info('fetched results', _)),
       catchError(
