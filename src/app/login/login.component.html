@@ -27,7 +27,7 @@
           #password
           id="password"
         />
-        <a href="#">¿Olvidaste tu contraseña?</a>
+        <a (click)="forgotPassword(user.value)">¿Olvidaste tu contraseña?</a>
       </div>
       <button class="boton-sumit" (click)="submit(user.value, password.value)">
         INICIAR SESIÓN

@@ -18,9 +18,8 @@ export class LoginComponent implements OnInit {
   submit(user: string, password: string) {
     this.backendService
       .signIn(user, password)
-      // .login()
-      .subscribe((res: GenericResponse | any) => {
-        if (res.data?.id) {
+      .subscribe((res: LoginResponse | any) => {
+        if (res.id) {
           // Usually you would use the redirect URL from the auth service.
           // However to keep the example simple, we will always redirect to `/admin`.
           let redirectUrl;
@@ -43,5 +42,17 @@ export class LoginComponent implements OnInit {
           this.serverResponse = res;
         }
       });
+  }
+
+  forgotPassword(username: string) {
+    this.backendService.forgotPassword(username).subscribe(
+      (res) => {
+        this.serverResponse = res;
+      },
+      (error) => {
+        console.error(error);
+        this.serverResponse = error;
+      }
+    );
   }
 }

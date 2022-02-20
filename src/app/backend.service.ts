@@ -120,31 +120,43 @@ export class BackendService {
   }
 
   /** POST: sign up a new user to the database */
-  signIn(username: string, password: string): Observable<GenericResponse> {
+  signIn(username: string, password: string): Observable<LoginResponse | any> {
     return this.http
-      .post<GenericResponse>(`${environment.apiUrl}/auth/signin`, {
+      .post<LoginResponse>(`${environment.apiUrl}/auth/signin`, {
         username,
         password,
       })
       .pipe(
         tap(() => (this.isLoggedIn = true)),
-        map((res: GenericResponse) => {
-          if (res.data.id) {
-            this.isLoggedIn = !!res.data.id;
-            this.loggedUser = res.data;
+        map((res: LoginResponse) => {
+          if (res.id) {
+            this.isLoggedIn = !!res.id;
+            this.loggedUser = res;
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user', JSON.stringify(this.loggedUser));
           }
           return res;
         }),
-        catchError(this.handleError('signIn', { code: 0, data: {} }))
+        catchError(this.handleError('signIn', {}))
+      );
+  }
+
+  forgotPassword(username: string): Observable<string | any> {
+    return this.http
+      .get<string | any>(`${environment.apiUrl}/auth/forgotPassword/${username}`)
+      .pipe(
+        map((res: string | any) => {
+          console.info(res)
+          return res;
+        }),
+        catchError(this.handleError('forgotPassword', {}))
       );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      return of(error.error as T);
+      return of(error.message as T);
     };
   }
 
