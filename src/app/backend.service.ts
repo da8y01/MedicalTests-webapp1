@@ -101,9 +101,33 @@ export class BackendService {
           ? console.info(`found patients matching "${term}"`)
           : console.info(`no patients matching "${term}"`)
       ),
-      map((res) => (res)),
+      map((res) => res),
       catchError(
         this.handleError<PatientResponse>('searchPatients', {
+          count: 0,
+          rows: [],
+        })
+      )
+    );
+  }
+
+  searchUsers(
+    term: string,
+    queryParams: QueryParams | any
+  ): Observable<PatientResponse> {
+    const qs = new URLSearchParams(queryParams);
+    const requestUrl = `${
+      environment.apiUrl
+    }/patients?&document=${term.trim()}&${qs.toString()}`;
+    return this.http.get<PatientResponse>(requestUrl).pipe(
+      tap((x) =>
+        x.count
+          ? console.info(`found patients matching "${term}"`)
+          : console.info(`no patients matching "${term}"`)
+      ),
+      map((res) => res),
+      catchError(
+        this.handleError<PatientResponse>('searchUsers', {
           count: 0,
           rows: [],
         })
@@ -143,10 +167,12 @@ export class BackendService {
 
   forgotPassword(username: string): Observable<string | any> {
     return this.http
-      .get<string | any>(`${environment.apiUrl}/auth/forgotPassword/${username}`)
+      .get<string | any>(
+        `${environment.apiUrl}/auth/forgotPassword/${username}`
+      )
       .pipe(
         map((res: string | any) => {
-          console.info(res)
+          console.info(res);
           return res;
         }),
         catchError(this.handleError('forgotPassword', {}))

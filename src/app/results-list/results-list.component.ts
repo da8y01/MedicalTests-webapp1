@@ -47,7 +47,6 @@ export class ResultsListComponent implements OnInit, OnChanges {
   }
 
   pageEvent(event: any): void {
-    console.log(event);
     this.queryParams.limit = this.paginatorData.pageSize;
     this.queryParams.offset = this.paginatorData.pageSize * event.pageIndex;
     this.getResults(this.queryParams);

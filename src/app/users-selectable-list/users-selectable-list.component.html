@@ -1,0 +1,21 @@
+<div class="lista-pacientes-busqueda-seleccion">
+  <div class="lista-pacientes-titulo-seleccion">
+    <input type="checkbox" class="input-checkbox" name="" />
+    <div>FECHA CREACIÓN {{roleText}}</div>
+    <div>DOCUMENTO</div>
+    <div>NOMBRES Y APELLIDOS DEL {{roleText}}</div>
+  </div>
+  <div class="lista-pacientes-contenido-seleccion" *ngFor="let user of users">
+    <input type="checkbox" class="input-checkbox" name="" />
+    <div>{{ user.createdAt | date: "MMMM d, y":"-0500":"es" }}</div>
+    <div>CC. {{ user.username }}</div>
+    <div>{{ user.firstName + " " + user.lastName }}</div>
+  </div>
+  <mat-paginator
+    [length]="paginatorData.length"
+    [pageSize]="paginatorData.pageSize"
+    (page)="pageEvent($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

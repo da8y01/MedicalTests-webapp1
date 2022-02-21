@@ -20,6 +20,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthInterceptor } from './auth-interceptor';
 import { FooterComponent } from './footer/footer.component';
+import { UsersSelectableListComponent } from './users-selectable-list/users-selectable-list.component';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -35,6 +36,7 @@ registerLocaleData(localeEs, 'es');
     LogoutComponent,
     AdminComponent,
     FooterComponent,
+    UsersSelectableListComponent,
   ],
   imports: [
     BrowserModule,
