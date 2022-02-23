@@ -1,5 +1,6 @@
 @media(max-width: 1440px){
 
+
 	.nav-principal_contenedor{
 		width: 90%;
 	}
@@ -19,6 +20,18 @@
 		width: 90%;
 	}
 
+	.main-contenedor-admin{
+		width: 90%;
+	}
+
+	.main-contenedor-add-paciente{
+		width: 90%;
+	}
+
+	.main-contenedor-add-remisor{
+		width: 90%;
+	}
+
 	.buscador-alert{
 		width: 80%;
 	}
@@ -31,6 +44,52 @@
 		padding: 10px 19px 10px 19px;
 
 	}
+
+	.lista-pacientes-contenido-seleccion{
+	grid-template-columns: 3% 31% 28% 38%;
+	}
+
+	.grid-contenedor-pasientes-asiganados .buscador-alert{
+		width: 80%;
+	}
+}
+
+@media(max-width: 1250px){
+
+	.form-campos-datos-personales .input-campo_texto{
+	width: 95%;
+	}
+
+	.form-campos-datos-personales{
+		grid-template-columns: 1fr;
+	}
+
+	.agregar-examenes{
+		grid-template-columns: 1fr;
+		grid-template-areas: "titulo-examenes "
+						 "nombre" 
+						 "cargaexamen"
+						 "lectura" 
+						 "fecha"
+						 "agregarotro";
+	}
+
+	.agregar-examenes .input-campo_texto{
+		width: 95%;
+	}
+
+	.agregar-examenes input[type=file ]{
+		width: 95%;
+	}
+
+	.form-campos-datos-personales hr{
+		width: 97%;
+	}
+
+	.grid-campos-form{
+		grid-template-columns: 10fr 1fr;
+	}
+
 }
 
 @media(max-width: 1050px){
@@ -51,6 +110,22 @@
 		font-size: 12px;
 
 	}
+
+	.main-contenedor-admin{
+		grid-template-columns: 1fr;
+	}
+
+	.grid-logo-boton{
+		grid-template-columns: 80% 16%;
+	}
+
+	.contenedor-asignar-pacientes{
+		width: 87%;
+	}
+
+	.grid-main-contenendor-examenes .contenedor-con-campo-eliminar{
+		font-size: 12px;
+	}
 }	
 
 @media(max-width: 900px){
@@ -68,13 +143,14 @@
 
 	.grid-main-contenendor-examenes .contenedor-examenes-resultados{
 		padding: 5px 25px 5px 25px;
-		grid-template-columns: 15% 55% 15% 15%;
+		grid-template-columns: 25% 40% 15% 15%;
 
 	}
 
+
 	.grid-main-contenendor-examenes .contenedor-examenes-titulo{
 		font-size: 11px;
-		grid-template-columns: 15% 55% 15% 15%;
+		grid-template-columns: 25% 40% 15% 15%;
 		grid-column-gap: 5px;
 		padding: 15px 25px 15px 25px;
 		font-weight: bold;
@@ -87,6 +163,7 @@
 
 	.nav-titulos .info-usuario .doumento-usuario{
 		font-size: 12px;
+		margin-left: 42px;
 	}
 
 	footer .info-contacto p{
@@ -105,18 +182,91 @@
 		margin-top: 10px;
 	}
 
+	.add-examen-button{
+		margin-left: 60%;
+	}
+
+	.grid-logo-boton{
+		grid-template-columns: 75% 25%;
+	}
+
+	
+
+	.grid-main-contenendor-examenes .contenedor-con-campo-eliminar{
+		grid-template-columns: 25% 27% 22% 17% 5%;
+    	padding: 7px 15px 15px 15px;
+    	font-size: 11px;
+
+	}
+
+	.grid-main-contenendor-examenes .contenedor-examenes-resultados-campo-eliminar{
+		grid-template-columns: 25% 27% 22% 17% 5%;
+    	padding: 15px 35px 15px 20px;
+    	font-size: 11px;
+    }
+
+    .grid-contenedor-examenes-editar-pacientes{
+		grid-template-columns: 35% 50% 5%;
+	}
+
+	.grid-contenedor-examenes-editar-pacientes p{
+		font-size: 12px;
+	}
+
+	.contenedor-asignar-pacientes{
+		padding: 42px 35px 42px 35px;
+	}
+	.grid-contenedor-asignar-pacientes{
+		grid-template-columns: 1fr;
+		grid-template-areas:
+        					"tituloAsignarPaciente"
+       						"documentoPacienteCampo" 
+       						"botonAsigPaciente"
+        					"alerta";
+        grid-template-rows: repeat(5, auto);
+	}
+
+	.campo-documento-paciente .input-campo_texto{
+		width: 95%;
+	}
+
+	.add-paciente-button .boton-sumit {
+		margin-top: 10px;
+	}
+
+
+	.grid-contenedor-pasientes-asiganados .buscador-alert{
+		width: 94%;
+	}
+	
+	.lista-remisores-titulo-seleccion{
+	grid-template-columns: 22% 28% 42% 8%;
+    padding: 15px 15px 15px 15px;
+    font-size: 11px;
+ 	}
+
+ 	.lista-remisores-contenido-seleccion{
+ 	grid-template-columns: 20% 28% 44% 10%;
+    padding: 10px 15px 10px 15px;
+ 	}
+
+ 	.grid-main-contenendor-examenes .contenedor-examenes-titulo{
+ 		padding: 5px 25px 15px 25px;
+ 	}
 }
 
 
 @media(max-width: 550px){
 
 	.grid-main-contenendor-examenes .contenedor-examenes-titulo{
-	font-size: 9px;
+		font-size: 9px;
+		grid-template-columns: 30% 35% 18% 12%;
+		grid-column-gap: 5px;
+		padding: 7px 8px 7px 8px;
 	
 	}
 
 	.contenedor-info-paciente{
-		display: block;
 		padding: 12px 45px 12px 25px;
 		margin-top: 10px;
 	}
@@ -126,5 +276,39 @@
 	}
 
 
+.lista-pacientes-titulo-seleccion{
+		grid-template-columns: 3% 31% 25% 40%;
+	}
+
+.lista-pacientes-contenido-seleccion{
+	grid-template-columns: 3% 28% 28% 40%;
+}
+
+.grid-main-contenendor-examenes .contenedor-examenes-resultados{
+		padding: 7px 8px 7px 8px;
+		grid-template-columns: 30% 35% 18% 12%;
+
+	}
+
+	.add-examen-button{
+		margin-left: 20%;
+	}
+
+	.grid-main-contenedor-add-paciente{
+		grid-template-columns: 1fr;
+	}
+
+	.grid-logo-boton{
+		grid-template-columns: 70% 30%;
+	}
+
+	.form-campos-datos-personales p{
+		width: 90%;
+	}
+
+	.grid-main-contenedor-add-remisor{
+		grid-template-columns:  1fr;
+	}
+	
 }
 
