@@ -16,9 +16,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   submit(user: string, password: string) {
-    this.backendService
-      .signIn(user, password)
-      .subscribe((res: LoginResponse | any) => {
+    this.backendService.signIn(user, password).subscribe(
+      (res: LoginResponse | any) => {
         if (res.id) {
           // Usually you would use the redirect URL from the auth service.
           // However to keep the example simple, we will always redirect to `/admin`.
@@ -41,10 +40,16 @@ export class LoginComponent implements OnInit {
         } else {
           this.serverResponse = res;
         }
-      });
+      },
+      (error) => {
+        console.error(error);
+        this.serverResponse = error;
+      }
+    );
   }
 
-  forgotPassword(username: string) {
+  forgotPassword(username: string, event: Event) {
+    event.preventDefault();
     this.backendService.forgotPassword(username).subscribe(
       (res) => {
         this.serverResponse = res;

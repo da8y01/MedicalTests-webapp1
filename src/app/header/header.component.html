@@ -16,8 +16,16 @@
           }}
         </h1>
         <div class="info-usuario">
-          <p class="nombre-usuario">{{ backendService.loggedUser.username }}</p>
-          <p class="documento-usuario">{{ backendService.loggedUser.roles }}</p>
+          <p class="nombre-usuario">
+            {{
+              backendService.getLocalStorageUser().firstName +
+                " " +
+                backendService.getLocalStorageUser().lastName
+            }}
+          </p>
+          <p class="documento-usuario">
+            {{ backendService.getLocalStorageUser().username }}
+          </p>
         </div>
       </div>
     </div>

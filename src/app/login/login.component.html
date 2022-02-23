@@ -27,7 +27,7 @@
           #password
           id="password"
         />
-        <a (click)="forgotPassword(user.value)">¿Olvidaste tu contraseña?</a>
+        <a href="#" (click)="forgotPassword(user.value, $event)">¿Olvidaste tu contraseña?</a>
       </div>
       <button class="boton-sumit" (click)="submit(user.value, password.value)">
         INICIAR SESIÓN

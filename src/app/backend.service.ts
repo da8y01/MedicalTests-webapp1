@@ -35,6 +35,8 @@ export class BackendService {
       id: 0,
       username: '',
       email: '',
+      firstName: '',
+      lastName: '',
       roles: [],
       accessToken: '',
     };
@@ -46,6 +48,8 @@ export class BackendService {
       id: 0,
       username: '',
       email: '',
+      firstName: '',
+      lastName: '',
       roles: [],
       accessToken: '',
     };
@@ -182,7 +186,20 @@ export class BackendService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      return of(error.message as T);
+      let errorCustom = {};
+      if (operation === 'forgotPassword' && error.status === 404) {
+        errorCustom = { error: 'Usuario inválido.' };
+      }
+      if (operation === 'signIn' && error.status === 401) {
+        errorCustom = { error: 'Password inválido.' };
+      }
+      if (operation === 'signIn' && error.status === 404) {
+        errorCustom = { error: 'Usuario inválido.' };
+      }
+      return of(errorCustom as T);
+      // return of(errorCustom as unknown as T);
+      // return of(result as T);
+      // return of(error.message as T);
     };
   }
 

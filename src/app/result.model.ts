@@ -3,7 +3,7 @@ export interface Result {
   name: string;
   link: string;
   patient: number;
-  reading?: number;
+  reading?: Result;
   createdAt: string;
   updatedAt: string;
 }
