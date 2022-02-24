@@ -9,22 +9,14 @@
       <img src="../../images/logo-SD.png" alt="Logo" />
       <div class="nav-titulos">
         <h1>
-          {{
-            backendService.loggedUser.roles[0] === "ROLE_PATIENT"
-              ? "Resultados"
-              : "Pacientes remitidos"
-          }}
+          {{ navTitles }}
         </h1>
         <div class="info-usuario">
           <p class="nombre-usuario">
-            {{
-              backendService.getLocalStorageUser().firstName +
-                " " +
-                backendService.getLocalStorageUser().lastName
-            }}
+            {{ nameUser }}
           </p>
-          <p class="documento-usuario">
-            {{ backendService.getLocalStorageUser().username }}
+          <p class="documento-usuario" *ngIf="documentUser">
+            {{ documentUser }}
           </p>
         </div>
       </div>

@@ -8,9 +8,26 @@ import { BackendService } from '../backend.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  navTitles = '';
+  nameUser = '';
+  documentUser = null;
   constructor(public backendService: BackendService, public router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.nameUser =
+      this.backendService.getLocalStorageUser().firstName +
+      ' ' +
+      this.backendService.getLocalStorageUser().lastName;
+    this.documentUser = this.backendService.getLocalStorageUser().username;
+    if (this.router.url.includes('patient')) this.navTitles = 'Resultados';
+    if (this.router.url.includes('medic'))
+      this.navTitles = 'Pacientes remitidos';
+    if (this.router.url.includes('admin')) {
+      this.navTitles = 'Administrador';
+      this.nameUser = 'Sociedad de Diagnóstico Visual S.A.S.';
+      this.documentUser = null;
+    }
+  }
 
   logout(event: MouseEvent) {
     event.preventDefault();
