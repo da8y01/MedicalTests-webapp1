@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { BackendService } from '../backend.service';
@@ -12,7 +12,9 @@ import { QueryParams } from '../query-params.model';
   styleUrls: ['./users-selectable-list.component.css'],
 })
 export class UsersSelectableListComponent implements OnInit {
-  @Input() role: string = '';
+  @Input('role') inputRole: string = '';
+  @Input('term') inputTerm: string = '';
+  @Output() usersCount = new EventEmitter<number>();
   roleText = '';
   paginatorData = {
     length: 0,
@@ -29,9 +31,9 @@ export class UsersSelectableListComponent implements OnInit {
   constructor(private backendService: BackendService) {}
 
   ngOnInit(): void {
-    this.roleText = this.role === 'patient' ? 'PACIENTE' : 'REMISOR';
+    this.roleText = this.inputRole === 'patient' ? 'PACIENTE' : 'REMISOR';
     const fullQueryParams = Object.assign(this.queryParams, {
-      roles: [this.role],
+      roles: [this.inputRole],
     });
     this.usersResponse$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
@@ -48,11 +50,13 @@ export class UsersSelectableListComponent implements OnInit {
     this.usersResponse$.subscribe(({ count, rows }) => {
       this.paginatorData.length = count;
       this.users = rows;
-      if (this.users.length <= 0) {
-        // display notification
-      }
+      this.emitUsersCount(count);
     });
     this.search('');
+  }
+
+  ngOnChanges() {
+    this.search(this.inputTerm);
   }
 
   getUsers(queryParams: QueryParams): void {
@@ -70,5 +74,9 @@ export class UsersSelectableListComponent implements OnInit {
 
   search(term: string): void {
     this.searchTerms.next(term);
+  }
+
+  emitUsersCount(value: number) {
+    this.usersCount.emit(value);
   }
 }
