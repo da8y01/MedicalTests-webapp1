@@ -38,7 +38,8 @@ export class LoginComponent implements OnInit {
           // Redirect the user
           this.router.navigate([redirectUrl]);
         } else {
-          this.serverResponse = res;
+          // this.serverResponse = res;
+          this.serverResponse = res.error;
         }
       },
       (error) => {

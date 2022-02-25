@@ -27,11 +27,16 @@ export class HeaderComponent implements OnInit {
       this.nameUser = 'Sociedad de Diagnóstico Visual S.A.S.';
       this.documentUser = null;
     }
+    if (this.router.url.includes('create-patient')) {
+      this.navTitles = 'Nuevo paciente';
+      this.nameUser = '';
+      this.documentUser = null;
+    }
   }
 
-  logout(event: MouseEvent) {
-    event.preventDefault();
-    this.backendService.logout();
-    this.router.navigate(['/login']);
-  }
+  // logout(event: MouseEvent) {
+  //   event.preventDefault();
+  //   this.backendService.logout();
+  //   this.router.navigate(['/login']);
+  // }
 }

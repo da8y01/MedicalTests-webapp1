@@ -21,6 +21,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AuthInterceptor } from './auth-interceptor';
 import { FooterComponent } from './footer/footer.component';
 import { UsersSelectableListComponent } from './users-selectable-list/users-selectable-list.component';
+import { CreatePatientComponent } from './create-patient/create-patient.component';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -37,6 +38,7 @@ registerLocaleData(localeEs, 'es');
     AdminComponent,
     FooterComponent,
     UsersSelectableListComponent,
+    CreatePatientComponent,
   ],
   imports: [
     BrowserModule,

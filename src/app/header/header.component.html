@@ -6,17 +6,24 @@
   </div>
   <div class="nav-banner">
     <div class="nav-grid-banner_logo">
-      <img src="../../images/logo-SD.png" alt="Logo" />
+      <div class="grid-logo-boton">
+        <img src="images/logo-SD.png" alt="Logo" />
+        <div class="regresar-button">
+          <div class="agregar-button">
+            <a routerLink="/admin"
+              ><i class="icono-agregar fas fa-arrow-left"></i
+            ></a>
+          </div>
+          <a routerLink="/admin"><p class="regresar">Regresar</p></a>
+        </div>
+      </div>
+
       <div class="nav-titulos">
-        <h1>
-          {{ navTitles }}
-        </h1>
-        <div class="info-usuario">
-          <p class="nombre-usuario">
-            {{ nameUser }}
-          </p>
+        <h1>{{ navTitles }}</h1>
+        <div class="info-usuario" *ngIf="nameUser !== ''">
+          <p class="nombre-usuario">Dr. {{ nameUser }}</p>
           <p class="documento-usuario" *ngIf="documentUser">
-            {{ documentUser }}
+            CC. {{ documentUser }}
           </p>
         </div>
       </div>
