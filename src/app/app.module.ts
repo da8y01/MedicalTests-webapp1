@@ -1,6 +1,7 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PatientComponent } from './patient/patient.component';
@@ -46,9 +47,12 @@ registerLocaleData(localeEs, 'es');
     AppRoutingModule,
     MatPaginatorModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
   ],
   // providers: [],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   // providers: [{provide: MatPaginatorIntl, useClass: CustomPaginatorIntl}],
   // providers: [{provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent],
