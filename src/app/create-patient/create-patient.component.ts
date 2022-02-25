@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-create-patient',
@@ -7,17 +10,45 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./create-patient.component.css'],
 })
 export class CreatePatientComponent implements OnInit {
-  patientForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+  patientForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    documentType: [''],
+    password: ['', Validators.required],
+    username: ['', Validators.required],
+    birthdate: [''],
+    address: [''],
+    phone: [''],
+    email: ['', Validators.required],
   });
+  messages = '';
 
-  constructor() {}
+  constructor(
+    private fb: FormBuilder,
+    private backendService: BackendService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    console.warn(this.patientForm.value);
+    this.backendService.createPatient(this.patientForm.value).subscribe(
+      (res) => {
+        console.info(res);
+        this.router.navigate(['/admin']);
+      },
+      (error) => {
+        console.error(error);
+        this.messages = error;
+      }
+    );
+  }
+
+  updateProfile() {
+    this.patientForm.patchValue({
+      firstName: '',
+      address: '',
+    });
   }
 }

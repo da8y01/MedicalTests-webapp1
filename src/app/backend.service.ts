@@ -147,7 +147,6 @@ export class BackendService {
     );
   }
 
-  /** POST: sign up a new user to the database */
   signIn(username: string, password: string): Observable<LoginResponse | any> {
     return this.http
       .post<LoginResponse>(`${environment.apiUrl}/auth/signin`, {
@@ -169,6 +168,18 @@ export class BackendService {
       );
   }
 
+  createPatient(patient: LoginResponse | any): Observable<LoginResponse | any> {
+    return this.http
+      .post<LoginResponse | any>(`${environment.apiUrl}/auth/signup`, patient)
+      .pipe(
+        map((res: LoginResponse | any) => {
+          console.info('createPatient', res);
+          return res;
+        }),
+        catchError(this.handleError('createPatient', {}))
+      );
+  }
+
   forgotPassword(username: string): Observable<string | any> {
     return this.http
       .get<string | any>(
@@ -187,6 +198,7 @@ export class BackendService {
     return (error: any): Observable<T> => {
       console.error(error);
       let errorCustom = {};
+      errorCustom = { error: 'Fallo en la operación.' };
       if (operation === 'forgotPassword' && error.status === 404) {
         errorCustom = { error: 'Usuario inválido.' };
       }

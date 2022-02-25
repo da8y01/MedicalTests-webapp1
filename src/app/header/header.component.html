@@ -21,9 +21,9 @@
       <div class="nav-titulos">
         <h1>{{ navTitles }}</h1>
         <div class="info-usuario" *ngIf="nameUser !== ''">
-          <p class="nombre-usuario">Dr. {{ nameUser }}</p>
+          <p class="nombre-usuario">{{ nameUser }}</p>
           <p class="documento-usuario" *ngIf="documentUser">
-            CC. {{ documentUser }}
+            {{ documentUser }}
           </p>
         </div>
       </div>
