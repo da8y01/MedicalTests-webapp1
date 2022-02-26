@@ -1,7 +1,7 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PatientComponent } from './patient/patient.component';
@@ -48,6 +48,7 @@ registerLocaleData(localeEs, 'es');
     MatPaginatorModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   // providers: [],
   providers: [

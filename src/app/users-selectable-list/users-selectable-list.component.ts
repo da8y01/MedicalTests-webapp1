@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormArray } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { BackendService } from '../backend.service';
@@ -27,8 +28,15 @@ export class UsersSelectableListComponent implements OnInit {
   usersResponse$!: Observable<PatientResponse>;
   users: Patient[] = [];
   private searchTerms = new Subject<string>();
+  selectableGroup = this.fb.group({
+    checkAll: this.fb.control(false),
+    usersArray: this.fb.array([]),
+  });
 
-  constructor(private backendService: BackendService) {}
+  constructor(
+    private backendService: BackendService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.roleText = this.inputRole === 'patient' ? 'PACIENTE' : 'REMISOR';
@@ -50,6 +58,9 @@ export class UsersSelectableListComponent implements OnInit {
     this.usersResponse$.subscribe(({ count, rows }) => {
       this.paginatorData.length = count;
       this.users = rows;
+      this.users.map((user) => {
+        this.addUser();
+      });
       this.emitUsersCount(count);
     });
     this.search('');
@@ -57,6 +68,14 @@ export class UsersSelectableListComponent implements OnInit {
 
   ngOnChanges() {
     this.search(this.inputTerm);
+  }
+
+  get usersList() {
+    return this.selectableGroup.get('usersArray') as FormArray;
+  }
+
+  addUser() {
+    this.usersList.push(this.fb.control(false));
   }
 
   getUsers(queryParams: QueryParams): void {
@@ -78,5 +97,20 @@ export class UsersSelectableListComponent implements OnInit {
 
   emitUsersCount(value: number) {
     this.usersCount.emit(value);
+  }
+
+  checkboxClicked(index: number) {
+    this.users[index].selected = !this.users[index].selected;
+  }
+  checkboxAll() {
+    console.debug('checkboxAll');
+    this.users = this.users.map((user) => {
+      user.selected = true;
+      return user;
+    });
+  }
+
+  allClick() {
+    console.info('CLICKED');
   }
 }
