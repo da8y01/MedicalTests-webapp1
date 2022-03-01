@@ -34,6 +34,7 @@ export class UsersSelectableListComponent implements OnInit {
     usersArray: this.fb.array([]),
   });
   deleteList: number[] = [];
+  deleteSet = new Set();
 
   constructor(
     private backendService: BackendService,
@@ -101,17 +102,16 @@ export class UsersSelectableListComponent implements OnInit {
     this.usersCount.emit(value);
   }
 
-  checkClick(userId: number, event: Event) {
-    // this.usersList.controls.map((control, idx) => {
-    //   if (idx === index) {
-    //     control.setValue(!control.value)
-    //   }
-    // })
-    this.deleteList.push(userId);
-    this.usersDelete.emit(this.deleteList);
+  checkClick(userId: number, index: number) {
+    if (this.usersList.controls[index].value) {
+      this.deleteSet.add(userId);
+    } else {
+      this.deleteSet.delete(userId);
+    }
+    this.usersDelete.emit([...this.deleteSet] as number[]);
   }
 
-  checkAllClick(event: Event) {
+  checkAllClick() {
     const checkAllValue = this.selectableGroup.get('checkAll')?.value;
     this.usersList.controls.map((checkControl) => {
       checkControl.setValue(checkAllValue);
