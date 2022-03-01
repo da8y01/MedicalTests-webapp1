@@ -32,6 +32,11 @@ export class HeaderComponent implements OnInit {
       this.nameUser = '';
       this.documentUser = null;
     }
+    if (this.router.url.includes('update-patient')) {
+      this.navTitles = 'Información del paciente';
+      this.nameUser = '';
+      this.documentUser = null;
+    }
   }
 
   // logout(event: MouseEvent) {

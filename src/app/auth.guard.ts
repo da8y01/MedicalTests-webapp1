@@ -38,7 +38,8 @@ export class AuthGuard implements CanActivate {
       (storageUserRole.includes('patient') && url.includes('patient')) ||
       (storageUserRole.includes('medic') && url.includes('medic')) ||
       (storageUserRole.includes('admin') && url.includes('admin')) ||
-      (storageUserRole.includes('admin') && url.includes('create-patient'))
+      (storageUserRole.includes('admin') && url.includes('create-patient')) ||
+      (storageUserRole.includes('admin') && url.includes('update-patient'))
     ) {
       return true;
     }

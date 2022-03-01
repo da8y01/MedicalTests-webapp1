@@ -8,7 +8,7 @@
     <div class="nav-grid-banner_logo">
       <div class="grid-logo-boton">
         <img src="images/logo-SD.png" alt="Logo" />
-        <div class="regresar-button" *ngIf="router.url.includes('create-patient')">
+        <div class="regresar-button" *ngIf="router.url.includes('create-patient') || router.url.includes('update-patient')">
           <div class="agregar-button">
             <a routerLink="/admin"
               ><i class="icono-agregar fas fa-arrow-left"></i
