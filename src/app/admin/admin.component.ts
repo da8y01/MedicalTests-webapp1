@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-admin',
@@ -10,8 +12,13 @@ export class AdminComponent implements OnInit {
   medicsLength: number = 0;
   termPatient: string = '';
   termMedic: string = '';
+  deletePatients: number[] = [];
+  deleteMedics: number[] = [];
 
-  constructor() {}
+  constructor(private backendService: BackendService, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+  }
 
   ngOnInit(): void {}
 
@@ -29,5 +36,25 @@ export class AdminComponent implements OnInit {
   }
   searchMedic(term: string): void {
     this.termMedic = term;
+  }
+
+  updateDeleteListPatients(deleteList: number[]) {
+    this.deletePatients = deleteList;
+  }
+  updateDeleteListMedics(deleteList: number[]) {
+    this.deleteMedics = deleteList;
+  }
+
+  deleteSelected(type: string) {
+    this.backendService
+      .deleteUsers(type === 'patient' ? this.deletePatients : this.deleteMedics)
+      .subscribe(
+        (count) => {
+          this.router.navigate(['/admin']);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
   }
 }

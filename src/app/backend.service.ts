@@ -180,6 +180,17 @@ export class BackendService {
       );
   }
 
+  deleteUsers(patients: number[]): Observable<number> {
+    return this.http
+      .post<number>(`${environment.apiUrl}/patients/delete`, {patients})
+      .pipe(
+        map((res: number) => {
+          return res;
+        }),
+        catchError(this.handleError('deletePatients', 0))
+      );
+  }
+
   forgotPassword(username: string): Observable<string | any> {
     return this.http
       .get<string | any>(

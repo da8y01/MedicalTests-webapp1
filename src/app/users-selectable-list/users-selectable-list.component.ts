@@ -16,6 +16,7 @@ export class UsersSelectableListComponent implements OnInit {
   @Input('role') inputRole: string = '';
   @Input('term') inputTerm: string = '';
   @Output() usersCount = new EventEmitter<number>();
+  @Output() usersDelete = new EventEmitter<number[]>();
   roleText = '';
   paginatorData = {
     length: 0,
@@ -32,6 +33,7 @@ export class UsersSelectableListComponent implements OnInit {
     checkAll: this.fb.control(false),
     usersArray: this.fb.array([]),
   });
+  deleteList: number[] = [];
 
   constructor(
     private backendService: BackendService,
@@ -99,18 +101,20 @@ export class UsersSelectableListComponent implements OnInit {
     this.usersCount.emit(value);
   }
 
-  checkboxClicked(index: number) {
-    this.users[index].selected = !this.users[index].selected;
-  }
-  checkboxAll() {
-    console.debug('checkboxAll');
-    this.users = this.users.map((user) => {
-      user.selected = true;
-      return user;
-    });
+  checkClick(userId: number, event: Event) {
+    // this.usersList.controls.map((control, idx) => {
+    //   if (idx === index) {
+    //     control.setValue(!control.value)
+    //   }
+    // })
+    this.deleteList.push(userId);
+    this.usersDelete.emit(this.deleteList);
   }
 
-  allClick() {
-    console.info('CLICKED');
+  checkAllClick(event: Event) {
+    const checkAllValue = this.selectableGroup.get('checkAll')?.value;
+    this.usersList.controls.map((checkControl) => {
+      checkControl.setValue(checkAllValue);
+    });
   }
 }

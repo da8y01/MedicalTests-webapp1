@@ -9,8 +9,8 @@
           ><i class="icono-agregar fas fa-plus"></i
         ></a>
       </div>
-      <div class="eliminar-button">
-        <a href="#"><i class="icono-agregar fas fa-trash-alt"></i></a>
+      <div class="eliminar-button" (click)="deleteSelected('patient')">
+        <a><i class="icono-agregar fas fa-trash-alt"></i></a>
       </div>
       <div class="editar-button">
         <a href="admineditarpaciente.html"
@@ -44,6 +44,7 @@
       role="patient"
       [term]="termPatient"
       (usersCount)="countPatients($event)"
+      (usersDelete)="updateDeleteListPatients($event)"
     ></app-users-selectable-list>
   </section>
 
@@ -55,8 +56,8 @@
           ><i class="icono-agregar fas fa-plus"></i
         ></a>
       </div>
-      <div class="eliminar-button">
-        <a href="#"><i class="icono-agregar fas fa-trash-alt"></i></a>
+      <div class="eliminar-button" (click)="deleteSelected('medic')">
+        <a><i class="icono-agregar fas fa-trash-alt"></i></a>
       </div>
       <div class="editar-button">
         <a href="admineditarmedico.html"
@@ -90,6 +91,7 @@
       role="medic"
       [term]="termMedic"
       (usersCount)="countMedics($event)"
+      (usersDelete)="updateDeleteListMedics($event)"
     ></app-users-selectable-list>
   </section>
 </main>
