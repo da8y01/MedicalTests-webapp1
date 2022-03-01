@@ -14,7 +14,7 @@
               ><i class="icono-agregar fas fa-arrow-left"></i
             ></a>
           </div>
-          <a routerLink="/admin"><p class="regresar">Regresar</p></a>
+          <a *ngIf="router.url.includes('create-patient')" routerLink="/admin"><p class="regresar">Regresar</p></a>
         </div>
       </div>
 
