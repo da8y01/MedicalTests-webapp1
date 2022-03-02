@@ -11,16 +11,27 @@ import { Patient } from '../patient.model';
 })
 export class UpdatePatientComponent implements OnInit {
   patientForm = this.fb.group({
-    firstName: [{ value: '', disabled: true }, Validators.required],
-    lastName: [{ value: '', disabled: true }, Validators.required],
-    documentType: [{ value: '', disabled: true }],
-    password: [{ value: '', disabled: true }, Validators.required],
-    username: [{ value: '', disabled: true }, Validators.required],
-    birthdate: [{ value: '', disabled: true }],
-    address: [{ value: '', disabled: true }],
-    phone: [{ value: '', disabled: true }],
-    email: [{ value: '', disabled: true }, Validators.required],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    documentType: [''],
+    password: ['', Validators.required],
+    username: ['', Validators.required],
+    birthdate: [''],
+    address: [''],
+    phone: [''],
+    email: ['', Validators.required],
   });
+  // patientForm = this.fb.group({
+  //   firstName: [{ value: '', disabled: true }, Validators.required],
+  //   lastName: [{ value: '', disabled: true }, Validators.required],
+  //   documentType: [{ value: '', disabled: true }],
+  //   password: [{ value: '', disabled: true }, Validators.required],
+  //   username: [{ value: '', disabled: true }, Validators.required],
+  //   birthdate: [{ value: '', disabled: true }],
+  //   address: [{ value: '', disabled: true }],
+  //   phone: [{ value: '', disabled: true }],
+  //   email: [{ value: '', disabled: true }, Validators.required],
+  // });
   userRoute: Patient;
 
   constructor(
