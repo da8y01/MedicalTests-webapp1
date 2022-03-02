@@ -102,7 +102,7 @@ export class UsersSelectableListComponent implements OnInit {
     this.usersCount.emit(value);
   }
 
-  checkClick(userId: number, index: number) {
+  checkClick(userId: number | any, index: number) {
     if (this.usersList.controls[index].value) {
       this.deleteSet.add(userId);
     } else {
