@@ -18,8 +18,16 @@
         ><i class="iconoDescarga fas fa-download"></i
       ></a>
     </div>
-    <div>
-      <a *ngIf="result.reading" [href]="result.reading.link"
+    <div *ngIf="currentUrl.includes('patient')">
+      <a
+        *ngIf="result.reading"
+        [href]="result.reading.link"
+        (click)="downloadFile(result.reading.link, $event)"
+        ><i class="iconoDescarga-lectura fas fa-download"></i
+      ></a>
+    </div>
+    <div *ngIf="currentUrl.includes('medic')">
+      <a *ngIf="result.reading" [href]="result.reading.link" target="_blank"
         ><i class="iconoDescarga-lectura fas fa-download"></i
       ></a>
     </div>

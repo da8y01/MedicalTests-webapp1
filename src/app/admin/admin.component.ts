@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../backend.service';
 
 @Component({
@@ -14,13 +14,22 @@ export class AdminComponent implements OnInit {
   termMedic: string = '';
   deletePatients: number[] = [];
   deleteMedics: number[] = [];
+  urlId: number = 0;
 
-  constructor(private backendService: BackendService, private router: Router) {
+  constructor(
+    private backendService: BackendService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.urlId = params['id'];
+    });
+  }
 
   countPatients(event: number): number {
     this.patientsLength = event;
@@ -56,5 +65,12 @@ export class AdminComponent implements OnInit {
           console.error(error);
         }
       );
+  }
+
+  updatePatient() {
+    const aPatientIdEdit = this.deletePatients.find(
+      (deletePatient) => {return deletePatient;}
+    );
+    this.router.navigate(['/', 'update-patient', aPatientIdEdit]);
   }
 }

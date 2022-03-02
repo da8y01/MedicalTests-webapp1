@@ -43,9 +43,10 @@ export class UsersSelectableListComponent implements OnInit {
 
   ngOnInit(): void {
     this.roleText = this.inputRole === 'patient' ? 'PACIENTE' : 'REMISOR';
-    const fullQueryParams = Object.assign(this.queryParams, {
-      roles: [this.inputRole],
-    });
+    // const fullQueryParams = Object.assign(this.queryParams, {
+    //   roles: [this.inputRole],
+    // });
+    const fullQueryParams = { ...this.queryParams, roles: [this.inputRole] };
     this.usersResponse$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
@@ -113,8 +114,10 @@ export class UsersSelectableListComponent implements OnInit {
 
   checkAllClick() {
     const checkAllValue = this.selectableGroup.get('checkAll')?.value;
-    this.usersList.controls.map((checkControl) => {
-      checkControl.setValue(checkAllValue);
+    this.users.map((user, idx) => {
+      this.deleteSet.add(user.id);
+      this.usersList.controls[idx].setValue(checkAllValue);
     });
+    this.usersDelete.emit([...this.deleteSet] as number[]);
   }
 }
