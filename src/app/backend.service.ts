@@ -139,11 +139,11 @@ export class BackendService {
     );
   }
 
-  getPatient(id: number): Observable<Patient> {
-    const url = `${environment.apiUrl}/patients/${id}`;
+  getUser(id: number): Observable<Patient> {
+    const url = `${environment.apiUrl}/users/${id}`;
     return this.http.get<Patient>(url).pipe(
       tap((_) => console.info(`fetched patient id=${id}`)),
-      catchError(this.handleError<Patient>(`getPatient id=${id}`))
+      catchError(this.handleError<Patient>(`getUser id=${id}`))
     );
   }
 
