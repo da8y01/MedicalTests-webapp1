@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../backend.service';
 import { Patient } from '../patient.model';
 
@@ -33,10 +33,12 @@ export class UpdatePatientComponent implements OnInit {
   //   email: [{ value: '', disabled: true }, Validators.required],
   // });
   userRoute: Patient;
+  patientId: number = 0;
 
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private backendService: BackendService
   ) {
     this.userRoute = this.activatedRoute.snapshot.data.user;
@@ -44,20 +46,29 @@ export class UpdatePatientComponent implements OnInit {
 
   ngOnInit(): void {
     let patientFormValue = { ...this.userRoute };
-    delete patientFormValue['id']
-    delete patientFormValue['medic']
-    delete patientFormValue['createdAt']
-    delete patientFormValue['updatedAt']
+    delete patientFormValue['id'];
+    delete patientFormValue['medic'];
+    delete patientFormValue['createdAt'];
+    delete patientFormValue['updatedAt'];
     patientFormValue = {
       ...patientFormValue,
       documentType: 'CC',
       birthdate: '01/01/1991',
     };
     this.patientForm.setValue(patientFormValue);
+    this.patientId = this.userRoute.id || 0;
   }
 
   onSubmit() {
-    console.info('onSubmit');
+    const userServer = { ...this.patientForm.value, id: this.patientId };
+    this.backendService.updatePatient(userServer).subscribe(
+      (updatedUser) => {
+        this.router.navigate(['/admin']);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   editField(field: string) {

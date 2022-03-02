@@ -180,6 +180,18 @@ export class BackendService {
       );
   }
 
+  updatePatient(patient: LoginResponse | any): Observable<LoginResponse | any> {
+    return this.http
+      .put<LoginResponse | any>(`${environment.apiUrl}/users`, patient)
+      .pipe(
+        map((res: LoginResponse | any) => {
+          console.info('updatePatient', res);
+          return res;
+        }),
+        catchError(this.handleError('updatePatient', {}))
+      );
+  }
+
   deleteUsers(patients: number[]): Observable<number> {
     return this.http
       .post<number>(`${environment.apiUrl}/patients/delete`, {patients})
