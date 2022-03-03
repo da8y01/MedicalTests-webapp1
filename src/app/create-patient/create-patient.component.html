@@ -122,8 +122,13 @@
               <label class="file">
                 <input
                   type="file"
-                  id="file"
+                  id="file-upload"
+                  accept=".pdf,.jpg,.png,.avi,.mp4"
+                  onchange="console.log(event.target.files)"
                   aria-label="File browser example"
+                  formControlName="fileUpload"
+                  (change)="onFileSelected($event)"
+                  #fileUpload
                 />
                 <span class="file-custom"></span>
               </label>

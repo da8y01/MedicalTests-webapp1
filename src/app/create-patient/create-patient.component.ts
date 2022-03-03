@@ -1,7 +1,10 @@
+import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { BackendService } from '../backend.service';
 
 @Component({
@@ -20,8 +23,12 @@ export class CreatePatientComponent implements OnInit {
     address: [''],
     phone: [''],
     email: ['', Validators.required],
+    fileUpload: ['', Validators.required],
   });
   messages = '';
+  fileName = '';
+  uploadProgress!: number;
+  uploadSub!: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -50,5 +57,35 @@ export class CreatePatientComponent implements OnInit {
       firstName: '',
       address: '',
     });
+  }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      this.fileName = file.name;
+      const formData = new FormData();
+      formData.append('fileResult', file);
+
+      const upload$ = this.backendService
+        .uploadResult(formData)
+        .pipe(finalize(() => this.reset()));
+
+      this.uploadSub = upload$.subscribe((event) => {
+        if (event.type == HttpEventType.UploadProgress) {
+          this.uploadProgress = Math.round(100 * (event.loaded / event.total));
+        }
+      });
+    }
+  }
+
+  cancelUpload() {
+    this.uploadSub.unsubscribe();
+    this.reset();
+  }
+
+  reset() {
+    this.uploadProgress = null;
+    this.uploadSub = null;
   }
 }

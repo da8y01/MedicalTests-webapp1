@@ -141,7 +141,6 @@ export class BackendService {
 
   getUser(id: number): Observable<Patient> {
     const url = `${environment.apiUrl}/users/${id}`;
-    console.info('url', url)
     return this.http.get<Patient>(url).pipe(
       tap((_) => console.info(`fetched patient id=${id}`)),
       catchError(this.handleError<Patient>(`getUser id=${id}`))
@@ -182,7 +181,6 @@ export class BackendService {
   }
 
   updatePatient(patient: LoginResponse | any): Observable<LoginResponse | any> {
-    console.log('updatePatient', patient)
     return this.http
       .put<LoginResponse | any>(`${environment.apiUrl}/users`, patient)
       .pipe(
@@ -196,7 +194,7 @@ export class BackendService {
 
   deleteUsers(patients: number[]): Observable<number> {
     return this.http
-      .post<number>(`${environment.apiUrl}/patients/delete`, {patients})
+      .post<number>(`${environment.apiUrl}/patients/delete`, { patients })
       .pipe(
         map((res: number) => {
           return res;
@@ -216,6 +214,18 @@ export class BackendService {
           return res;
         }),
         catchError(this.handleError('forgotPassword', {}))
+      );
+  }
+
+  uploadResult(formData: any): Observable<any> {
+    return this.http
+      .post<any>(`${environment.apiUrl}/results/upload`, formData)
+      .pipe(
+        map((res: any) => {
+          console.info('uploadResult', res);
+          return res;
+        }),
+        catchError(this.handleError('uploadResult', {}))
       );
   }
 

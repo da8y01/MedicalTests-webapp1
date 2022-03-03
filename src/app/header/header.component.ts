@@ -10,7 +10,7 @@ import { BackendService } from '../backend.service';
 export class HeaderComponent implements OnInit {
   navTitles = '';
   nameUser = '';
-  documentUser = null;
+  documentUser: string = null;
   constructor(public backendService: BackendService, public router: Router) {}
 
   ngOnInit(): void {
