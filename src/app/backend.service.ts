@@ -141,6 +141,7 @@ export class BackendService {
 
   getUser(id: number): Observable<Patient> {
     const url = `${environment.apiUrl}/users/${id}`;
+    console.info('url', url)
     return this.http.get<Patient>(url).pipe(
       tap((_) => console.info(`fetched patient id=${id}`)),
       catchError(this.handleError<Patient>(`getUser id=${id}`))
@@ -181,6 +182,7 @@ export class BackendService {
   }
 
   updatePatient(patient: LoginResponse | any): Observable<LoginResponse | any> {
+    console.log('updatePatient', patient)
     return this.http
       .put<LoginResponse | any>(`${environment.apiUrl}/users`, patient)
       .pipe(

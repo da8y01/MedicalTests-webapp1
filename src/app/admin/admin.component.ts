@@ -68,9 +68,11 @@ export class AdminComponent implements OnInit {
   }
 
   updatePatient() {
+    console.info('this.deletePatients', this.deletePatients)
     const aPatientIdEdit = this.deletePatients.find(
       (deletePatient) => {return deletePatient;}
     );
+    console.info('aPatientIdEdit', aPatientIdEdit)
     this.router.navigate(['/', 'update-patient', aPatientIdEdit]);
   }
 }
