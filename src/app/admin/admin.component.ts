@@ -68,13 +68,18 @@ export class AdminComponent implements OnInit {
   }
 
   updatePatient() {
-    const aPatientIdEdit = this.deletePatients.find(
-      (deletePatient) => {return deletePatient;}
-    );
-    this.router.navigate(['/', 'update-patient', aPatientIdEdit]);
+    if (this.deletePatients.length === 1) {
+      this.router.navigate(['/', 'update-patient', this.deletePatients[0]]);
+    } else {
+      alert('ERROR: Solamente puede editar un paciente a la vez.');
+    }
   }
 
   updateMedic() {
-    this.router.navigate(['/', 'update-medic', this.deleteMedics[0]]);
+    if (this.deleteMedics.length === 1) {
+      this.router.navigate(['/', 'update-medic', this.deleteMedics[0]]);
+    } else {
+      alert('ERROR: Solamente puede editar un médico a la vez.');
+    }
   }
 }

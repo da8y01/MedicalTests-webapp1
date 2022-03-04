@@ -1,13 +1,13 @@
 <div class="lista-pacientes-busqueda-seleccion" [formGroup]="selectableGroup">
   <div class="lista-pacientes-titulo-seleccion">
-    <input type="checkbox" class="input-checkbox" formControlName="checkAll" (change)="checkAllClick()" />
+    <input type="checkbox" class="input-checkbox" formControlName="checkAll" (change)="checkAllClick()" [style.visibility]="inputSelectable ? 'visible' : 'hidden'" />
     <div>FECHA CREACIÓN {{roleText}}</div>
     <div>DOCUMENTO</div>
     <div>NOMBRES Y APELLIDOS DEL {{roleText}}</div>
   </div>
   <div formArrayName="usersArray">
     <div class="lista-pacientes-contenido-seleccion" *ngFor="let user of users; let i=index">
-      <input type="checkbox" class="input-checkbox" [formControlName]="i" (change)="checkClick(user.id, i)" />
+      <input type="checkbox" class="input-checkbox" [formControlName]="i" (change)="checkClick(user.id, i)" [style.visibility]="inputSelectable ? 'visible' : 'hidden'" />
       <div>{{ user.createdAt | date: "MMMM d, y":"-0500":"es" }}</div>
       <div>CC. {{ user.username }}</div>
       <div>{{ user.firstName + " " + user.lastName }}</div>

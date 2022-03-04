@@ -15,6 +15,7 @@ import { QueryParams } from '../query-params.model';
 export class UsersSelectableListComponent implements OnInit {
   @Input('role') inputRole: string = '';
   @Input('term') inputTerm: string = '';
+  @Input('selectable') inputSelectable: boolean = true;
   @Output() usersCount = new EventEmitter<number>();
   @Output() usersDelete = new EventEmitter<number[]>();
   roleText = '';
@@ -103,7 +104,7 @@ export class UsersSelectableListComponent implements OnInit {
     this.usersCount.emit(value);
   }
 
-  checkClick(userId: number | any, index: number) {
+  checkClick(userId: number, index: number) {
     if (this.usersList.controls[index].value) {
       this.deleteSet.add(userId);
     } else {
@@ -116,8 +117,12 @@ export class UsersSelectableListComponent implements OnInit {
     const checkAllValue = this.selectableGroup.get('checkAll')?.value;
     this.users.map((user, idx) => {
       this.deleteSet.add(user.id);
+      // if (checkAllValue) this.deleteSet.add(user.id);
+      // else this.deleteSet.delete(user.id);
       this.usersList.controls[idx].setValue(checkAllValue);
     });
+    if (!checkAllValue) this.deleteSet.clear();
     this.usersDelete.emit([...this.deleteSet] as number[]);
+    // this.usersDelete.emit([...this.deleteSet]);
   }
 }
