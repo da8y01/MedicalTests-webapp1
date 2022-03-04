@@ -4,7 +4,7 @@
   <section class="grid-main-contenedor-add-paciente">
     <img src="images/img-pacientes.png" />
     <section class="form-add-paciente">
-      <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="patientForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
         <div class="grid-form">
           <div class="form-campos-datos-personales">
             <div>
@@ -122,16 +122,16 @@
               <label class="file">
                 <input
                   type="file"
-                  id="file-upload"
-                  accept=".pdf,.jpg,.png,.avi,.mp4"
-                  onchange="console.log(event.target.files)"
+                  id="file-result"
+                  name="file-result"
+                  accept=".pdf,.jpg,.jpeg,.png,.avi,.mp4"
                   aria-label="File browser example"
-                  formControlName="fileUpload"
                   (change)="onFileSelected($event)"
-                  #fileUpload
+                  #fileResult
                 />
                 <span class="file-custom"></span>
               </label>
+              <button type="button" (click)="fileResult.click()">trigger</button>
             </div>
             <div class="cargar-lectura">
               <h2>Cargar lectura</h2>
