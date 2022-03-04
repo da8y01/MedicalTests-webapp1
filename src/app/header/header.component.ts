@@ -32,16 +32,26 @@ export class HeaderComponent implements OnInit {
       this.nameUser = '';
       this.documentUser = null;
     }
+    if (this.router.url.includes('create-medic')) {
+      this.navTitles = 'Nuevo remisor';
+      this.nameUser = '';
+      this.documentUser = null;
+    }
     if (this.router.url.includes('update-patient')) {
       this.navTitles = 'Información del paciente';
       this.nameUser = '';
       this.documentUser = null;
     }
+    if (this.router.url.includes('update-medic')) {
+      this.navTitles = 'Información del remisor';
+      this.nameUser = '';
+      this.documentUser = null;
+    }
   }
 
-  // logout(event: MouseEvent) {
-  //   event.preventDefault();
-  //   this.backendService.logout();
-  //   this.router.navigate(['/login']);
-  // }
+  showRegresar = () =>
+    this.router.url.includes('create-patient') ||
+    this.router.url.includes('create-medic') ||
+    this.router.url.includes('update-patient') ||
+    this.router.url.includes('update-medic');
 }

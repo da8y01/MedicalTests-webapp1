@@ -24,6 +24,11 @@ import { FooterComponent } from './footer/footer.component';
 import { UsersSelectableListComponent } from './users-selectable-list/users-selectable-list.component';
 import { CreatePatientComponent } from './create-patient/create-patient.component';
 import { UpdatePatientComponent } from './update-patient/update-patient.component';
+import { CreateMedicComponent } from './create-medic/create-medic.component';
+import { UpdateMedicComponent } from './update-medic/update-medic.component';
+
+// import { FileSelectDirective } from 'ng2-file-upload';
+
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -41,7 +46,10 @@ registerLocaleData(localeEs, 'es');
     FooterComponent,
     UsersSelectableListComponent,
     CreatePatientComponent,
+    // FileSelectDirective,
     UpdatePatientComponent,
+    CreateMedicComponent,
+    UpdateMedicComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +58,7 @@ registerLocaleData(localeEs, 'es');
     MatPaginatorModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    // FileSelectDirective,
     FormsModule,
   ],
   // providers: [],

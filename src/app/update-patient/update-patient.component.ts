@@ -56,7 +56,7 @@ export class UpdatePatientComponent implements OnInit {
       birthdate: '01/01/1991',
     };
     this.patientForm.setValue(patientFormValue);
-    this.patientId = this.userRoute.id || 0;
+    this.patientId = this.userRoute.id;
   }
 
   onSubmit() {

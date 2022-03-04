@@ -4,7 +4,11 @@
   <section class="grid-main-contenedor-add-paciente">
     <img src="images/img-pacientes.png" />
     <section class="form-add-paciente">
-      <form [formGroup]="patientForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <form
+        [formGroup]="patientForm"
+        (ngSubmit)="onSubmit()"
+        enctype="multipart/form-data"
+      >
         <div class="grid-form">
           <div class="form-campos-datos-personales">
             <div>
@@ -131,7 +135,9 @@
                 />
                 <span class="file-custom"></span>
               </label>
-              <button type="button" (click)="fileResult.click()">trigger</button>
+              <button type="button" (click)="fileResult.click()">
+                trigger
+              </button>
             </div>
             <div class="cargar-lectura">
               <h2>Cargar lectura</h2>
@@ -154,6 +160,9 @@
             <button
               class="boton-sumit"
               type="submit"
+              name="submitButton"
+              id="submitButton"
+              #submitButton
               [disabled]="!patientForm.valid"
             >
               AGREGAR PACIENTE

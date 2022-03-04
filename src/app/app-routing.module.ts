@@ -11,6 +11,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { CreatePatientComponent } from './create-patient/create-patient.component';
 import { UpdatePatientComponent } from './update-patient/update-patient.component';
 import { UserResolver } from './user.resolver';
+import { CreateMedicComponent } from './create-medic/create-medic.component';
+import { UpdateMedicComponent } from './update-medic/update-medic.component';
 
 const routes: Routes = [
   { path: 'patient', component: PatientComponent, canActivate: [AuthGuard] },
@@ -22,8 +24,21 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'create-medic',
+    component: CreateMedicComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'update-patient/:id',
     component: UpdatePatientComponent,
+    canActivate: [AuthGuard],
+    resolve: {
+      user: UserResolver,
+    },
+  },
+  {
+    path: 'update-medic/:id',
+    component: UpdateMedicComponent,
     canActivate: [AuthGuard],
     resolve: {
       user: UserResolver,

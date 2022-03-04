@@ -199,7 +199,14 @@
       </div>
 
       <div class="add-paciente-button add-btn-remisor">
-        <button class="boton-sumit" type="text" name="password">
+        <button
+          class="boton-sumit"
+          type="submit"
+          name="submitButton"
+          id="submitButton"
+          #submitButton
+          [disabled]="!patientForm.valid"
+        >
           ACTUALIZAR PACIENTE
         </button>
       </div>
