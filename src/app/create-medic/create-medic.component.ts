@@ -21,6 +21,7 @@ export class CreateMedicComponent implements OnInit {
     email: ['', Validators.required],
   });
   messages = '';
+  termPatient: string = '';
 
   constructor(
     private fb: FormBuilder,

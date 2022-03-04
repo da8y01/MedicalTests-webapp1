@@ -201,12 +201,10 @@
         </div>
 
         <!-- <div class="lista-pacientes-busqueda-seleccion"> -->
-          <app-users-selectable-list
-            role="patient"
-            [term]="termPatient"
-            (usersCount)="countPatients($event)"
-            (usersDelete)="updateDeleteListPatients($event)"
-          ></app-users-selectable-list>
+        <app-users-selectable-list
+          role="patient"
+          [term]="termPatient"
+        ></app-users-selectable-list>
         <!-- </div> -->
       </div>
 
