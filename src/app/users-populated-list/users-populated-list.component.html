@@ -1,14 +1,34 @@
-<div class="lista-pacientes-busqueda-seleccion">
-    <div class="lista-pacientes-titulo-seleccion">
-        <div>FECHA CREACIÓN DEL PACIENTE</div>
-        <div>DOCUMENTO</div>
-        <div>NOMBRES Y APELLIDOS DEL REMISOR</div>
+<div class="grid-contenedor-pasientes-asiganados">
+  <h1 class="titulo-pacientes-asiganados">Pacientes asignados</h1>
+  <div class="buscador">
+    <input class="input-campo_busqueda" type="text" name="user">
+    <div class="buscador-button">
+      <a href="#"><i class="iconoBuscar fas fa-search"></i></a>
     </div>
-    <div formArrayName="usersArray">
-        <div class="lista-pacientes-contenido-seleccion" *ngFor="let user of inputPrePopulated; let i=index">
-            <div>{{ user.createdAt | date: "MMMM d, y":"-0500":"es" }}</div>
-            <div>CC. {{ user.username }}</div>
-            <div>{{ user.firstName + " " + user.lastName }}</div>
-        </div>
+  </div>
+  <div class="buscador-alert" [style.visibility]="false ? 'visible' : 'hidden'">
+    <div>
+      <a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
     </div>
+    <p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
+  </div>
+
+  <div class="lista-pacientes-busqueda-seleccion">
+    <div class="lista-remisores-titulo-seleccion">
+      <div>FECHA CREACIÓN DEL PACIENTE</div>
+      <div>DOCUMENTO</div>
+      <div>NOMBRES Y APELLIDOS DEL REMISOR</div>
+      <div>-</div>
+    </div>
+    <div class="lista-remisores-contenido-seleccion" *ngFor="let user of inputPrePopulated; let i=index">
+      <div>{{ user.createdAt | date: "MMMM d, y":"-0500":"es" }}</div>
+      <div>CC. {{ user.username }}</div>
+      <div>{{ user.firstName + " " + user.lastName }}</div>
+      <div>
+        <a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
+      </div>
+    </div>
+
+    <!--<div class="main-paginacion-examenes">Paginacion</div>-->
+  </div>
 </div>

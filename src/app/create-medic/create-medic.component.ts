@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
+import { Patient } from '../patient.model';
 
 @Component({
   selector: 'app-create-medic',
@@ -23,14 +24,16 @@ export class CreateMedicComponent implements OnInit {
   messages = '';
   termPatient: string = '';
   assignedPatients: string[] = []
+  populatedPatients: Patient[] = []
+  showPatientValidation = true
 
   constructor(
     private fb: FormBuilder,
     private backendService: BackendService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
@@ -49,8 +52,13 @@ export class CreateMedicComponent implements OnInit {
   }
 
   addPatient(document: string): void {
+    this.showPatientValidation = true
     this.backendService.getUser(parseInt(document)).subscribe(user => {
-      if (user.id) this.assignedPatients.push(user.username)
+      if (user.id) {
+        this.assignedPatients.push(user.username)
+        this.populatedPatients.push(user)
+        this.showPatientValidation = false
+      }
       // this.assignedPatients.push({})
     }, error => console.error(error));
   }

@@ -96,7 +96,8 @@
             AGREGAR PACIENTE
           </button>
         </div>
-        <div class="position-addbutton-alerta buscador-alert">
+        <div class="position-addbutton-alerta buscador-alert"
+          [style.visibility]="showPatientValidation ? 'visible' : 'hidden'">
           <div>
             <a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
           </div>
@@ -106,28 +107,7 @@
         </div>
       </div>
 
-      <div class="grid-contenedor-pasientes-asiganados">
-        <h1 class="titulo-pacientes-asiganados">Pacientes asignados</h1>
-        <div class="buscador">
-          <input class="input-campo_busqueda" type="text" name="user" />
-          <div class="buscador-button">
-            <a href="#"><i class="iconoBuscar fas fa-search"></i></a>
-          </div>
-        </div>
-        <div class="buscador-alert">
-          <div>
-            <a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
-          </div>
-          <p>
-            No se encontraron datos relacionados. Por favor inténtelo de nuevo.
-          </p>
-        </div>
-
-        <!-- <div class="lista-pacientes-busqueda-seleccion"> -->
-        <!-- <app-users-selectable-list role="patient" [term]="termPatient" [selectable]="false" [pre-populated]="assignedPatients"></app-users-selectable-list> -->
-        <!-- <app-users-populated-list pre-populated="assignedPatients"></app-users-populated-list> -->
-        <!-- </div> -->
-      </div>
+      <app-users-populated-list [pre-populated]="populatedPatients"></app-users-populated-list>
 
       <div class="add-paciente-button add-btn-remisor">
         <button class="boton-sumit" type="submit" name="submitButton" id="submitButton" #submitButton
