@@ -26,6 +26,7 @@ import { CreatePatientComponent } from './create-patient/create-patient.componen
 import { UpdatePatientComponent } from './update-patient/update-patient.component';
 import { CreateMedicComponent } from './create-medic/create-medic.component';
 import { UpdateMedicComponent } from './update-medic/update-medic.component';
+import { UsersPopulatedListComponent } from './users-populated-list/users-populated-list.component';
 
 // import { FileSelectDirective } from 'ng2-file-upload';
 
@@ -50,6 +51,7 @@ registerLocaleData(localeEs, 'es');
     UpdatePatientComponent,
     CreateMedicComponent,
     UpdateMedicComponent,
+    UsersPopulatedListComponent,
   ],
   imports: [
     BrowserModule,

@@ -56,9 +56,8 @@ export class BackendService {
   }
 
   getResults(queryParams: QueryParams): Observable<ResultResponse> {
-    const requestUrl = `${environment.apiUrl}/results?limit=${
-      queryParams.limit || 10
-    }&offset=${queryParams.offset || 0}&patient=${queryParams.patient || 0}`;
+    const requestUrl = `${environment.apiUrl}/results?limit=${queryParams.limit || 10
+      }&offset=${queryParams.offset || 0}&patient=${queryParams.patient || 0}`;
     return this.http.get<ResultResponse>(requestUrl).pipe(
       tap((_) => console.info('fetched results', _)),
       catchError(
@@ -94,11 +93,9 @@ export class BackendService {
     term: string,
     queryParams: QueryParams
   ): Observable<PatientResponse> {
-    const requestUrl = `${environment.apiUrl}/patients?limit=${
-      queryParams.limit || 10
-    }&offset=${queryParams.offset || 0}&document=${term.trim()}&medic=${
-      this.getLocalStorageUser().id
-    }`;
+    const requestUrl = `${environment.apiUrl}/patients?limit=${queryParams.limit || 10
+      }&offset=${queryParams.offset || 0}&document=${term.trim()}&medic=${this.getLocalStorageUser().id
+      }`;
     return this.http.get<PatientResponse>(requestUrl).pipe(
       tap((x) =>
         x.count
@@ -120,9 +117,8 @@ export class BackendService {
     queryParams: QueryParams | any
   ): Observable<PatientResponse> {
     const qs = new URLSearchParams(queryParams);
-    const requestUrl = `${
-      environment.apiUrl
-    }/patients?&document=${term.trim()}&${qs.toString()}`;
+    const requestUrl = `${environment.apiUrl
+      }/patients?&document=${term.trim()}&${qs.toString()}`;
     return this.http.get<PatientResponse>(requestUrl).pipe(
       tap((x) =>
         x.count
@@ -173,7 +169,6 @@ export class BackendService {
       .post<LoginResponse | any>(`${environment.apiUrl}/auth/signup`, patient)
       .pipe(
         map((res: LoginResponse | any) => {
-          console.info('createPatient', res);
           return res;
         }),
         catchError(this.handleError('createPatient', {}))
@@ -197,6 +192,17 @@ export class BackendService {
       .post<number>(`${environment.apiUrl}/patients/delete`, { patients })
       .pipe(
         map((res: number) => {
+          return res;
+        }),
+        catchError(this.handleError('deletePatients', 0))
+      );
+  }
+
+  assignPatients(medic: string, patients: string[]): Observable<any> {
+    return this.http
+      .post<any>(`${environment.apiUrl}/patients/assignMedic`, { medic, patients })
+      .pipe(
+        map((res: any) => {
           return res;
         }),
         catchError(this.handleError('deletePatients', 0))

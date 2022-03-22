@@ -1,47 +1,32 @@
 <app-header></app-header>
 
 <main class="main-contenedor-add-remisor">
-  <form
-    [formGroup]="medicForm"
-    (ngSubmit)="onSubmit()"
-    enctype="multipart/form-data"
-  >
+  <form [formGroup]="medicForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
     <section class="grid-main-contenedor-add-remisor">
       <img src="images/img-remisores.png" />
       <div class="form-add-paciente">
         <div class="grid-form">
           <div class="form-campos-datos-personales">
             <div>
-              <label for="firstName"><h2>Nombre / Razón social</h2></label>
-              <input
-                class="input-campo_texto"
-                type="text"
-                name="firstName"
-                id="firstName"
-                #firstName
-                formControlName="firstName"
-              />
+              <label for="firstName">
+                <h2>Nombre / Razón social</h2>
+              </label>
+              <input class="input-campo_texto" type="text" name="firstName" id="firstName" #firstName
+                formControlName="firstName" />
             </div>
             <div>
-              <label for="lastName"><h2>Apellido</h2></label>
-              <input
-                class="input-campo_texto"
-                type="text"
-                name="lastName"
-                id="lastName"
-                #lastName
-                formControlName="lastName"
-              />
+              <label for="lastName">
+                <h2>Apellido</h2>
+              </label>
+              <input class="input-campo_texto" type="text" name="lastName" id="lastName" #lastName
+                formControlName="lastName" />
             </div>
             <div>
-              <label for="documentType"><h2>Tipo de documento</h2></label>
-              <select
-                name="documentType"
-                id="documentType"
-                #documentType
-                formControlName="documentType"
-                class="input-campo_texto"
-              >
+              <label for="documentType">
+                <h2>Tipo de documento</h2>
+              </label>
+              <select name="documentType" id="documentType" #documentType formControlName="documentType"
+                class="input-campo_texto">
                 <option value="1">Cédula</option>
                 <option value="2">Documento de identidad</option>
                 <option value="3">Pasaporte</option>
@@ -49,80 +34,50 @@
               </select>
             </div>
             <div>
-              <label for="password"><h2>Contraseña</h2></label>
-              <input
-                class="input-campo_texto"
-                type="text"
-                name="password"
-                id="password"
-                #password
-                formControlName="password"
-              />
+              <label for="password">
+                <h2>Contraseña</h2>
+              </label>
+              <input class="input-campo_texto" type="text" name="password" id="password" #password
+                formControlName="password" />
             </div>
             <div>
-              <label for="username"><h2>Número de documento</h2></label>
-              <input
-                class="input-campo_texto"
-                type="text"
-                name="username"
-                id="username"
-                #username
-                formControlName="username"
-              />
+              <label for="username">
+                <h2>Número de documento</h2>
+              </label>
+              <input class="input-campo_texto" type="text" name="username" id="username" #username
+                formControlName="username" />
             </div>
             <div>
-              <label for="birthdate"><h2>Fecha de nacimiento</h2></label>
-              <input
-                class="input-campo_texto"
-                type="date"
-                name="birthdate"
-                id="birthdate"
-                #birthdate
-                formControlName="birthdate"
-              />
+              <label for="birthdate">
+                <h2>Fecha de nacimiento</h2>
+              </label>
+              <input class="input-campo_texto" type="date" name="birthdate" id="birthdate" #birthdate
+                formControlName="birthdate" />
             </div>
             <div>
-              <label for="address"><h2>Dirección consultorio</h2></label>
-              <input
-                class="input-campo_texto"
-                type="text"
-                name="address"
-                id="address"
-                #address
-                formControlName="address"
-              />
+              <label for="address">
+                <h2>Dirección consultorio</h2>
+              </label>
+              <input class="input-campo_texto" type="text" name="address" id="address" #address
+                formControlName="address" />
             </div>
             <div>
-              <label for="phone"><h2>Celular</h2></label>
-              <input
-                class="input-campo_texto"
-                type="text"
-                name="phone"
-                id="phone"
-                #phone
-                formControlName="phone"
-              />
+              <label for="phone">
+                <h2>Celular</h2>
+              </label>
+              <input class="input-campo_texto" type="text" name="phone" id="phone" #phone formControlName="phone" />
             </div>
             <div>
-              <label for="email"><h2>Correo</h2></label>
-              <input
-                class="input-campo_texto"
-                type="text"
-                name="email"
-                id="email"
-                #email
-                formControlName="email"
-              />
+              <label for="email">
+                <h2>Correo</h2>
+              </label>
+              <input class="input-campo_texto" type="text" name="email" id="email" #email formControlName="email" />
             </div>
             <div>
-              <label for="email2"><h2>Correo 2</h2></label>
-              <input
-                class="input-campo_texto"
-                type="text"
-                name="email2"
-                id="email2"
-                #email2
-              />
+              <label for="email2">
+                <h2>Correo 2</h2>
+              </label>
+              <input class="input-campo_texto" type="text" name="email2" id="email2" #email2 />
             </div>
           </div>
         </div>
@@ -134,10 +89,10 @@
         <h1 class="titulo-asiganar-paciente">Asignar paciente</h1>
         <div class="campo-documento-paciente">
           <h2>Documento del paciente</h2>
-          <input class="input-campo_texto" type="text" name="" />
+          <input class="input-campo_texto" type="text" name="patient_box" #patientBox id="patient-box" />
         </div>
         <div class="position-addbutton add-paciente-button">
-          <button class="boton-sumit" type="text" name="password">
+          <button class="boton-sumit" type="button" (click)="addPatient(patientBox.value)">
             AGREGAR PACIENTE
           </button>
         </div>
@@ -169,23 +124,14 @@
         </div>
 
         <!-- <div class="lista-pacientes-busqueda-seleccion"> -->
-        <app-users-selectable-list
-          role="patient"
-          [term]="termPatient"
-          [selectable]="false"
-        ></app-users-selectable-list>
+        <!-- <app-users-selectable-list role="patient" [term]="termPatient" [selectable]="false" [pre-populated]="assignedPatients"></app-users-selectable-list> -->
+        <!-- <app-users-populated-list pre-populated="assignedPatients"></app-users-populated-list> -->
         <!-- </div> -->
       </div>
 
       <div class="add-paciente-button add-btn-remisor">
-        <button
-          class="boton-sumit"
-          type="submit"
-          name="submitButton"
-          id="submitButton"
-          #submitButton
-          [disabled]="!medicForm.valid"
-        >
+        <button class="boton-sumit" type="submit" name="submitButton" id="submitButton" #submitButton
+          [disabled]="!medicForm.valid">
           AGREGAR REMISOR
         </button>
         <p *ngIf="messages !== ''">{{ messages | json }}</p>

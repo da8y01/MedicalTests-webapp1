@@ -1,0 +1,14 @@
+<div class="lista-pacientes-busqueda-seleccion">
+    <div class="lista-pacientes-titulo-seleccion">
+        <div>FECHA CREACIÓN DEL PACIENTE</div>
+        <div>DOCUMENTO</div>
+        <div>NOMBRES Y APELLIDOS DEL REMISOR</div>
+    </div>
+    <div formArrayName="usersArray">
+        <div class="lista-pacientes-contenido-seleccion" *ngFor="let user of inputPrePopulated; let i=index">
+            <div>{{ user.createdAt | date: "MMMM d, y":"-0500":"es" }}</div>
+            <div>CC. {{ user.username }}</div>
+            <div>{{ user.firstName + " " + user.lastName }}</div>
+        </div>
+    </div>
+</div>

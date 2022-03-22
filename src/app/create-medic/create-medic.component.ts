@@ -22,6 +22,7 @@ export class CreateMedicComponent implements OnInit {
   });
   messages = '';
   termPatient: string = '';
+  assignedPatients: string[] = []
 
   constructor(
     private fb: FormBuilder,
@@ -33,15 +34,24 @@ export class CreateMedicComponent implements OnInit {
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
+    const sentMedic = { ...this.medicForm.value, roles: ['medic'] }
     this.backendService
-      .createPatient({ ...this.medicForm.value, roles: ['medic'] })
+      .createPatient(sentMedic)
       .subscribe(
         (res) => {
+          this.backendService.assignPatients(sentMedic.username, this.assignedPatients).subscribe(patients => console.info(patients), error => console.error(error))
           this.router.navigate(['/admin']);
         },
         (error) => {
           console.error(error);
         }
       );
+  }
+
+  addPatient(document: string): void {
+    this.backendService.getUser(parseInt(document)).subscribe(user => {
+      if (user.id) this.assignedPatients.push(user.username)
+      // this.assignedPatients.push({})
+    }, error => console.error(error));
   }
 }
