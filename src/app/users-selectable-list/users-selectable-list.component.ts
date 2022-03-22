@@ -17,7 +17,7 @@ export class UsersSelectableListComponent implements OnInit {
   @Input('term') inputTerm: string = '';
   @Input('selectable') inputSelectable: boolean = true;
   @Output() usersCount = new EventEmitter<number>();
-  @Output() usersDelete = new EventEmitter<number[]>();
+  @Output() usersDelete = new EventEmitter<string[]>();
   roleText = '';
   paginatorData = {
     length: 0,
@@ -104,25 +104,25 @@ export class UsersSelectableListComponent implements OnInit {
     this.usersCount.emit(value);
   }
 
-  checkClick(userId: number, index: number) {
+  checkClick(userName: string, index: number) {
     if (this.usersList.controls[index].value) {
-      this.deleteSet.add(userId);
+      this.deleteSet.add(userName);
     } else {
-      this.deleteSet.delete(userId);
+      this.deleteSet.delete(userName);
     }
-    this.usersDelete.emit([...this.deleteSet] as number[]);
+    this.usersDelete.emit([...this.deleteSet] as string[]);
   }
 
   checkAllClick() {
     const checkAllValue = this.selectableGroup.get('checkAll')?.value;
     this.users.map((user, idx) => {
-      this.deleteSet.add(user.id);
+      this.deleteSet.add(user.username);
       // if (checkAllValue) this.deleteSet.add(user.id);
       // else this.deleteSet.delete(user.id);
       this.usersList.controls[idx].setValue(checkAllValue);
     });
     if (!checkAllValue) this.deleteSet.clear();
-    this.usersDelete.emit([...this.deleteSet] as number[]);
+    this.usersDelete.emit([...this.deleteSet] as string[]);
     // this.usersDelete.emit([...this.deleteSet]);
   }
 }

@@ -12,8 +12,8 @@ export class AdminComponent implements OnInit {
   medicsLength: number = 0;
   termPatient: string = '';
   termMedic: string = '';
-  deletePatients: number[] = [];
-  deleteMedics: number[] = [];
+  deletePatients: string[] = [];
+  deleteMedics: string[] = [];
   urlId: number = 0;
 
   constructor(
@@ -47,10 +47,10 @@ export class AdminComponent implements OnInit {
     this.termMedic = term;
   }
 
-  updateDeleteListPatients(deleteList: number[]) {
+  updateDeleteListPatients(deleteList: string[]) {
     this.deletePatients = deleteList;
   }
-  updateDeleteListMedics(deleteList: number[]) {
+  updateDeleteListMedics(deleteList: string[]) {
     this.deleteMedics = deleteList;
   }
 

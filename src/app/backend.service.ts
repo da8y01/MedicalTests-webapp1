@@ -192,7 +192,7 @@ export class BackendService {
       );
   }
 
-  deleteUsers(patients: number[]): Observable<number> {
+  deleteUsers(patients: string[]): Observable<number> {
     return this.http
       .post<number>(`${environment.apiUrl}/patients/delete`, { patients })
       .pipe(
