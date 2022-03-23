@@ -26,6 +26,7 @@ export class UpdateMedicComponent implements OnInit {
   patientsLength: number = 0;
   termPatient: string = '';
   deletePatients: number[] = [];
+  populatedPatients: Patient[] = []
 
   constructor(
     private fb: FormBuilder,
@@ -49,6 +50,7 @@ export class UpdateMedicComponent implements OnInit {
     };
     this.medicForm.setValue(medicFormValue);
     this.medicId = this.userRoute.id;
+    this.getMedicPatients()
   }
 
   onSubmit() {
@@ -69,5 +71,14 @@ export class UpdateMedicComponent implements OnInit {
   }
   updateDeleteListPatients(deleteList: number[]) {
     this.deletePatients = deleteList;
+  }
+
+  getMedicPatients(): void {
+    this.backendService.getPatients(this.userRoute.id).subscribe(patients => {
+      // console.info(patients)
+      // patients.map(patient => this.populatedPatients.push(patient))
+      // console.info(this.populatedPatients)
+      this.populatedPatients = patients
+    }, error => console.error(error));
   }
 }

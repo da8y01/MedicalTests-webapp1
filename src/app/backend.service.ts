@@ -74,13 +74,13 @@ export class BackendService {
     );
   }
 
-  getPatients(): Observable<PatientResponse> {
+  getPatients(medicId: number): Observable<any> {
     return this.http
-      .get<PatientResponse>(`${environment.apiUrl}/patients`)
+      .get<any>(`${environment.apiUrl}/patients/assignedTo/${medicId}`)
       .pipe(
         tap((_) => console.info('fetched patients', _)),
         catchError(
-          this.handleError<PatientResponse>('getPatients', {
+          this.handleError<any>('getPatients', {
             count: 0,
             rows: [],
           })

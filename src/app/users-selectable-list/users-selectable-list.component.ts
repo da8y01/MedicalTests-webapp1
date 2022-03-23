@@ -5,7 +5,6 @@ import { debounceTime, switchMap } from 'rxjs/operators';
 import { BackendService } from '../backend.service';
 import { PatientResponse } from '../patient-response.model';
 import { Patient } from '../patient.model';
-import { QueryParams } from '../query-params.model';
 
 @Component({
   selector: 'app-users-selectable-list',
@@ -40,7 +39,7 @@ export class UsersSelectableListComponent implements OnInit {
   constructor(
     private backendService: BackendService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.roleText = this.inputRole === 'patient' ? 'PACIENTE' : 'REMISOR';
@@ -81,13 +80,6 @@ export class UsersSelectableListComponent implements OnInit {
 
   addUser() {
     this.usersList.push(this.fb.control(false));
-  }
-
-  getUsers(queryParams: QueryParams): void {
-    this.backendService.getPatients().subscribe((res) => {
-      this.paginatorData.length = res.count;
-      this.users = res.rows;
-    });
   }
 
   pageEvent(event: any): void {
