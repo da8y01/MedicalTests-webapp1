@@ -148,6 +148,31 @@ p {
   cursor: pointer;
 }
 
+.alert-log{
+	display: flex;
+	align-items: center;
+	background-color: #FFF1F0;
+	border: 0.5px solid #FFA39E;
+	border-radius: 8px;
+	padding-left: 15px;
+	color: var(--main-color-grisclaro);
+	width: 94%;
+    height: 40px;
+    padding-bottom: 0px;
+    margin-top: 20px;
+    padding-right: 8px;
+    padding-top: 12px;
+}
+.iconoAlerta{
+	color: #F5222D;
+	font-size: 20px;
+}
+.alert-log p{
+	margin-left: 10px;
+	font-size: 13px;
+	margin-top: 22px;
+}
+
 /*Paciente------------------------------------------------------------*/
 
 /*header--------------------*/

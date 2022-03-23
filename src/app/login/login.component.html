@@ -10,36 +10,21 @@
       </div>
       <div>
         <h2>Usuario</h2>
-        <input
-          class="input-campo_texto"
-          type="number"
-          name="user"
-          #user
-          id="user"
-        />
+        <input class="input-campo_texto" type="number" name="user" #user id="user" />
       </div>
       <div>
         <h2>Contraseña</h2>
-        <input
-          class="input-campo_texto"
-          type="password"
-          name="password"
-          #password
-          id="password"
-        />
+        <input class="input-campo_texto" type="password" name="password" #password id="password" />
         <a href="#" (click)="forgotPassword(user.value, $event)">¿Olvidaste tu contraseña?</a>
       </div>
       <button class="boton-sumit" (click)="submit(user.value, password.value)">
         INICIAR SESIÓN
       </button>
-      <div
-        [style.visibility]="serverResponse ? 'visible' : 'hidden'"
-        class="buscador-alert"
-      >
+      <div class="alert-log" [style.visibility]="serverResponse ? 'visible' : 'hidden'">
         <div>
           <a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
         </div>
-        <p>{{ serverResponse }}</p>
+        <p>Error. Por favor inténtelo de nuevo.</p>
       </div>
     </div>
   </section>
