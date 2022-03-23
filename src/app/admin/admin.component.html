@@ -5,94 +5,60 @@
     <div class="editar-content">
       <h1>Pacientes</h1>
       <div class="agregar-button">
-        <a routerLink="/create-patient"
-          ><i class="icono-agregar fas fa-plus"></i
-        ></a>
+        <a routerLink="/create-patient"><i class="icono-agregar fas fa-plus"></i></a>
       </div>
-      <div class="eliminar-button" (click)="deleteSelected('patient')">
-        <a><i class="icono-agregar fas fa-trash-alt"></i></a>
+      <div class="eliminar-button">
+        <a href="#" (click)="deleteSelected('patient', $event)"><i class="icono-agregar fas fa-trash-alt"></i></a>
       </div>
       <div class="editar-button">
-        <a (click)="updatePatient()"
-          ><i class="icono-agregar fas fa-pencil-alt"></i
-        ></a>
+        <a href="#" (click)="updatePatient($event)"><i class="icono-agregar fas fa-pencil-alt"></i></a>
       </div>
     </div>
     <div class="buscador">
-      <input
-        class="input-campo_busqueda"
-        type="text"
-        name="patient"
-        #patient
-        id="patient"
-      />
+      <input class="input-campo_busqueda" type="text" name="patient" #patient id="patient" />
       <div class="buscador-button" (click)="searchPatient(patient.value)">
         <a><i class="iconoBuscar fas fa-search"></i></a>
       </div>
     </div>
-    <div
-      class="buscador-alert"
-      [style.visibility]="patientsLength == 0 ? 'visible' : 'hidden'"
-    >
+    <div class="buscador-alert" [style.visibility]="patientsLength == 0 ? 'visible' : 'hidden'">
       <div>
         <a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
       </div>
       <p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
     </div>
 
-    <app-users-selectable-list
-      role="patient"
-      [term]="termPatient"
-      (usersCount)="countPatients($event)"
-      (usersDelete)="updateDeleteListPatients($event)"
-    ></app-users-selectable-list>
+    <app-users-selectable-list role="patient" [term]="termPatient" (usersCount)="countPatients($event)"
+      (usersDelete)="updateDeleteListPatients($event)"></app-users-selectable-list>
   </section>
 
   <section class="grid-contenedor-admin">
     <div class="editar-content">
       <h1>Remisores</h1>
       <div class="agregar-button">
-        <a routerLink="/create-medic"
-          ><i class="icono-agregar fas fa-plus"></i
-        ></a>
+        <a routerLink="/create-medic"><i class="icono-agregar fas fa-plus"></i></a>
       </div>
-      <div class="eliminar-button" (click)="deleteSelected('medic')">
-        <a><i class="icono-agregar fas fa-trash-alt"></i></a>
+      <div class="eliminar-button">
+        <a href="#" (click)="deleteSelected('medic', $event)"><i class="icono-agregar fas fa-trash-alt"></i></a>
       </div>
       <div class="editar-button">
-        <a (click)="updateMedic()"
-          ><i class="icono-agregar fas fa-pencil-alt"></i
-        ></a>
+        <a href="#" (click)="updateMedic($event)"><i class="icono-agregar fas fa-pencil-alt"></i></a>
       </div>
     </div>
     <div class="buscador">
-      <input
-        class="input-campo_busqueda"
-        type="text"
-        name="medic"
-        #medic
-        id="medic"
-      />
+      <input class="input-campo_busqueda" type="text" name="medic" #medic id="medic" />
       <div class="buscador-button" (click)="searchMedic(medic.value)">
         <a><i class="iconoBuscar fas fa-search"></i></a>
       </div>
     </div>
-    <div
-      class="buscador-alert"
-      [style.visibility]="medicsLength == 0 ? 'visible' : 'hidden'"
-    >
+    <div class="buscador-alert" [style.visibility]="medicsLength == 0 ? 'visible' : 'hidden'">
       <div>
         <a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
       </div>
       <p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
     </div>
 
-    <app-users-selectable-list
-      role="medic"
-      [term]="termMedic"
-      (usersCount)="countMedics($event)"
-      (usersDelete)="updateDeleteListMedics($event)"
-    ></app-users-selectable-list>
+    <app-users-selectable-list role="medic" [term]="termMedic" (usersCount)="countMedics($event)"
+      (usersDelete)="updateDeleteListMedics($event)"></app-users-selectable-list>
   </section>
 </main>
 
