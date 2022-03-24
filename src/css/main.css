@@ -148,29 +148,29 @@ p {
   cursor: pointer;
 }
 
-.alert-log{
-	display: flex;
-	align-items: center;
-	background-color: #FFF1F0;
-	border: 0.5px solid #FFA39E;
-	border-radius: 8px;
-	padding-left: 15px;
-	color: var(--main-color-grisclaro);
-	width: 94%;
-    height: 40px;
-    padding-bottom: 0px;
-    margin-top: 20px;
-    padding-right: 8px;
-    padding-top: 12px;
+.alert-log {
+  display: flex;
+  align-items: center;
+  background-color: #fff1f0;
+  border: 0.5px solid #ffa39e;
+  border-radius: 8px;
+  padding-left: 15px;
+  color: var(--main-color-grisclaro);
+  width: 94%;
+  height: 40px;
+  padding-bottom: 0px;
+  margin-top: 20px;
+  padding-right: 8px;
+  padding-top: 12px;
 }
-.iconoAlerta{
-	color: #F5222D;
-	font-size: 20px;
+.iconoAlerta {
+  color: #f5222d;
+  font-size: 20px;
 }
-.alert-log p{
-	margin-left: 10px;
-	font-size: 13px;
-	margin-top: 22px;
+.alert-log p {
+  margin-left: 10px;
+  font-size: 13px;
+  margin-top: 22px;
 }
 
 /*Paciente------------------------------------------------------------*/
@@ -780,6 +780,21 @@ footer .info-contacto p span {
   margin-bottom: 32px;
   margin-left: 70%;
   grid-area: agregarotro;
+}
+
+.custom-input-file button[type="button"] {
+  background-color: var(--main-color-rojooscuro);
+  width: auto;
+  height: auto;
+  border-radius: 8px 8px;
+  color: #fff;
+  margin: 10px 10px;
+  padding: 15px;
+  font-family: "Mulish", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  border: none;
+  cursor: pointer;
 }
 
 .agregar-examenes input[type="file"] {

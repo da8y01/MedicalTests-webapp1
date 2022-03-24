@@ -12,7 +12,9 @@
         <div class="grid-form">
           <div class="form-campos-datos-personales">
             <div>
-              <label for="first-name"><h2>Nombre</h2></label>
+              <label for="first-name">
+                <h2>Nombre</h2>
+              </label>
               <input
                 class="input-campo_texto"
                 type="text"
@@ -23,7 +25,9 @@
               />
             </div>
             <div>
-              <label for="last-name"><h2>Apellido</h2></label>
+              <label for="last-name">
+                <h2>Apellido</h2>
+              </label>
               <input
                 class="input-campo_texto"
                 type="text"
@@ -34,7 +38,9 @@
               />
             </div>
             <div>
-              <label for="document-type"><h2>Tipo de documento</h2></label>
+              <label for="document-type">
+                <h2>Tipo de documento</h2>
+              </label>
               <select
                 name="document-type"
                 class="input-campo_texto"
@@ -49,7 +55,9 @@
               </select>
             </div>
             <div>
-              <label for="password"><h2>Contraseña</h2></label>
+              <label for="password">
+                <h2>Contraseña</h2>
+              </label>
               <input
                 class="input-campo_texto"
                 type="text"
@@ -60,7 +68,9 @@
               />
             </div>
             <div>
-              <label for="username"><h2>Número de documento</h2></label>
+              <label for="username">
+                <h2>Número de documento</h2>
+              </label>
               <input
                 class="input-campo_texto"
                 type="text"
@@ -71,7 +81,9 @@
               />
             </div>
             <div>
-              <label for="birthdate"><h2>Fecha de nacimiento</h2></label>
+              <label for="birthdate">
+                <h2>Fecha de nacimiento</h2>
+              </label>
               <input
                 class="input-campo_texto"
                 type="date"
@@ -82,7 +94,9 @@
               />
             </div>
             <div>
-              <label for="address"><h2>Dirección</h2></label>
+              <label for="address">
+                <h2>Dirección</h2>
+              </label>
               <input
                 class="input-campo_texto"
                 type="text"
@@ -93,7 +107,9 @@
               />
             </div>
             <div>
-              <label for="phone"><h2>Celular</h2></label>
+              <label for="phone">
+                <h2>Celular</h2>
+              </label>
               <input
                 class="input-campo_texto"
                 type="text"
@@ -104,7 +120,9 @@
               />
             </div>
             <div>
-              <label for="email"><h2>Correo</h2></label>
+              <label for="email">
+                <h2>Correo</h2>
+              </label>
               <input
                 class="input-campo_texto"
                 type="text"
@@ -121,34 +139,37 @@
               <h2>Nombre del examen</h2>
               <input class="input-campo_texto" type="text" name="" />
             </div>
-            <div class="cargar-examen">
+            <div class="custom-input-file">
               <h2>Cargar examen</h2>
-              <label class="file">
-                <input
-                  type="file"
-                  id="file-result"
-                  name="file-result"
-                  accept=".pdf,.jpg,.jpeg,.png,.avi,.mp4"
-                  aria-label="File browser example"
-                  (change)="onFileSelected($event)"
-                  #fileResult
-                />
-                <span class="file-custom"></span>
-              </label>
               <button type="button" (click)="fileResult.click()">
-                trigger
+                CARGAR EXAMEN
               </button>
+              <input
+                style="display: none"
+                type="file"
+                id="file-result"
+                name="file_result"
+                accept=".pdf,.jpg,.jpeg,.png,.avi,.mp4"
+                aria-label="File browser example"
+                (change)="onFileSelected($event)"
+                #fileResult
+              />
             </div>
-            <div class="cargar-lectura">
+            <div class="custom-input-file">
               <h2>Cargar lectura</h2>
-              <label class="file">
-                <input
-                  type="file"
-                  id="file"
-                  aria-label="File browser example"
-                />
-                <span class="file-custom"> </span>
-              </label>
+              <button type="button" (click)="fileReading.click()">
+                CARGAR LECTURA
+              </button>
+              <input
+                style="display: none"
+                type="file"
+                id="file-reading"
+                name="file_reading"
+                accept=".pdf,.jpg,.jpeg,.png,.avi,.mp4"
+                aria-label="File browser example"
+                (change)="onFileSelected($event)"
+                #fileReading
+              />
             </div>
             <div class="fecha-toma-examen">
               <h2>Fecha toma del examen</h2>

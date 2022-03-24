@@ -118,6 +118,7 @@ export class CreatePatientComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
+    console.info(event);
     const file: File = event.target.files[0];
 
     if (file) {
