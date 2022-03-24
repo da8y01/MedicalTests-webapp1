@@ -133,49 +133,70 @@
               />
             </div>
           </div>
-          <div class="agregar-examenes">
+          <div class="agregar-examenes" formArrayName="examsArray">
             <h1 class="titulo-examenes">Agregar exámenes</h1>
-            <div class="nombre-examen">
-              <h2>Nombre del examen</h2>
-              <input class="input-campo_texto" type="text" name="" />
+            <div
+              *ngFor="let exam of examsList.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="nombre-examen">
+                <h2>Nombre del examen</h2>
+                <input
+                  class="input-campo_texto"
+                  type="text"
+                  name="exam_name"
+                  id="exam-name"
+                  #examName
+                  formControlName="name"
+                />
+              </div>
+              <div class="custom-input-file">
+                <h2>Cargar examen</h2>
+                <button type="button" (click)="fileResult.click()">
+                  CARGAR EXAMEN
+                </button>
+                <input
+                  style="display: none"
+                  type="file"
+                  id="file-result"
+                  name="file_result"
+                  accept=".pdf,.jpg,.jpeg,.png,.avi,.mp4"
+                  aria-label="File browser example"
+                  (change)="onFileSelected($event)"
+                  #fileResult
+                />
+              </div>
+              <div class="custom-input-file">
+                <h2>Cargar lectura</h2>
+                <button type="button" (click)="fileReading.click()">
+                  CARGAR LECTURA
+                </button>
+                <input
+                  style="display: none"
+                  type="file"
+                  id="file-reading"
+                  name="file_reading"
+                  accept=".pdf,.jpg,.jpeg,.png,.avi,.mp4"
+                  aria-label="File browser example"
+                  (change)="onFileSelected($event)"
+                  #fileReading
+                />
+              </div>
+              <div class="fecha-toma-examen">
+                <h2>Fecha toma del examen</h2>
+                <input
+                  class="input-campo_texto"
+                  type="date"
+                  name="exam_date"
+                  id="exam-date"
+                  #examDate
+                  formControlName="date"
+                />
+              </div>
             </div>
-            <div class="custom-input-file">
-              <h2>Cargar examen</h2>
-              <button type="button" (click)="fileResult.click()">
-                CARGAR EXAMEN
-              </button>
-              <input
-                style="display: none"
-                type="file"
-                id="file-result"
-                name="file_result"
-                accept=".pdf,.jpg,.jpeg,.png,.avi,.mp4"
-                aria-label="File browser example"
-                (change)="onFileSelected($event)"
-                #fileResult
-              />
-            </div>
-            <div class="custom-input-file">
-              <h2>Cargar lectura</h2>
-              <button type="button" (click)="fileReading.click()">
-                CARGAR LECTURA
-              </button>
-              <input
-                style="display: none"
-                type="file"
-                id="file-reading"
-                name="file_reading"
-                accept=".pdf,.jpg,.jpeg,.png,.avi,.mp4"
-                aria-label="File browser example"
-                (change)="onFileSelected($event)"
-                #fileReading
-              />
-            </div>
-            <div class="fecha-toma-examen">
-              <h2>Fecha toma del examen</h2>
-              <input class="input-campo_texto" type="date" name="" />
-            </div>
-            <a href="" class="add-examen-button">Agregar otro examen</a>
+            <a href="#" (click)="addExam($event)" class="add-examen-button"
+              >Agregar otro examen</a
+            >
           </div>
           <div class="add-paciente-button">
             <button
