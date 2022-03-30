@@ -162,7 +162,7 @@
                   name="file_result"
                   accept=".pdf,.jpg,.jpeg,.png,.avi,.mp4"
                   aria-label="File browser example"
-                  (change)="onFileSelected($event)"
+                  (change)="onFileExam($event, i, examName.value)"
                   #fileResult
                 />
               </div>
@@ -178,7 +178,7 @@
                   name="file_reading"
                   accept=".pdf,.jpg,.jpeg,.png,.avi,.mp4"
                   aria-label="File browser example"
-                  (change)="onFileSelected($event)"
+                  (change)="onFileReading($event, i)"
                   #fileReading
                 />
               </div>

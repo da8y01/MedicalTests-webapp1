@@ -29,6 +29,7 @@ export class CreatePatientComponent implements OnInit {
   fileName = '';
   uploadProgress!: number;
   uploadSub!: Subscription;
+  listFormData: FormData[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -41,10 +42,14 @@ export class CreatePatientComponent implements OnInit {
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
+    const patientFormValue = { ...this.patientForm.value };
+    delete patientFormValue['examsArray'];
+    delete this.patientForm.value['examsArray'];
     this.backendService.createPatient(this.patientForm.value).subscribe(
       (res) => {
         console.info(res);
-        this.router.navigate(['/admin']);
+        this.triggerUploads();
+        // this.router.navigate(['/admin']);
       },
       (error) => {
         console.error(error);
@@ -58,7 +63,7 @@ export class CreatePatientComponent implements OnInit {
   }
 
   addExam(event: Event) {
-    event.preventDefault()
+    event.preventDefault();
     const exam = {
       name: [''],
       result: [''],
@@ -75,8 +80,67 @@ export class CreatePatientComponent implements OnInit {
     });
   }
 
-  onFileSelected(event: any) {
-    console.info(event);
+  async triggerUploads() {
+    try {
+      const uploads = await this.listFormData.map(async (formData) => {
+        // const upload$ = await this.backendService.uploadResult(formData);
+        const result = await this.backendService.uploadResult2(formData);
+        return result;
+        // .pipe(finalize(() => this.reset())).toPromise();
+
+        // console.info(upload$);
+        // this.uploadSub = upload$.subscribe(
+        //   (event) => {
+        //     if (event.type == HttpEventType.UploadProgress) {
+        //       this.uploadProgress = Math.round(
+        //         100 * (event.loaded / event.total)
+        //       );
+        //       console.info(this.uploadProgress);
+        //     }
+        //     if (event.type == HttpEventType.Sent) {
+        //       console.info(event);
+        //       // this.router.navigate(['/admin']);
+        //     }
+        //   },
+        //   (error) => console.error(error)
+        // );
+      });
+      await Promise.all(uploads)
+        .then((uploads) => {
+          console.info(uploads);
+        })
+        .catch((error) => console.error(error));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  onFileExam(event: any, index: number, filename?: string) {
+    const file: File = event.target.files[0];
+    if (file) {
+      let filenameFinal = file.name;
+      if (filename) {
+        let filenameTrimmed = filename.trim();
+        if (filenameTrimmed !== '') {
+          filenameFinal = filenameTrimmed.replace(/^\s+|\s+$/gm, '_');
+        } else {
+          filenameFinal = file.name.replace(/^\s+|\s+$/gm, '_');
+        }
+      } else {
+        filenameFinal = file.name.replace(/^\s+|\s+$/gm, '_');
+      }
+      // const extension = file.name.split('.').pop();
+      // const extension = file.name.substring(file.name.lastIndexOf('.') + 1);
+      // const extension = file.name.slice((file.name.lastIndexOf(".") - 1 >>> 0) + 2);
+      const extension = file.name.slice((Math.max(0, file.name.lastIndexOf(".")) || Infinity) + 1);
+      filenameFinal = `${filenameFinal}.${extension}`;
+      const formData = new FormData();
+      formData.append('exam', file, filenameFinal);
+      this.listFormData.push(formData);
+    }
+  }
+
+  onFileReading(event: any, index: number) {
     const file: File = event.target.files[0];
 
     if (file) {
