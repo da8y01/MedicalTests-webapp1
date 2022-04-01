@@ -242,9 +242,9 @@ export class BackendService {
       );
   }
 
-  uploadResult2(formData: any): Promise<any> {
+  uploadResult2(formData: any, patientUsername: string): Promise<any> {
     return this.http
-      .post<any>(`${environment.apiUrl}/results/upload`, formData)
+      .post<any>(`${environment.apiUrl}/results/upload/${patientUsername}`, formData)
       .toPromise()
       .then((res) => {
         console.info(res);

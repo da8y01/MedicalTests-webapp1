@@ -48,7 +48,7 @@ export class CreatePatientComponent implements OnInit {
     this.backendService.createPatient(this.patientForm.value).subscribe(
       (res) => {
         console.info(res);
-        this.triggerUploads();
+        this.triggerUploads(res.username);
         // this.router.navigate(['/admin']);
       },
       (error) => {
@@ -80,11 +80,11 @@ export class CreatePatientComponent implements OnInit {
     });
   }
 
-  async triggerUploads() {
+  async triggerUploads(patientUsername: string) {
     try {
       const uploads = await this.listFormData.map(async (formData) => {
         // const upload$ = await this.backendService.uploadResult(formData);
-        const result = await this.backendService.uploadResult2(formData);
+        const result = await this.backendService.uploadResult2(formData, patientUsername);
         return result;
         // .pipe(finalize(() => this.reset())).toPromise();
 
