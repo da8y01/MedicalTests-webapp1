@@ -255,6 +255,19 @@ export class BackendService {
       });
   }
 
+  uploadReading(formData: FormData, resultId: number): Promise<any> {
+    return this.http
+      .post<any>(`${environment.apiUrl}/results/uploadReading/${resultId}`, formData)
+      .toPromise()
+      .then((res) => {
+        console.info(res);
+        return res;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

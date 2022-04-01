@@ -29,7 +29,11 @@ export class CreatePatientComponent implements OnInit {
   fileName = '';
   uploadProgress!: number;
   uploadSub!: Subscription;
-  listFormData: FormData[] = [];
+  listFormData: { exam: FormData; reading: FormData }[] = [];
+  currentFormDataItem: { exam: FormData; reading: FormData } = {
+    exam: null,
+    reading: null,
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -84,7 +88,10 @@ export class CreatePatientComponent implements OnInit {
     try {
       const uploads = await this.listFormData.map(async (formData) => {
         // const upload$ = await this.backendService.uploadResult(formData);
-        const result = await this.backendService.uploadResult2(formData, patientUsername);
+        const result = await this.backendService.uploadResult2(
+          formData.exam,
+          patientUsername
+        );
         return result;
         // .pipe(finalize(() => this.reset())).toPromise();
 
@@ -105,11 +112,22 @@ export class CreatePatientComponent implements OnInit {
         //   (error) => console.error(error)
         // );
       });
-      await Promise.all(uploads)
-        .then((uploads) => {
+      const lastUploads = await Promise.all(uploads)
+        .then(async (uploads) => {
           console.info(uploads);
+          const readings = await uploads.map(async (upload, index) => {
+            const reading = await this.backendService.uploadReading(
+              this.listFormData[index].reading,
+              upload.id
+            );
+          console.info(reading);
+          return reading;
+          });
+          console.info(readings);
+          return readings;
         })
         .catch((error) => console.error(error));
+      console.info(lastUploads);
     } catch (error) {
       console.error(error);
     }
@@ -132,11 +150,15 @@ export class CreatePatientComponent implements OnInit {
       // const extension = file.name.split('.').pop();
       // const extension = file.name.substring(file.name.lastIndexOf('.') + 1);
       // const extension = file.name.slice((file.name.lastIndexOf(".") - 1 >>> 0) + 2);
-      const extension = file.name.slice((Math.max(0, file.name.lastIndexOf(".")) || Infinity) + 1);
+      const extension = file.name.slice(
+        (Math.max(0, file.name.lastIndexOf('.')) || Infinity) + 1
+      );
       filenameFinal = `${filenameFinal}.${extension}`;
       const formData = new FormData();
       formData.append('exam', file, filenameFinal);
-      this.listFormData.push(formData);
+      this.currentFormDataItem.exam = formData;
+      // this.listFormData.push(this.currentFormDataItem);
+      this.listFormData[index] = this.currentFormDataItem;
     }
   }
 
@@ -144,19 +166,21 @@ export class CreatePatientComponent implements OnInit {
     const file: File = event.target.files[0];
 
     if (file) {
-      this.fileName = file.name;
       const formData = new FormData();
-      formData.append('result', file, file.name);
+      // formData.append('reading', file, file.name);
+      formData.append('reading', file);
+      this.currentFormDataItem.reading = formData;
+      this.listFormData[index] = this.currentFormDataItem;
 
-      const upload$ = this.backendService
-        .uploadResult(formData)
-        .pipe(finalize(() => this.reset()));
+      // const upload$ = this.backendService
+      //   .uploadResult(formData)
+      //   .pipe(finalize(() => this.reset()));
 
-      this.uploadSub = upload$.subscribe((event) => {
-        if (event.type == HttpEventType.UploadProgress) {
-          this.uploadProgress = Math.round(100 * (event.loaded / event.total));
-        }
-      });
+      // this.uploadSub = upload$.subscribe((event) => {
+      //   if (event.type == HttpEventType.UploadProgress) {
+      //     this.uploadProgress = Math.round(100 * (event.loaded / event.total));
+      //   }
+      // });
     }
   }
 
