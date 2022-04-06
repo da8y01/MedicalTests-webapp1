@@ -40,10 +40,12 @@ export class AdminComponent implements OnInit {
     return this.medicsLength;
   }
 
-  searchPatient(term: string): void {
+  searchPatient(term: string, event?: Event): void {
+    if (event) event.preventDefault();
     this.termPatient = term;
   }
-  searchMedic(term: string): void {
+  searchMedic(term: string, event?: Event): void {
+    if (event) event.preventDefault();
     this.termMedic = term;
   }
 

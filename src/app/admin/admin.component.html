@@ -16,8 +16,8 @@
     </div>
     <div class="buscador">
       <input class="input-campo_busqueda" type="text" name="patient" #patient id="patient" />
-      <div class="buscador-button" (click)="searchPatient(patient.value)">
-        <a><i class="iconoBuscar fas fa-search"></i></a>
+      <div class="buscador-button">
+        <a href="#" (click)="searchPatient(patient.value, $event)"><i class="iconoBuscar fas fa-search"></i></a>
       </div>
     </div>
     <div class="buscador-alert" [style.visibility]="patientsLength == 0 ? 'visible' : 'hidden'">
@@ -46,8 +46,8 @@
     </div>
     <div class="buscador">
       <input class="input-campo_busqueda" type="text" name="medic" #medic id="medic" />
-      <div class="buscador-button" (click)="searchMedic(medic.value)">
-        <a><i class="iconoBuscar fas fa-search"></i></a>
+      <div class="buscador-button">
+        <a href="#" (click)="searchMedic(medic.value, $event)"><i class="iconoBuscar fas fa-search"></i></a>
       </div>
     </div>
     <div class="buscador-alert" [style.visibility]="medicsLength == 0 ? 'visible' : 'hidden'">

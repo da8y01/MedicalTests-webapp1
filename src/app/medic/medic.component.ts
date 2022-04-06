@@ -29,7 +29,8 @@ export class MedicComponent implements OnInit {
   constructor(private backendService: BackendService) {}
 
   // Push a search term into the observable stream.
-  search(term: string): void {
+  search(term: string, event?: Event): void {
+    if (event) event.preventDefault();
     this.searchTerms.next(term);
   }
 
@@ -42,14 +43,15 @@ export class MedicComponent implements OnInit {
       // distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.backendService.searchPatients(term, this.queryParams))
+      switchMap((term: string) =>
+        this.backendService.searchPatients(term, this.queryParams)
+      )
     );
     this.patientsResponse$.subscribe(({ count, rows }) => {
       this.paginatorData.length = count;
       this.patients = rows;
       if (this.patients.length <= 0) {
         // display notification
-        
       }
     });
     this.search('');
