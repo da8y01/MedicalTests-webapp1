@@ -34,14 +34,16 @@ export class AuthGuard implements CanActivate {
       ? JSON.parse(storageUser).roles[0].toLowerCase()
       : '';
 
+    const urlRoute = url.split('/')[1];
     if (
-      (storageUserRole.includes('patient') && url.includes('patient')) ||
-      (storageUserRole.includes('medic') && url.includes('medic')) ||
-      (storageUserRole.includes('admin') && url.includes('admin')) ||
-      (storageUserRole.includes('admin') && url.includes('create-patient')) ||
-      (storageUserRole.includes('admin') && url.includes('create-medic')) ||
-      (storageUserRole.includes('admin') && url.includes('update-patient')) ||
-      (storageUserRole.includes('admin') && url.includes('update-medic'))
+      (storageUserRole === 'role_admin' &&
+        (urlRoute === 'create-patient' ||
+          urlRoute === 'update-patient' ||
+          urlRoute === 'create-medic' ||
+          urlRoute === 'update-medic' ||
+          urlRoute === 'admin')) ||
+      (storageUserRole === 'role_medic' && urlRoute === 'medic') ||
+      (storageUserRole === 'role_patient' && urlRoute === 'patient')
     ) {
       return true;
     }

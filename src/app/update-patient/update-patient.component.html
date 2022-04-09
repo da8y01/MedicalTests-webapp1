@@ -41,15 +41,18 @@
             </div>
             <div>
               <label for="document-type"><h2>Tipo de documento</h2></label>
-              <input
-                class="input-campo_texto"
-                type="text"
+              <select
                 name="document-type"
+                class="input-campo_texto"
                 id="document-type"
                 #documentType
                 formControlName="documentType"
-                [value]="'C.C.'"
-              />
+              >
+                <option value="1">Cédula</option>
+                <option value="2">Documento de identidad</option>
+                <option value="3">Pasaporte</option>
+                <option value="4">NIT</option>
+              </select>
               <!-- <hr /> -->
               <a (click)="editField('documentType')"
                 ><i class="icono-editar-solo fas fa-pencil-alt"></i
@@ -63,8 +66,8 @@
                 name="password"
                 id="password"
                 #password
-                formControlName="password"
-                [value]="'xxxxxxxxx'"
+                value="xxxxxxxxx"
+                disabled
               />
               <!-- <hr /> -->
               <a (click)="editField('password')"
@@ -91,12 +94,11 @@
               <label for="birthdate"><h2>Fecha de nacimiento</h2></label>
               <input
                 class="input-campo_texto"
-                type="text"
+                type="date"
                 name="birthdate"
                 id="birthdate"
                 #birthdate
                 formControlName="birthdate"
-                [value]="'12/12/1985'"
               />
               <!-- <hr /> -->
               <a (click)="editField('birthdate')"

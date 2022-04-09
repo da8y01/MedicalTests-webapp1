@@ -26,7 +26,7 @@ export class ResultsListComponent implements OnInit, OnChanges {
   };
   currentUrl = '';
 
-  constructor(private backendService: BackendService, private router: Router) {}
+  constructor(public backendService: BackendService, private router: Router) {}
 
   ngOnInit(): void {
     this.currentUrl = this.router.url;

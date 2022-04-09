@@ -17,7 +17,7 @@ export class CreatePatientComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     documentType: [''],
-    password: ['', Validators.required],
+    password: [''],
     username: ['', Validators.required],
     birthdate: [''],
     address: [''],
@@ -49,6 +49,7 @@ export class CreatePatientComponent implements OnInit {
     const patientFormValue = { ...this.patientForm.value };
     delete patientFormValue['examsArray'];
     delete this.patientForm.value['examsArray'];
+    this.patientForm.patchValue({password: this.patientForm.get('username').value})
     this.backendService.createPatient(this.patientForm.value).subscribe(
       (res) => {
         console.info(res);
@@ -162,7 +163,7 @@ export class CreatePatientComponent implements OnInit {
     if (file) {
       const formData = new FormData();
       // formData.append('reading', file, file.name);
-      formData.append('reading', file);
+      formData.append('reading', file, file.name.trim().replace(/\s+/gm, '_'));
       this.currentFormDataItem.reading = formData;
       // this.listFormData[index] = this.currentFormDataItem;
       this.listFormData[index].reading = formData;

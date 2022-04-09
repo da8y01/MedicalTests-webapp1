@@ -14,7 +14,6 @@ export class UpdatePatientComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     documentType: [''],
-    password: ['', Validators.required],
     username: ['', Validators.required],
     birthdate: [''],
     address: [''],
@@ -46,14 +45,18 @@ export class UpdatePatientComponent implements OnInit {
 
   ngOnInit(): void {
     let patientFormValue = { ...this.userRoute };
+    const birthdate = new Date(patientFormValue.birthdate)
+    let month = `${birthdate.getMonth()}`
+    if (parseInt(month) <= 9) month = `0${month}`
     delete patientFormValue['id'];
     delete patientFormValue['medic'];
     delete patientFormValue['createdAt'];
     delete patientFormValue['updatedAt'];
+    delete patientFormValue['password'];
     patientFormValue = {
       ...patientFormValue,
-      documentType: 'CC',
-      birthdate: '01/01/1991',
+      documentType: "1",
+      birthdate: `${birthdate.getFullYear()}-${month}-${birthdate.getDate()}`
     };
     this.patientForm.setValue(patientFormValue);
     this.patientId = this.userRoute.id;
