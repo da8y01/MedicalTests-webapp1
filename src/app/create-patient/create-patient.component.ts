@@ -114,20 +114,21 @@ export class CreatePatientComponent implements OnInit {
       });
       const lastUploads = await Promise.all(uploads)
         .then(async (uploads) => {
-          console.info(uploads);
           const readings = await uploads.map(async (upload, index) => {
-            const reading = await this.backendService.uploadReading(
-              this.listFormData[index].reading,
-              upload.id
-            );
-          console.info(reading);
-          return reading;
+            let reading;
+            if (this.listFormData[index].reading) {
+              reading = await this.backendService.uploadReading(
+                this.listFormData[index].reading,
+                upload.id
+              );
+            }
+            return reading;
           });
-          console.info(readings);
           return readings;
         })
         .catch((error) => console.error(error));
       console.info(lastUploads);
+      this.router.navigate(['/admin']);
     } catch (error) {
       console.error(error);
     }
@@ -136,17 +137,8 @@ export class CreatePatientComponent implements OnInit {
   onFileExam(event: any, index: number, filename?: string) {
     const file: File = event.target.files[0];
     if (file) {
-      let filenameFinal = file.name;
-      if (filename) {
-        let filenameTrimmed = filename.trim();
-        if (filenameTrimmed !== '') {
-          filenameFinal = filenameTrimmed.replace(/^\s+|\s+$/gm, '_');
-        } else {
-          filenameFinal = file.name.replace(/^\s+|\s+$/gm, '_');
-        }
-      } else {
-        filenameFinal = file.name.replace(/^\s+|\s+$/gm, '_');
-      }
+      let filenameFinal = file.name.trim().replace(/\s+/gm, '_');
+      if (filename) filenameFinal = filename.trim().replace(/\s+/gm, '_');
       // const extension = file.name.split('.').pop();
       // const extension = file.name.substring(file.name.lastIndexOf('.') + 1);
       // const extension = file.name.slice((file.name.lastIndexOf(".") - 1 >>> 0) + 2);
@@ -154,11 +146,13 @@ export class CreatePatientComponent implements OnInit {
         (Math.max(0, file.name.lastIndexOf('.')) || Infinity) + 1
       );
       filenameFinal = `${filenameFinal}.${extension}`;
-      const formData = new FormData();
+      // const formData = new FormData();
+      let formData = new FormData();
       formData.append('exam', file, filenameFinal);
-      this.currentFormDataItem.exam = formData;
+      // this.currentFormDataItem.exam = formData;
       // this.listFormData.push(this.currentFormDataItem);
-      this.listFormData[index] = this.currentFormDataItem;
+      this.listFormData.push({ exam: formData, reading: null });
+      // this.listFormData[index] = this.currentFormDataItem;
     }
   }
 
@@ -170,7 +164,8 @@ export class CreatePatientComponent implements OnInit {
       // formData.append('reading', file, file.name);
       formData.append('reading', file);
       this.currentFormDataItem.reading = formData;
-      this.listFormData[index] = this.currentFormDataItem;
+      // this.listFormData[index] = this.currentFormDataItem;
+      this.listFormData[index].reading = formData;
 
       // const upload$ = this.backendService
       //   .uploadResult(formData)
