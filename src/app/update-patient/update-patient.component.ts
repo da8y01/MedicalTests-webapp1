@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../backend.service';
 import { Patient } from '../patient.model';
@@ -33,6 +33,8 @@ export class UpdatePatientComponent implements OnInit {
   // });
   userRoute: Patient;
   patientId: number = 0;
+  listFormData: { exam: FormData; reading: FormData }[] = [];
+  dummyExams = []
 
   constructor(
     private fb: FormBuilder,
@@ -56,7 +58,7 @@ export class UpdatePatientComponent implements OnInit {
     patientFormValue = {
       ...patientFormValue,
       documentType: "1",
-      birthdate: `${birthdate.getFullYear()}-${month}-${birthdate.getDate()}`
+      birthdate: `${birthdate.getFullYear()}-${month}-${birthdate.getDate()}`,
     };
     this.patientForm.setValue(patientFormValue);
     this.patientId = this.userRoute.id;
@@ -72,6 +74,53 @@ export class UpdatePatientComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  get examsList() {
+    return this.patientForm.get('examsArray') as FormArray;
+  }
+
+  addExam(event: Event) {
+    event.preventDefault();
+    const exam = {
+      name: [''],
+      result: [''],
+      reading: [''],
+      date: [''],
+    };
+    // this.examsList.push(this.fb.group(exam));
+    this.dummyExams.push(this.fb.group(exam));
+  }
+
+  onFileExam(event: any, filename?: string, index?: number) {
+    const file: File = event.target.files[0];
+    if (file) {
+      let filenameFinal = file.name.trim().replace(/\s+/gm, '_');
+      if (filename) filenameFinal = filename.trim().replace(/\s+/gm, '_');
+      // const extension = file.name.split('.').pop();
+      // const extension = file.name.substring(file.name.lastIndexOf('.') + 1);
+      // const extension = file.name.slice((file.name.lastIndexOf(".") - 1 >>> 0) + 2);
+      const extension = file.name.slice(
+        (Math.max(0, file.name.lastIndexOf('.')) || Infinity) + 1
+      );
+      filenameFinal = `${filenameFinal}.${extension}`;
+      const formData = new FormData();
+      // let formData = new FormData();
+      formData.append('exam', file, filenameFinal);
+      // this.currentFormDataItem.exam = formData;
+      // this.listFormData.push(this.currentFormDataItem);
+      this.listFormData.push({ exam: formData, reading: null });
+      // this.listFormData[index] = this.currentFormDataItem;
+    }
+  }
+
+  onFileReading(event: any, index?: number) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('reading', file, file.name.trim().replace(/\s+/gm, '_'));
+      this.listFormData[index].reading = formData;
+    }
   }
 
   editField(field: string) {
