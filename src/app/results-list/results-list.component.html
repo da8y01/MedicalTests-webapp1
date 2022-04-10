@@ -39,6 +39,7 @@
       <a
         href="#"
         *ngIf="backendService.getLocalStorageUser().roles[0] === 'ROLE_ADMIN'"
+        (click)="deleteResult(result.id, $event)"
         ><i class="iconoEliminar fas fa-trash-alt"></i
       ></a>
     </div>

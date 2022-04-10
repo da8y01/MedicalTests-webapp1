@@ -64,4 +64,18 @@ export class ResultsListComponent implements OnInit, OnChanges {
       });
     });
   }
+
+  deleteResult(resultId: number, event: Event) {
+    event.preventDefault()
+    this.backendService
+      .deleteResult(resultId)
+      .subscribe(
+        (res) => {
+          this.getResults(this.queryParams)
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+  }
 }

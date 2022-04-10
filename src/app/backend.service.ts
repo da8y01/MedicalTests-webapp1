@@ -202,6 +202,17 @@ export class BackendService {
       );
   }
 
+  deleteResult(resultId: number): Observable<any> {
+    return this.http
+      .delete<any>(`${environment.apiUrl}/results/${resultId}`)
+      .pipe(
+        map((res: number) => {
+          return res;
+        }),
+        catchError(this.handleError('deleteResult', 0))
+      );
+  }
+
   assignPatients(medic: string, patients: string[]): Observable<any> {
     return this.http
       .post<any>(`${environment.apiUrl}/patients/assignMedic`, {
