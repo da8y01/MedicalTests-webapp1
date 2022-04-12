@@ -13,20 +13,23 @@ export class UpdateMedicComponent implements OnInit {
   medicForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    documentType: [''],
-    password: ['', Validators.required],
+    documentType: ['', Validators.required],
     username: ['', Validators.required],
-    birthdate: [''],
-    address: [''],
-    phone: [''],
+    birthdate: ['', Validators.required],
+    address: ['', Validators.required],
+    phone: ['', Validators.required],
     email: ['', Validators.required],
+    email2: [''],
   });
   userRoute: Patient;
   medicId: number = 0;
   patientsLength: number = 0;
   termPatient: string = '';
   deletePatients: number[] = [];
-  populatedPatients: Patient[] = []
+  // populatedPatients: Patient[] = [];
+  populatedPatients: Patient[];
+  showPatientValidation = false;
+  assignedPatients: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -43,14 +46,17 @@ export class UpdateMedicComponent implements OnInit {
     delete medicFormValue['medic'];
     delete medicFormValue['createdAt'];
     delete medicFormValue['updatedAt'];
+    delete medicFormValue['password'];
+    const birthdate = new Date(medicFormValue.birthdate);
+    let month = `${birthdate.getMonth()}`;
+    if (parseInt(month) <= 9) month = `0${month}`;
     medicFormValue = {
       ...medicFormValue,
-      documentType: 'CC',
-      birthdate: '01/01/1991',
+      birthdate: `${birthdate.getFullYear()}-${month}-${birthdate.getDate()}`,
     };
     this.medicForm.setValue(medicFormValue);
     this.medicId = this.userRoute.id;
-    this.getMedicPatients()
+    this.getMedicPatients();
   }
 
   onSubmit() {
@@ -74,11 +80,30 @@ export class UpdateMedicComponent implements OnInit {
   }
 
   getMedicPatients(): void {
-    this.backendService.getPatients(this.userRoute.id).subscribe(patients => {
-      // console.info(patients)
-      // patients.map(patient => this.populatedPatients.push(patient))
-      // console.info(this.populatedPatients)
-      this.populatedPatients = patients
-    }, error => console.error(error));
+    this.backendService.getPatients(this.userRoute.id).subscribe(
+      (patients) => {
+        // console.info(patients)
+        // patients.map(patient => this.populatedPatients.push(patient))
+        // console.info(this.populatedPatients)
+        this.populatedPatients = patients;
+      },
+      (error) => console.error(error)
+    );
+  }
+
+  addPatient(document: string): void {
+    this.backendService.getUser(parseInt(document)).subscribe(
+      (user) => {
+        if (user.id) {
+          this.assignedPatients.push(user.username);
+          this.populatedPatients.push(user);
+          this.showPatientValidation = false;
+        } else {
+          this.showPatientValidation = true;
+        }
+        // this.assignedPatients.push({})
+      },
+      (error) => console.error(error)
+    );
   }
 }

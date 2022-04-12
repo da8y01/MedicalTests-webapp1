@@ -57,7 +57,6 @@ export class UpdatePatientComponent implements OnInit {
     delete patientFormValue['password'];
     patientFormValue = {
       ...patientFormValue,
-      documentType: "1",
       birthdate: `${birthdate.getFullYear()}-${month}-${birthdate.getDate()}`,
     };
     this.patientForm.setValue(patientFormValue);

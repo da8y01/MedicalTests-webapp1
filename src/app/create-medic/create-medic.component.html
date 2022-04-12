@@ -27,10 +27,10 @@
               </label>
               <select name="documentType" id="documentType" #documentType formControlName="documentType"
                 class="input-campo_texto">
-                <option value="1">Cédula</option>
-                <option value="2">Documento de identidad</option>
-                <option value="3">Pasaporte</option>
-                <option value="4">NIT</option>
+                <option value="cedula">Cédula</option>
+                <option value="documentoid">Documento de identidad</option>
+                <option value="pasaporte">Pasaporte</option>
+                <option value="nit">NIT</option>
               </select>
             </div>
             <div>
@@ -77,7 +77,7 @@
               <label for="email2">
                 <h2>Correo 2</h2>
               </label>
-              <input class="input-campo_texto" type="text" name="email2" id="email2" #email2 />
+              <input class="input-campo_texto" type="text" name="email2" id="email2" #email2 formControlName="email2" />
             </div>
           </div>
         </div>

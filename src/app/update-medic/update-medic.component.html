@@ -11,8 +11,14 @@
               <label for="firstName">
                 <h2>Nombre / Razón social</h2>
               </label>
-              <input class="input-campo_texto" type="text" name="firstName" id="firstName" #firstName
-                formControlName="firstName" />
+              <input
+                class="input-campo_texto"
+                type="text"
+                name="firstName"
+                id="firstName"
+                #firstName
+                formControlName="firstName"
+              />
               <!-- <hr /> -->
               <a><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
             </div>
@@ -20,8 +26,14 @@
               <label for="lastName">
                 <h2>Apellido</h2>
               </label>
-              <input class="input-campo_texto" type="text" name="lastName" id="lastName" #lastName
-                formControlName="lastName" />
+              <input
+                class="input-campo_texto"
+                type="text"
+                name="lastName"
+                id="lastName"
+                #lastName
+                formControlName="lastName"
+              />
               <!-- <hr /> -->
               <a><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
             </div>
@@ -29,8 +41,18 @@
               <label for="documentType">
                 <h2>Tipo de documento</h2>
               </label>
-              <input class="input-campo_texto" type="text" name="documentType" id="documentType" #documentType
-                formControlName="documentType" />
+              <select
+                name="documentType"
+                id="documentType"
+                #documentType
+                formControlName="documentType"
+                class="input-campo_texto"
+              >
+                <option value="cedula">Cédula</option>
+                <option value="documentoid">Documento de identidad</option>
+                <option value="pasaporte">Pasaporte</option>
+                <option value="nit">NIT</option>
+              </select>
               <!-- <hr /> -->
               <a><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
             </div>
@@ -38,8 +60,15 @@
               <label for="password">
                 <h2>Contraseña</h2>
               </label>
-              <input class="input-campo_texto" type="text" name="password" id="password" #password
-                formControlName="password" />
+              <input
+                class="input-campo_texto"
+                type="text"
+                name="password"
+                id="password"
+                #password
+                value="xxxxxxxxx"
+                disabled
+              />
               <!-- <hr /> -->
               <a><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
             </div>
@@ -47,8 +76,14 @@
               <label for="username">
                 <h2>Número de documento</h2>
               </label>
-              <input class="input-campo_texto" type="text" name="username" id="username" #username
-                formControlName="username" />
+              <input
+                class="input-campo_texto"
+                type="text"
+                name="username"
+                id="username"
+                #username
+                formControlName="username"
+              />
               <!-- <hr /> -->
               <a><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
             </div>
@@ -56,8 +91,14 @@
               <label for="birthdate">
                 <h2>Fecha de nacimiento</h2>
               </label>
-              <input class="input-campo_texto" type="date" name="birthdate" id="birthdate" #birthdate
-                formControlName="birthdate" />
+              <input
+                class="input-campo_texto"
+                type="date"
+                name="birthdate"
+                id="birthdate"
+                #birthdate
+                formControlName="birthdate"
+              />
               <!-- <hr /> -->
               <a><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
             </div>
@@ -65,8 +106,14 @@
               <label for="address">
                 <h2>Dirección consultorio</h2>
               </label>
-              <input class="input-campo_texto" type="date" name="address" id="address" #address
-                formControlName="address" />
+              <input
+                class="input-campo_texto"
+                type="text"
+                name="address"
+                id="address"
+                #address
+                formControlName="address"
+              />
               <!-- <hr /> -->
               <a><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
             </div>
@@ -74,7 +121,14 @@
               <label for="phone">
                 <h2>Celular</h2>
               </label>
-              <input class="input-campo_texto" type="tel" name="phone" id="phone" #phone formControlName="phone" />
+              <input
+                class="input-campo_texto"
+                type="tel"
+                name="phone"
+                id="phone"
+                #phone
+                formControlName="phone"
+              />
               <!-- <hr /> -->
               <a><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
             </div>
@@ -82,7 +136,14 @@
               <label for="email">
                 <h2>Correo</h2>
               </label>
-              <input class="input-campo_texto" type="email" name="email" id="email" #email formControlName="email" />
+              <input
+                class="input-campo_texto"
+                type="email"
+                name="email"
+                id="email"
+                #email
+                formControlName="email"
+              />
               <!-- <hr /> -->
               <a><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
             </div>
@@ -90,7 +151,14 @@
               <label for="email2">
                 <h2>Correo 2</h2>
               </label>
-              <input class="input-campo_texto" type="email" name="email2" id="email2" #email2 />
+              <input
+                class="input-campo_texto"
+                type="email"
+                name="email2"
+                id="email2"
+                #email2
+                formControlName="email2"
+              />
               <!-- <hr /> -->
               <a><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
             </div>
@@ -104,14 +172,27 @@
         <h1 class="titulo-asiganar-paciente">Asignar paciente</h1>
         <div class="campo-documento-paciente">
           <h2>Documento del paciente</h2>
-          <input class="input-campo_texto" type="text" name="" />
+          <input
+            class="input-campo_texto"
+            type="text"
+            name="patient_box"
+            #patientBox
+            id="patient-box"
+          />
         </div>
         <div class="position-addbutton add-paciente-button">
-          <button class="boton-sumit" type="text" name="password">
+          <button
+            class="boton-sumit"
+            type="button"
+            (click)="addPatient(patientBox.value)"
+          >
             AGREGAR PACIENTE
           </button>
         </div>
-        <div class="position-addbutton-alerta buscador-alert">
+        <div
+          class="position-addbutton-alerta buscador-alert"
+          [style.visibility]="showPatientValidation ? 'visible' : 'hidden'"
+        >
           <div>
             <a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
           </div>
@@ -121,11 +202,20 @@
         </div>
       </div>
 
-      <app-users-populated-list [pre-populated]="populatedPatients"></app-users-populated-list>
+      <app-users-populated-list
+        [pre-populated]="populatedPatients"
+        [delete-remote]="true"
+      ></app-users-populated-list>
 
       <div class="add-paciente-button add-btn-remisor">
-        <button class="boton-sumit" type="submit" name="submitButton" id="submitButton" #submitButton
-          [disabled]="!medicForm.valid">
+        <button
+          class="boton-sumit"
+          type="submit"
+          name="submitButton"
+          id="submitButton"
+          #submitButton
+          [disabled]="!medicForm.valid"
+        >
           ACTUALIZAR REMISOR
         </button>
       </div>

@@ -75,7 +75,7 @@ export class AdminComponent implements OnInit {
     if (this.deletePatients.length === 1) {
       this.router.navigate(['/', 'update-patient', this.deletePatients[0]]);
     } else {
-      alert('ERROR: Solamente puede editar un paciente a la vez.');
+      alert('[ERROR] Solamente puede editar un paciente a la vez.');
     }
   }
 
@@ -84,7 +84,7 @@ export class AdminComponent implements OnInit {
     if (this.deleteMedics.length === 1) {
       this.router.navigate(['/', 'update-medic', this.deleteMedics[0]]);
     } else {
-      alert('ERROR: Solamente puede editar un médico a la vez.');
+      alert('[ERROR] Solamente puede editar un médico a la vez.');
     }
   }
 }

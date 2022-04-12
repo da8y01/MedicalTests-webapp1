@@ -223,7 +223,20 @@ export class BackendService {
         map((res: any) => {
           return res;
         }),
-        catchError(this.handleError('deletePatients', 0))
+        catchError(this.handleError('assignPatients', {}))
+      );
+  }
+
+  undoAssignPatients(patients: string[]): Observable<string[]> {
+    return this.http
+      .post<string[]>(`${environment.apiUrl}/patients/undoAssignMedic`, {
+        patients,
+      })
+      .pipe(
+        map((res: string[]) => {
+          return res;
+        }),
+        catchError(this.handleError('undoAssignPatients', []))
       );
   }
 
