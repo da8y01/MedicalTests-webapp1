@@ -16,7 +16,6 @@ import { Patient } from '../patient.model';
 export class UsersPopulatedListComponent implements OnInit, OnChanges {
   // @Input('pre-populated') inputPrePopulated: Patient[] = [];
   @Input('pre-populated') inputPrePopulated: Patient[];
-  @Input('delete-remote') deleteRemote?: boolean = false;
   prePopulatedCopy: Patient[] = [];
   showValidation = false;
 
@@ -33,19 +32,8 @@ export class UsersPopulatedListComponent implements OnInit, OnChanges {
     const result = confirm(
       '[ALERTA] Está seguro que desea eliminar el elemento?'
     );
-    if (result && !this.deleteRemote) {
+    if (result) {
       this.inputPrePopulated.splice(index, 1);
-    }
-    if (result && this.deleteRemote) {
-      this.backendService
-        .undoAssignPatients([this.inputPrePopulated[index].username])
-        .subscribe(
-          (updatedPatients) => {
-            if (updatedPatients.length === 1)
-              this.inputPrePopulated.splice(index, 1);
-          },
-          (error) => console.error(error)
-        );
     }
   }
 

@@ -142,7 +142,7 @@ export class BackendService {
   getUser(id: number): Observable<Patient> {
     const url = `${environment.apiUrl}/users/${id}`;
     return this.http.get<Patient>(url).pipe(
-      tap((_) => console.info(`fetched patient id=${id}`)),
+      tap((_) => console.info(`fetched patient id=${id}`, _)),
       catchError(this.handleError<Patient>(`getUser id=${id}`))
     );
   }
@@ -296,7 +296,7 @@ export class BackendService {
     return (error: any): Observable<T> => {
       console.error(error);
       let errorCustom = {};
-      errorCustom = { error: 'Fallo en la operación.' };
+      errorCustom = { error: `Fallo en la operación ${operation}.` };
       if (operation === 'forgotPassword' && error.status === 404) {
         errorCustom = { error: 'Usuario inválido.' };
       }

@@ -28,6 +28,7 @@ export class UpdateMedicComponent implements OnInit {
   deletePatients: number[] = [];
   // populatedPatients: Patient[] = [];
   populatedPatients: Patient[];
+  originalAssignedPatients: Patient[];
   showPatientValidation = false;
   assignedPatients: string[] = [];
 
@@ -48,11 +49,12 @@ export class UpdateMedicComponent implements OnInit {
     delete medicFormValue['updatedAt'];
     delete medicFormValue['password'];
     const birthdate = new Date(medicFormValue.birthdate);
-    let month = `${birthdate.getMonth()}`;
-    if (parseInt(month) <= 9) month = `0${month}`;
+    let strMonth = '';
+    let month = parseInt(`${birthdate.getMonth()}`) + 1;
+    if (month <= 9) strMonth = `0${month}`;
     medicFormValue = {
       ...medicFormValue,
-      birthdate: `${birthdate.getFullYear()}-${month}-${birthdate.getDate()}`,
+      birthdate: `${birthdate.getFullYear()}-${strMonth}-${birthdate.getDate()}`,
     };
     this.medicForm.setValue(medicFormValue);
     this.medicId = this.userRoute.id;
@@ -60,10 +62,34 @@ export class UpdateMedicComponent implements OnInit {
   }
 
   onSubmit() {
-    const userServer = { ...this.medicForm.value, id: this.medicId };
+    const userServer = { ...this.medicForm.value, id: this.userRoute.id };
     this.backendService.updatePatient(userServer).subscribe(
       (updatedUser) => {
-        this.router.navigate(['/admin']);
+        this.backendService
+          .undoAssignPatients(
+            this.originalAssignedPatients.map(
+              (originalAssignedPatient) => originalAssignedPatient.username
+            )
+          )
+          .subscribe(
+            (nullifiedPatients) => {
+              this.backendService
+                .assignPatients(
+                  updatedUser.username,
+                  this.populatedPatients.map(
+                    (populatedPatient) => populatedPatient.username
+                  )
+                )
+                .subscribe(
+                  (updatedPatients) => {
+                    this.router.navigate(['/admin']);
+                  },
+                  (error) => console.error(error)
+                );
+            },
+            (error) => console.error(error)
+          );
+        // this.router.navigate(['/admin']);
       },
       (error) => {
         console.error(error);
@@ -86,6 +112,7 @@ export class UpdateMedicComponent implements OnInit {
         // patients.map(patient => this.populatedPatients.push(patient))
         // console.info(this.populatedPatients)
         this.populatedPatients = patients;
+        this.originalAssignedPatients = [...this.populatedPatients];
       },
       (error) => console.error(error)
     );
