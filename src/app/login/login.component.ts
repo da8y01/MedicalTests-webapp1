@@ -31,6 +31,9 @@ export class LoginComponent implements OnInit {
           if (loggedUserRole.includes('medic')) {
             redirectUrl = '/medic';
           }
+          if (loggedUserRole.includes('reader')) {
+            redirectUrl = '/reader';
+          }
           if (loggedUserRole.includes('admin')) {
             redirectUrl = '/admin';
           }

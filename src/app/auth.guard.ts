@@ -36,15 +36,15 @@ export class AuthGuard implements CanActivate {
 
     const urlRoute = url.split('/')[1];
     if (
-      (storageUserRole === 'role_admin' &&
+      (storageUserRole === 'admin' &&
         (urlRoute === 'create-patient' ||
           urlRoute === 'update-patient' ||
           urlRoute === 'create-medic' ||
           urlRoute === 'update-medic' ||
           urlRoute === 'admin')) ||
-      (storageUserRole === 'role_medic' && urlRoute === 'medic') ||
-      (storageUserRole === 'role_medic' && urlRoute === 'reader') ||
-      (storageUserRole === 'role_patient' && urlRoute === 'patient')
+      (storageUserRole === 'medic' && urlRoute === 'medic') ||
+      (storageUserRole === 'reader' && urlRoute === 'reader') ||
+      (storageUserRole === 'patient' && urlRoute === 'patient')
     ) {
       return true;
     }
