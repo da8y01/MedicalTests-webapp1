@@ -13,9 +13,11 @@ import { UpdatePatientComponent } from './update-patient/update-patient.componen
 import { UserResolver } from './user.resolver';
 import { CreateMedicComponent } from './create-medic/create-medic.component';
 import { UpdateMedicComponent } from './update-medic/update-medic.component';
+import { ReaderComponent } from './reader/reader.component';
 
 const routes: Routes = [
   { path: 'patient', component: PatientComponent, canActivate: [AuthGuard] },
+  { path: 'reader', component: ReaderComponent, canActivate: [AuthGuard] },
   { path: 'medic', component: MedicComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   {
