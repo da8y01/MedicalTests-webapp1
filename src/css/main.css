@@ -1123,7 +1123,7 @@ footer .info-contacto p span {
 	width: 99%;
 	height: auto;
 	grid-template-columns: 64% 34%;
-	grid-template-rows: auto; auto;
+	grid-template-rows: auto;
 }
 .grid-contenedor-add-lectura{
 	background-color: #fff;

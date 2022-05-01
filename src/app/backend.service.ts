@@ -79,7 +79,7 @@ export class BackendService {
     return this.http
       .get<any>(`${environment.apiUrl}/patients/assignedTo/${medicId}`)
       .pipe(
-        tap((_) => console.info('fetched patients', _)),
+        tap((_) => console.info('fetched patients')),
         catchError(
           this.handleError<any>('getPatients', {
             count: 0,
@@ -165,7 +165,7 @@ export class BackendService {
   getUser(id: number): Observable<Patient> {
     const url = `${environment.apiUrl}/users/${id}`;
     return this.http.get<Patient>(url).pipe(
-      tap((_) => console.info(`fetched patient id=${id}`, _)),
+      tap((_) => console.info(`fetched patient id=${id}`)),
       catchError(this.handleError<Patient>(`getUser id=${id}`))
     );
   }

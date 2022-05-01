@@ -18,7 +18,7 @@ export class UserResolver implements Resolve<Patient> {
     state: RouterStateSnapshot
   ): Observable<Patient> {
     return this.backendService.getUser(
-      parseInt(route.paramMap.get('id') || '')
+      parseInt(route.paramMap.get('username'))
     );
   }
 }

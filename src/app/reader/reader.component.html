@@ -68,7 +68,7 @@
       <div class="contenedor-boton-editar-lecturas">
         <p>Editar lecturas</p>
         <div class="editar-button">
-          <a [routerLink]="['/update-readings', 1001]"
+          <a [routerLink]="['/update-readings', selectedPatient?.username]"
             ><i class="icono-agregar fas fa-pencil-alt"></i
           ></a>
         </div>

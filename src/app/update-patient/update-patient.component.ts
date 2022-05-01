@@ -34,7 +34,7 @@ export class UpdatePatientComponent implements OnInit {
   userRoute: Patient;
   patientId: number = 0;
   listFormData: { exam: FormData; reading: FormData }[] = [];
-  dummyExams = []
+  dummyExams = [];
 
   constructor(
     private fb: FormBuilder,
@@ -47,14 +47,15 @@ export class UpdatePatientComponent implements OnInit {
 
   ngOnInit(): void {
     let patientFormValue = { ...this.userRoute };
-    const birthdate = new Date(patientFormValue.birthdate)
-    let month = `${birthdate.getMonth()}`
-    if (parseInt(month) <= 9) month = `0${month}`
+    const birthdate = new Date(patientFormValue.birthdate);
+    let month = `${birthdate.getMonth()}`;
+    if (parseInt(month) <= 9) month = `0${month}`;
     delete patientFormValue['id'];
     delete patientFormValue['medic'];
     delete patientFormValue['createdAt'];
     delete patientFormValue['updatedAt'];
     delete patientFormValue['password'];
+    delete patientFormValue['email2'];
     patientFormValue = {
       ...patientFormValue,
       birthdate: `${birthdate.getFullYear()}-${month}-${birthdate.getDate()}`,

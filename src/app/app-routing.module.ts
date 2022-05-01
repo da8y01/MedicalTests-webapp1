@@ -40,7 +40,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'update-patient/:id',
+    path: 'update-patient/:username',
     component: UpdatePatientComponent,
     canActivate: [AuthGuard],
     resolve: {
@@ -48,7 +48,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'update-medic/:id',
+    path: 'update-medic/:username',
     component: UpdateMedicComponent,
     canActivate: [AuthGuard],
     resolve: {
