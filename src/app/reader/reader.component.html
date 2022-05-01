@@ -52,13 +52,9 @@
       <div class="contenedor-info-paciente">
         <div class="contenedor-info-pacientes-izquierdo">
           <div>
-            <span>{{
-              selectedPatient?.firstName + " " + selectedPatient?.lastName
-            }}</span>
+            {{ selectedPatient?.firstName + " " + selectedPatient?.lastName }}
           </div>
-          <div>
-            <span>cc. {{ selectedPatient?.username }} </span>
-          </div>
+          <div>cc. {{ selectedPatient?.username }}</div>
           <div>
             {{ selectedPatient?.createdAt | date: "MMMM d, y":"-0500":"es" }}
           </div>
@@ -67,6 +63,14 @@
           <div>{{ selectedPatient?.address }}</div>
           <div>{{ selectedPatient?.phone }}</div>
           <div>{{ selectedPatient?.email }}</div>
+        </div>
+      </div>
+      <div class="contenedor-boton-editar-lecturas">
+        <p>Editar lecturas</p>
+        <div class="editar-button">
+          <a [routerLink]="['/update-readings', 1001]"
+            ><i class="icono-agregar fas fa-pencil-alt"></i
+          ></a>
         </div>
       </div>
       <app-results-list [patient]="selectedPatient?.id"></app-results-list>

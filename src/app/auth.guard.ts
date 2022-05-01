@@ -43,7 +43,7 @@ export class AuthGuard implements CanActivate {
           urlRoute === 'update-medic' ||
           urlRoute === 'admin')) ||
       (storageUserRole === 'medic' && urlRoute === 'medic') ||
-      (storageUserRole === 'reader' && urlRoute === 'reader') ||
+      (storageUserRole === 'reader' && (urlRoute === 'reader' || urlRoute === 'update-readings')) ||
       (storageUserRole === 'patient' && urlRoute === 'patient')
     ) {
       return true;

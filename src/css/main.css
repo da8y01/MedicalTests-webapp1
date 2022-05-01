@@ -1092,3 +1092,105 @@ footer .info-contacto p span {
   background-color: #fff;
   border-bottom: 1px solid #dfe0eb;
 }
+
+
+/*Vista remisor lector ------------------------------------------------------*/
+.contenedor-boton-editar-lecturas{
+	width: 100%;
+	display: flex;
+	justify-content: right;
+}
+.contenedor-boton-editar-lecturas p {
+    text-align: right;
+    text-transform: uppercase;
+    color: var(--main-color-gristextooscuro);
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: auto;
+}
+/*Vista editar lecturas--------------------*/
+.main-contenedor-examenes-lecturas{
+	width: 1440px;
+	height: auto;
+	margin: 25px auto 42px auto;
+}
+.grid-contenedor-lecturas{
+	display: grid;
+	grid-gap: 42px;
+	width: 99%;
+	height: auto;
+	grid-template-columns: 64% 34%;
+	grid-template-rows: auto; auto;
+}
+.grid-contenedor-add-lectura{
+	background-color: #fff;
+	border-radius: 8px;
+	padding: 30px 30px;
+	height: 300px;
+}
+.grid-contenedor-add-lectura p{
+	color: var(--main-color-grisclaro);
+	text-transform: uppercase;
+	font-family:'Mulish', sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 15px;
+	color: var(--main-color-gristexto);
+	margin-bottom: 0;
+	letter-spacing: 0.3px;
+	padding-bottom: 15px;
+}
+.buscador-alert p{
+	text-transform: none;
+}
+.grid-contenedor-add-lectura .buscador-alert{
+	width: 100%;
+}
+.add-btn-lectura{
+	text-align: left;
+	margin-bottom: 12px;
+}
+.grid-contenedor-add-lectura hr{
+	color: #e4e5e9;
+	border:1px solid;
+}
+.grid-contenedor-add-lectura .custom-input-file button[type=file ]{
+    margin: 10px 0px;
+}
+.grid-main-contenendor-examenes .contenedor-con-campo-eliminar-lectura{
+	display: grid;
+	grid-template-columns: 26% 40% 16% 3% 9% 6%;
+	grid-column-gap: 10px;
+	padding: 15px 35px 15px 35px;
+	color: var(--main-color-grisclaro);
+	font-family:'Mulish', sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+	text-align: center;
+	background-color: #F0F0F0;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+	text-align: left;
+	z-index: 1;
+}
+.contenedor-examenes-resultados-campo-eliminar-lectura{
+	display: grid;
+	grid-template-columns: 26% 44% 11% 5% 7% 7%;
+	grid-column-gap: 10px;
+	padding: 15px 35px 15px 35px;
+	text-align: left;
+	background-color: #fff;
+	border-bottom: 1px solid #DFE0EB ;
+}
+.iconoCargar-lectura{
+	color: #36c326;
+	font-size: 18px;
+	transform: rotate(180deg);
+}

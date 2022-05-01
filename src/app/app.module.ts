@@ -28,6 +28,7 @@ import { CreateMedicComponent } from './create-medic/create-medic.component';
 import { UpdateMedicComponent } from './update-medic/update-medic.component';
 import { UsersPopulatedListComponent } from './users-populated-list/users-populated-list.component';
 import { ReaderComponent } from './reader/reader.component';
+import { UpdateReadingsComponent } from './update-readings/update-readings.component';
 
 // import { FileSelectDirective } from 'ng2-file-upload';
 
@@ -54,6 +55,7 @@ registerLocaleData(localeEs, 'es');
     UpdateMedicComponent,
     UsersPopulatedListComponent,
     ReaderComponent,
+    UpdateReadingsComponent,
   ],
   imports: [
     BrowserModule,

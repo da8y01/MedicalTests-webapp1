@@ -115,6 +115,29 @@ export class BackendService {
     );
   }
 
+  searchAllPatients(
+    term: string,
+    queryParams: QueryParams
+  ): Observable<PatientResponse> {
+    const requestUrl = `${environment.apiUrl}/patients?limit=${
+      queryParams.limit || 10
+    }&offset=${queryParams.offset || 0}&document=${term.trim()}&medic=-1`;
+    return this.http.get<PatientResponse>(requestUrl).pipe(
+      tap((x) =>
+        x.count
+          ? console.info(`found patients matching "${term}"`)
+          : console.info(`no patients matching "${term}"`)
+      ),
+      map((res) => res),
+      catchError(
+        this.handleError<PatientResponse>('searchAllPatients', {
+          count: 0,
+          rows: [],
+        })
+      )
+    );
+  }
+
   searchUsers(
     term: string,
     queryParams: QueryParams | any
@@ -268,7 +291,10 @@ export class BackendService {
 
   uploadResult2(formData: FormData, patientUsername: string): Promise<any> {
     return this.http
-      .post<any>(`${environment.apiUrl}/results/upload/${patientUsername}`, formData)
+      .post<any>(
+        `${environment.apiUrl}/results/upload/${patientUsername}`,
+        formData
+      )
       .toPromise()
       .then((res) => {
         console.info(res);
@@ -281,7 +307,10 @@ export class BackendService {
 
   uploadReading(formData: FormData, resultId: number): Promise<any> {
     return this.http
-      .post<any>(`${environment.apiUrl}/results/uploadReading/${resultId}`, formData)
+      .post<any>(
+        `${environment.apiUrl}/results/uploadReading/${resultId}`,
+        formData
+      )
       .toPromise()
       .then((res) => {
         console.info(res);
