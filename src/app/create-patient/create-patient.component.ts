@@ -16,12 +16,12 @@ export class CreatePatientComponent implements OnInit {
   patientForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    documentType: [''],
+    documentType: ['', Validators.required],
     password: [''],
     username: ['', Validators.required],
-    birthdate: [''],
-    address: [''],
-    phone: [''],
+    birthdate: ['', Validators.required],
+    address: ['', Validators.required],
+    phone: ['', Validators.required],
     email: ['', Validators.required],
     examsArray: this.fb.array([]),
   });
