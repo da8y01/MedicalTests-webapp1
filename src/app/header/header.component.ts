@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
       this.backendService.getLocalStorageUser().lastName;
     this.documentUser = this.backendService.getLocalStorageUser().username;
     if (this.router.url.includes('patient')) this.navTitles = 'Resultados';
+    if (this.router.url.includes('reader')) this.navTitles = 'Pacientes';
     if (this.router.url.includes('medic'))
       this.navTitles = 'Pacientes remitidos';
     if (this.router.url.includes('admin')) {
