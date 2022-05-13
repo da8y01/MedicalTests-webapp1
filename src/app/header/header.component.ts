@@ -23,6 +23,8 @@ export class HeaderComponent implements OnInit {
     if (this.router.url.includes('reader')) this.navTitles = 'Pacientes';
     if (this.router.url.includes('medic'))
       this.navTitles = 'Pacientes remitidos';
+    if (this.router.url.includes('update-readings'))
+      this.navTitles = 'Exámenes del paciente / Editar lecturas de:';
     if (this.router.url.includes('admin')) {
       this.navTitles = 'Administrador';
       this.nameUser = 'Sociedad de Diagnóstico Visual S.A.S.';
