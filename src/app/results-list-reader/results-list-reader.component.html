@@ -1,0 +1,77 @@
+<section class="grid-contenedor-lecturas">
+  <div class="grid-main-contenendor-examenes">
+    <div class="contenedor-con-campo-eliminar-lectura">
+      <div>FECHA TOMA DEL EXAMEN</div>
+      <div>NOMBRE DEL EXAMEN</div>
+      <div>RESULTADO</div>
+      <div>-</div>
+      <div>LECTURA</div>
+      <div>-</div>
+    </div>
+    <div
+      class="contenedor-examenes-resultados-campo-eliminar"
+      *ngFor="let result of results"
+    >
+      <div>{{ result.createdAt | date: "MMMM d, y":"-0500":"es" }}</div>
+      <div>{{ result.name }}</div>
+      <div><input type="checkbox" class="input-checkbox" name="" /></div>
+      <div *ngIf="currentUrl.includes('patient')">
+        <a [href]="result.link" (click)="downloadFile(result.link, $event)"
+          ><i class="iconoDescarga fas fa-download"></i
+        ></a>
+      </div>
+      <div *ngIf="currentUrl.includes('medic')">
+        <a [href]="result.link" target="_blank"
+          ><i class="iconoDescarga fas fa-download"></i
+        ></a>
+      </div>
+      <div *ngIf="result.reading">
+        <a [href]="result.reading.link" target="_blank"
+          ><i class="iconoDescarga-lectura fas fa-download"></i
+        ></a>
+      </div>
+      <div *ngIf="!result.reading">
+        <a href="#"><i class="iconoCargar-lectura fas fa-download"></i></a>
+      </div>
+      <div>
+        <a
+          href="#"
+          *ngIf="backendService.getLocalStorageUser().roles[0] === 'READER'"
+          (click)="deleteResult(result.id, $event)"
+          ><i class="iconoEliminar fas fa-trash-alt"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-contenedor-add-lectura">
+    <p>Se cargará la lectura para el examen:</p>
+    <div>Marzo 26 de 2022 - Examen general optico</div>
+    <hr />
+    <div class="agregar-examenes">
+      <div class="custom-input-file">
+        <h2>Cargar lectura</h2>
+        <button type="file">CARGAR LECTURA</button>
+      </div>
+    </div>
+    <div class="add-paciente-button add-btn-lectura">
+      <button class="boton-sumit" type="text" name="password">
+        ACTUALIZAR LECTURA
+      </button>
+    </div>
+    <div class="buscador-alert">
+      <div>
+        <a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
+      </div>
+      <p>No se logró cargar el archivo. Por favor inténtelo de nuevo.</p>
+    </div>
+  </div>
+
+  <mat-paginator
+    [length]="paginatorData.length"
+    [pageSize]="paginatorData.pageSize"
+    (page)="pageEvent($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</section>

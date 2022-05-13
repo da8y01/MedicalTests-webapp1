@@ -1,10 +1,10 @@
 <div class="grid-main-contenendor-examenes">
-  <div class="contenedor-con-campo-eliminar">
+  <div class="contenedor-examenes-titulo">
     <div>FECHA TOMA DEL EXAMEN</div>
     <div>NOMBRE DEL EXAMEN</div>
     <div>RESULTADO</div>
     <div>LECTURA</div>
-    <div>-</div>
+    <div *ngIf="backendService.getLocalStorageUser().roles[0] === 'ADMIN'">-</div>
   </div>
   <div
     class="contenedor-examenes-resultados-campo-eliminar"
@@ -38,7 +38,7 @@
     <div>
       <a
         href="#"
-        *ngIf="backendService.getLocalStorageUser().roles[0] === 'ROLE_ADMIN'"
+        *ngIf="backendService.getLocalStorageUser().roles[0] === 'ADMIN'"
         (click)="deleteResult(result.id, $event)"
         ><i class="iconoEliminar fas fa-trash-alt"></i
       ></a>
