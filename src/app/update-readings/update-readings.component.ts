@@ -11,9 +11,14 @@ import { Patient } from '../patient.model';
 export class UpdateReadingsComponent implements OnInit {
   loggedUserId: number = 0;
   userRoute: Patient;
+  readerPatient: {nameUser: string, documentUser: string} = null
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.userRoute = this.activatedRoute.snapshot.data.user;
+    this.readerPatient =  {
+      nameUser: this.userRoute.firstName + " " + this.userRoute.lastName,
+      documentUser: this.userRoute.username
+    }
   }
 
   ngOnInit(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
 
@@ -8,17 +8,25 @@ import { BackendService } from '../backend.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  @Input('reader-patient') readerPatient?: {
+    nameUser: string;
+    documentUser: string;
+  } = null;
   navTitles = '';
   nameUser = '';
   documentUser: string = null;
+
   constructor(public backendService: BackendService, public router: Router) {}
 
   ngOnInit(): void {
     this.nameUser =
+      this.readerPatient.nameUser ||
       this.backendService.getLocalStorageUser().firstName +
-      ' ' +
-      this.backendService.getLocalStorageUser().lastName;
-    this.documentUser = this.backendService.getLocalStorageUser().username;
+        ' ' +
+        this.backendService.getLocalStorageUser().lastName;
+    this.documentUser =
+      this.readerPatient.documentUser ||
+      this.backendService.getLocalStorageUser().username;
     if (this.router.url.includes('patient')) this.navTitles = 'Resultados';
     if (this.router.url.includes('reader')) this.navTitles = 'Pacientes';
     if (this.router.url.includes('medic'))

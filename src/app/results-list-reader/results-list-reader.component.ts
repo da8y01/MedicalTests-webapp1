@@ -68,4 +68,22 @@ export class ResultsListReaderComponent implements OnInit {
       this.results = results.rows;
     });
   }
+
+  selectedResult: Result;
+  checkClick(result: Result, index: number) {
+    this.selectedResult = result;
+  }
+
+  async onFileReading(event: any) {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+      formData.append('reading', file, file.name.trim().replace(/\s+/gm, '_'));
+      const reading = await this.backendService.uploadReading(
+        formData,
+        this.selectedResult.id
+      );
+    }
+  }
 }
