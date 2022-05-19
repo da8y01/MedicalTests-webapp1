@@ -22,6 +22,8 @@ export class ResultsListReaderComponent implements OnInit {
     limit: 10,
     patient: 0,
   };
+  formData: FormData = null;
+  showValidation = false;
 
   constructor(public backendService: BackendService, private router: Router) {}
 
@@ -44,16 +46,46 @@ export class ResultsListReaderComponent implements OnInit {
     });
   }
 
-  deleteResult(resultId: number, event: Event) {
+  deleteReading(resultId: number, event: Event) {
     event.preventDefault();
-    this.backendService.deleteResult(resultId).subscribe(
-      (res) => {
-        this.getResults(this.queryParams);
-      },
-      (error) => {
-        console.error(error);
-      }
+    const result = confirm(
+      '[ALERTA] Está seguro que desea eliminar la Lectura?'
     );
+    if (result) {
+      this.backendService.deleteReading(resultId).subscribe(
+        (res) => {
+          if (res.count === 1) {
+            window.location.reload();
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+
+  checkSelectedResult(fileReading: any) {
+    if (!this.selectedResult) {
+      alert(
+        '[ALERTA] Debe seleccionar un resultado antes de cargar su Lectura.'
+      );
+    } else {
+      fileReading.click();
+    }
+  }
+
+  async updateReading() {
+    try {
+      const reading = await this.backendService.uploadReading(
+        this.formData,
+        this.selectedResult.id
+      );
+      this.showValidation = false;
+      window.location.reload();
+    } catch (error) {
+      this.showValidation = true;
+    }
   }
 
   pageEvent(event: any): void {
@@ -74,15 +106,15 @@ export class ResultsListReaderComponent implements OnInit {
     this.selectedResult = result;
   }
 
-  async onFileReading(event: any) {
+  onFileReading(event: any) {
     const file: File = event.target.files[0];
 
     if (file) {
-      const formData = new FormData();
-      formData.append('reading', file, file.name.trim().replace(/\s+/gm, '_'));
-      const reading = await this.backendService.uploadReading(
-        formData,
-        this.selectedResult.id
+      this.formData = new FormData();
+      this.formData.append(
+        'reading',
+        file,
+        file.name.trim().replace(/\s+/gm, '_')
       );
     }
   }

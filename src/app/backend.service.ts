@@ -221,7 +221,7 @@ export class BackendService {
         map((res: number) => {
           return res;
         }),
-        catchError(this.handleError('deletePatients', 0))
+        catchError(this.handleError('deleteUsers', 0))
       );
   }
 
@@ -233,6 +233,17 @@ export class BackendService {
           return res;
         }),
         catchError(this.handleError('deleteResult', 0))
+      );
+  }
+
+  deleteReading(resultId: number): Observable<any> {
+    return this.http
+      .delete<any>(`${environment.apiUrl}/results/reading/${resultId}`)
+      .pipe(
+        map((res: number) => {
+          return res;
+        }),
+        catchError(this.handleError('deleteReading', 0))
       );
   }
 

@@ -47,7 +47,7 @@
         <a
           href="#"
           *ngIf="backendService.getLocalStorageUser().roles[0] === 'READER'"
-          (click)="deleteResult(result.id, $event)"
+          (click)="deleteReading(result.id, $event)"
           ><i class="iconoEliminar fas fa-trash-alt"></i
         ></a>
       </div>
@@ -64,7 +64,7 @@
     <div class="agregar-examenes">
       <div class="custom-input-file">
         <h2>Cargar lectura</h2>
-        <button type="button" (click)="fileReading.click()">
+        <button type="button" (click)="checkSelectedResult(fileReading)">
           CARGAR LECTURA
         </button>
         <input
@@ -80,7 +80,7 @@
       </div>
     </div>
     <div class="add-paciente-button add-btn-lectura">
-      <button class="boton-sumit" type="text" name="password">
+      <button class="boton-sumit" type="button" (click)="updateReading()">
         ACTUALIZAR LECTURA
       </button>
     </div>
