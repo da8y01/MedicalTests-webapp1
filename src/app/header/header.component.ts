@@ -20,12 +20,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.nameUser =
-      this.readerPatient.nameUser ||
+      this.readerPatient?.nameUser ||
       this.backendService.getLocalStorageUser().firstName +
         ' ' +
         this.backendService.getLocalStorageUser().lastName;
     this.documentUser =
-      this.readerPatient.documentUser ||
+      this.readerPatient?.documentUser ||
       this.backendService.getLocalStorageUser().username;
     if (this.router.url.includes('patient')) this.navTitles = 'Resultados';
     if (this.router.url.includes('reader')) this.navTitles = 'Pacientes';
